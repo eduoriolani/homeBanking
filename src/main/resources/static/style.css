@@ -1,0 +1,25 @@
+
+*{
+  margin-left: .2rem;
+}
+body{
+    background: linear-gradient(lightgrey, white) !important;
+}
+.layout{
+    height: 100vh;
+    width: 100vw;
+
+}
+form{
+    width: 50vw;
+}
+.table-div{
+    width: 50vw !important;
+}
+#clientInfo{
+    width: 50% !important;
+}
+#rest {
+    width: 50% !important;
+}
+

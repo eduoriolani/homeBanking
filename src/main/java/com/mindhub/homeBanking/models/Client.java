@@ -5,8 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.List;
-import org.springframework.data.jpa.repository.JpaRepository;
+
 @Entity
 
 
@@ -24,9 +23,9 @@ public class Client {
 
     public Client(){}
     public Client(String first, String last, String contact){
-        this.firstName = first;
-        this.lastName = last;
-        this.email = contact;
+        firstName = first;
+        lastName = last;
+        email = contact;
     }
 
     public String getFirstName(){
@@ -52,9 +51,5 @@ public class Client {
 
     public String toString(){
         return firstName + " " + lastName;
-    }
-
-    public interface ClientRepository extends JpaRepository<Client, Long> {
-        List<Client> findByLastName(String lastName);
     }
 }
