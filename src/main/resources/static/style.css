@@ -3,7 +3,7 @@
   margin-left: .2rem;
 }
 body{
-    background: linear-gradient(lightgrey, white) !important;
+    background: linear-gradient(to right, lightgrey, white) !important;
 }
 .layout{
     height: 100vh;
