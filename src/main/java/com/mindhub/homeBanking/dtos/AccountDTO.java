@@ -3,13 +3,13 @@ package com.mindhub.homeBanking.dtos;
 
 import com.mindhub.homeBanking.models.Account;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class AccountDTO extends Account {
 
     private long id;
     private String number;
-    private LocalDateTime date;
+    private LocalDate date;
     private Double balance;
 
     private ClientDTO owner;
@@ -23,11 +23,11 @@ public class AccountDTO extends Account {
     public String getNumber(){ return number;}
     public void setNumber(String number){ this.number = number;}
 
-    public LocalDateTime getDate(){ return date;}
-    public void setDate(LocalDateTime date){ this.date = date;}
+    public LocalDate getDate(){ return date;}
+    public void setDate(LocalDate date){ this.date = date;}
 
     public Double getBalance(){ return this.balance = balance; }
-    public void setBalance(LocalDateTime date){ this.date = date;}
+    public void setBalance(LocalDate date){ this.date = date;}
 
     public ClientDTO getOwner(){ return owner;}
     public void setOwner(ClientDTO owner){ this.owner = owner;}
