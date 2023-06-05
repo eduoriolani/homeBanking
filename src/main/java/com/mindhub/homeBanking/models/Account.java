@@ -1,14 +1,13 @@
 package com.mindhub.homeBanking.models;
 
-import com.mindhub.homeBanking.dtos.AccountDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Entity
-public class Account extends AccountDTO {
+public class Account{
 
 
     @Id
@@ -40,9 +39,10 @@ public class Account extends AccountDTO {
     public Double getBalance(){ return this.balance = balance; }
     public void setBalance(LocalDateTime date){ this.date = date;}
 
+    @JsonIgnore
     public Client getOwner(){ return owner;}
     public void setOwner(Client owner){ this.owner = owner;}
 
-    public String toString(){ return number + " " + date + " " + balance + " " + owner;}
+    public String toString(){ return number + " " + date + " " + balance ;}
 
 }
