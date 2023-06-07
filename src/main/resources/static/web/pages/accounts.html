@@ -39,7 +39,7 @@
                 </div>
             </div>
         </header>
-        <main class="d-flex">
+        <main class="d-flex flex-column">
             <section class="d-flex flex-column flex-start" id="navbar">
                 
                 <div id="myModal" class="modal">
@@ -63,23 +63,24 @@
                 </div>
                 
             </section>
-           <section class="d-flex flex-column justify-content-around col-12 card-section">
+           <section class="d-flex flex-column col-12 card-section">
                 <h3 class="text-center mt-4">
-                    Hello <span class="text-danger">{{clients[0].firstName}}</span>, here are your accounts data!
+                    Hello <span class="text-danger">{{clients[0].firstName}}</span>, here are your accounts information!
                 </h3>
-                <div class=" d-flex flex-row justify-content-around">
-                    <div class="card " v-for="account of accounts">
-                        <div class="card-body d-flex flex-column justify-content-between gap-3" >
-                        <div class="">
-                            <h5 class="card-title pb-2">Account Number: {{account.number}}</h5>
-                            <h5 class="card-text pb-2">Balance: ${{account.balance}}</h5>
-                            <p class="card-text pb-2">Date of creation: {{account.date}}</p>
-                        </div>
-                            <a href="#" class="btn btn-primary pb-2">Make a transfer</a>
-                            <a href="#" class="btn btn-primary pb-2">Request a loan</a>
+                <div id="divCards" class="d-flex flex-row flex-wrap mt-4 justify-content-around">
 
+                            <div class="card col-xs-10" v-for="account of accounts">
+                                <div class="card-body col-xs-10 d-flex flex-column justify-content-around gap-3" >
+                                    <div>
+                                        <h5 class="card-title pb-2">Account Number: {{account.number}}</h5>
+                                        <h5 class="card-text pb-2">Balance: ${{account.balance}}</h5>
+                                        <p class="card-text pb-2">Date of creation: {{account.date}}</p>
+                                    </div>
+                                        <a href="#" class="btn btn-primary pb-2">Make a transfer</a>
+                                        <a href="#" class="btn btn-primary pb-2">Request a loan</a>
+                                </div>
                             </div>
-                    </div>
+
                 </div>
               
            </section>
@@ -87,7 +88,15 @@
 
         </main>
         <footer>
-            <h5 class="text-center">Developed by Edu</h5>
+            <div id="redessociales" class="ms-3">
+                <a class="smedia facebook" href="#">Uno</a>
+                <a class="smedia twitter" href="#">Dos</a>
+                <a class="smedia instagram" href="https://www.instagram.com/lemarch___/">Tres</a>
+                <a class="smedia youtube" href="#">Cuatro</a>
+                <a class="smedia vimeo" href="#">Cinco</a>
+                <a class="smedia email" href="#">Seis</a>
+            </div>
+            <h5 class="text-center align-self-start">Developed by Edu</h5>
         </footer>
 
     </div>
