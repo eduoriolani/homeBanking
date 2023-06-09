@@ -24,8 +24,8 @@ createApp({
         .then((response) => {
           console.log(response);
           this.clients = response.data;
-          console.log(this.clients);
-          this.accounts = this.clients[0].accounts;
+
+          this.accounts = this.clients.flatMap( client => client.accounts)
           console.log(this.accounts);
         })
         .catch((error) => {

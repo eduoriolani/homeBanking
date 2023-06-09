@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="../style/bootstrap.css">
     <link rel="stylesheet" href="../style/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.google.com/specimen/Josefin+Sans/">
-    <link rel="stylesheet" href="../style/accounts.css">
+    <link rel="stylesheet" href="../style/account.css">
     <link rel="shortcut icon" href="../images/mindHub-icon.png" type="image/x-icon">
-    <title>Mindhub Brothers | Accounts</title>
+    <title>Mindhub Brothers | Account</title>
 </head>
 <body>
     <div class="layout" id="app">
@@ -24,7 +24,7 @@
                       </button>
                     </div>
                   </nav>
-                <a href="../index.html"> <img class="logoMind" src="../../web/images/mindHub-icon.png" alt="mindHub-Brothers"></a>
+                <img class="logoMind" src="../../web/images/mindHub-icon.png" alt="mindHub-Brothers">
                 <div class="d-flex flex-column">
                     <h5 class="align-self-center">Confidence & Grow</h5>
                     <form action="" class="d-flex gap-4">
@@ -50,13 +50,15 @@
                             <ul class="pagesList">
                                 <li class="p-1 mt-2 text-decoration-none"><a href="../index.html">Home | Client</a></li>
                                 <hr>
+                                <li class="p-1 mt-2 "><a class="text-decoration-none" href="./accounts.html">Accounts</a></li>
+                                <hr>
                                 <li class="p-1 text-decoration-none"><a href="../pages/transfer.html">Transfer Options</a></li>
                                 <hr>
                                 <li class="p-1 text-decoration-none"><a href="../pages/loans.html">Loans</a> </li>
                                 <hr>
                                 <li class="p-1 text-decoration-none"><a href="../pages/contact.html">More Information</a></li>
                                 <hr>
-                                <img class="d-flex align-items-end logoMind" src="../images/mindHub-icon.png" alt="mindhub">
+                                <a href="../index.html"> <img class="d-flex align-items-end logoMind" src="../images/mindHub-icon.png" alt="mindhub"></a>
                             </ul>
                         </div>
                     </div>
@@ -64,23 +66,42 @@
                 
             </section>
            <section class="d-flex flex-column col-12 card-section">
-                <h3 class="text-center mt-4">
-                    Hello <span class="text-danger">{{clients[0].firstName}}</span>, here are your accounts information!
-                </h3>
+                    <h3 class="text-center mt-4">
+                        <!-- Hello <span class="text-danger">{{clients[0].firstName}}</span>, here is your account information! -->
+                    </h3>
                 <div id="divCards" class="d-flex flex-row flex-wrap mt-4 justify-content-around">
 
-                            <div class="card col-xs-10" v-for="account of accounts" >
+                            <div class="card col-xs-10">
                                 <div class="card-body col-xs-10 d-flex flex-column justify-content-around gap-3" >
                                     <div>
                                         <h5 class="card-title pb-2">Account Number: {{account.number}}</h5>
                                         <h5 class="card-text pb-2">Balance: ${{account.balance}}</h5>
                                         <p class="card-text pb-2">Date of creation: {{account.date}}</p>
                                     </div>
-                                        <a :href="'./account.html?id='+account.id" class="btn btn-primary pb-2">Show Account Info</a>
+                                        <table>
+                                            <thead>
+                                                <th>Transaction Type</th>
+                                                <th>Amount</th>
+                                                <th>Description</th>
+                                                <th>Date</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="transaction of transactions">
+                                                    <td v-if="transaction.type == 'CREDIT'" class="text-success">{{transaction.type}}</td>
+                                                    <td v-else="transaction.type == 'DEBIT'" class="text-danger">{{transaction.type}}</td>
+                                                    <td>{{transaction.amount}}</td>
+                                                    <td>{{transaction.description}}</td>
+                                                    <td>{{transaction.date}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <a href="#" class="btn btn-primary pb-2">Make a transfer</a>
+                                        <a href="#" class="btn btn-primary pb-2">Request a loan</a>
                                 </div>
                             </div>
 
                 </div>
+                <a class="btn btn-primary d-flex align-self-start ms-3 mb-2" href="./accounts.html">Back to Accounts</a>
               
            </section>
 
@@ -102,6 +123,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="../script/accounts.js"></script>
+    <script src="../script/account.js"></script>
 </body>
 </html>

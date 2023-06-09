@@ -113,11 +113,11 @@ ul {
   }
 
   .card {
-    width: 25rem !important;
-    height: 20rem;
+    width: 50rem !important;
+    min-height: 20rem;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #797ff1c7;
+    background-color: #aeb2ffc7;
     padding: 1.3rem;
     margin-bottom: 1.3rem;
     display: flex !important;
@@ -133,7 +133,7 @@ ul {
     box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
     top: -4px;
     border: 1px solid #cccccc;
-    background-color: rgb(208, 160, 205);
+    background-color: rgba(230, 219, 255, 0.757);
   }
   .card:hover:before {
     transform: scale(2.15);
@@ -168,9 +168,8 @@ footer{
     padding-top: 2rem;
     background: linear-gradient( to right, rgb(62, 122, 182), rgb(93, 108, 238) ) !important;
 }
-.card-section{
-    width: 100vw !important;
-}
+
+
 h5{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -249,6 +248,13 @@ h5{
   .smedia:hover {
       background-position: 0 -46px;
   }
+  .debit{
+    background-color: rgb(14, 101, 14);
+  }
+  .credit{
+    background-color: rgb(213, 22, 22);
+  }
+  
 
 @media screen and (max-width: 768px) {
     

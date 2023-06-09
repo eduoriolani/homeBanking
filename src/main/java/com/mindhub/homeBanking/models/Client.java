@@ -3,7 +3,9 @@ package com.mindhub.homeBanking.models;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,8 +24,8 @@ public class Client {
     private String email;
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
-    Set<Account> accounts = new HashSet<>();
-    public Set<Account> getAccounts(){ return accounts;}
+    List<Account> accounts = new ArrayList<>();
+    public List<Account> getAccounts(){ return accounts;}
     public void addAccounts (Account account){
         account.setOwner( this );
         accounts.add( account );

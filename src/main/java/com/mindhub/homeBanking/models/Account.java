@@ -5,6 +5,10 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Account{
@@ -22,6 +26,13 @@ public class Account{
     @JoinColumn(name= "owner_id")
     private Client owner;
 
+    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
+    List<Transaction> transactions = new ArrayList<>();
+    public List<Transaction> getTransactions(){return transactions;}
+    public void addTransactions(Transaction transaction){
+        transaction.setAccount(this);
+        transactions.add(transaction);
+    }
     public Account (){}
     public Account (String number, LocalDate date, Double balance, Client client){
         this.number = number;
@@ -29,6 +40,8 @@ public class Account{
         this.balance = balance;
         this.owner = client;
     }
+
+    public Long getId(){return id;}
 
     public String getNumber(){ return number;}
     public void setNumber(String number){ this.number = number;}

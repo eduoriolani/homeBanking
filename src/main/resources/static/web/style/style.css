@@ -21,6 +21,9 @@
   filter: brightness(1.1);
   mix-blend-mode: multiply;
 }
+.loginButton:hover{
+  background-color: rgb(116, 94, 122);
+}
 
 header{
     height: 14vh;
@@ -58,7 +61,7 @@ header .header{
 main {
     width: 100vw !important;
     min-height: 76vh !important;
-    background: linear-gradient( to left, #feefff, #cbe8ff) !important;
+    background-color: #cbe8ff !important;
     filter: blur(2.0);
     
 }
