@@ -76,6 +76,7 @@ form input {
 .card-section{
     min-height: 76vh !important;
     width: 100vw !important;
+    background-color: #cbe8ff !important;
     z-index: 0;
 }
 .pagesList li > a {
@@ -112,6 +113,7 @@ ul {
   }
   .modal-content {
     background-color: #f7f5f5;
+    transition-duration: 1s;
     padding: 20px;
     width: 30%;
     height: 100%;
@@ -138,7 +140,7 @@ ul {
   }
 
   .card {
-    width: 30rem;
+    width: 40rem !important;
     height: 15rem !important;
     border: 1px solid #ccc;
     border-radius: 5px;

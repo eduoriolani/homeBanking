@@ -106,16 +106,16 @@
 
                 <div class="d-flex flex-column justify-content-center align-items-center col-12">
                     <h3 class="text-center mb-5 fontStyle">Client | Accounts</h3>
-                    <div class="card"  v-for="client of clients" >
+                    <div class="card">
                         <div class="card-body mb-3 justify-content-center d-flex">
-                        <h5 class="card-title me-2">{{client.lastName}}</h5>
-                        <h5 class="card-title">{{client.firstName}}</h5>
+                        <h5 class="card-title me-2">{{clients[0].lastName}}</h5>
+                        <h5 class="card-title">{{clients[0].firstName}}</h5>
                         </div>
                       
-                        <div class="flex-column align-items-center" v-for="account of accounts">
+                        <div class="flex-column align-items-center flex-wrap" v-for="account of accounts">
                             <p class="card-text text-center">Account number: {{account.number}}</p>
                             <p class="card-text text-center">Account balance: ${{account.balance}}</p>
-                            <a href="./pages/accounts.html" class="btn btn-primary gap-2 d-flex justify-content-center">Show account info</a>
+                            <a href="./pages/accounts.html" class="btn btn-primary gap-2">Show account info</a>
                         </div>
                     </div>
                 </div>

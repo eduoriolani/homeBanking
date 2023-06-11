@@ -9,8 +9,6 @@ createApp({
             clients: [],
             transactions: [],
             param: "",
-            debitType: 'text-danger',
-            creditType: 'text-success',
             
         }
     },
@@ -19,19 +17,14 @@ createApp({
     },
     methods: {
         loadData(){
-            // axios
-            //     .get("http://localhost:8080/api/clients")
-            //     .then((response) =>{
-            //         this.clients = response.data;  
-            //         console.log(this.clients);
-            //     }),
-                
                 this.param = new URLSearchParams(location.search).get("id")
                 axios
                 .get(`http://localhost:8080/api/accounts/${this.param}`)
                 .then((response) => {
                     this.account = response.data;
-                    this.transactions = this.account.transactions
+                    this.transactions = this.account.transactions;
+                    this.transactions.sort((a,b) => a.amount-b.amount);
+
                     console.log(this.account);
                 })
                 .catch((error) => {
@@ -47,14 +40,7 @@ createApp({
             document.getElementById("myModal").style.display = "none";
         }
     },
-    computed:{
-        classTransaction(){
-            return {
-                debit: this.debitType && !this.creditType,
-                credit: this.creditType && !this.debitType
-            }
-        }
-    },
+
 
 
 

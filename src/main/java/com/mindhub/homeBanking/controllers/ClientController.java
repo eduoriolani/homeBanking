@@ -1,5 +1,7 @@
 package com.mindhub.homeBanking.controllers;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mindhub.homeBanking.DTO.ClientDTO;
@@ -20,7 +22,7 @@ public class ClientController {
 
     @RequestMapping ("/clients")
     @JsonIgnore
-    public List<ClientDTO> getClient(){ return clientRepository.findAll().stream().map(ClientDTO::new).collect(toList()); }
+    public Set<ClientDTO> getClient(){ return clientRepository.findAll().stream().map(ClientDTO::new).collect(Collectors.toSet()); }
 
     @RequestMapping ("/clients/{id}")
     public ClientDTO getClient(@PathVariable Long id){ return clientRepository.findById(id).map(ClientDTO::new).orElse(null); }

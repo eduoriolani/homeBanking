@@ -5,9 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,13 +20,14 @@ public class Account{
     private LocalDate date;
     private Double balance;
 
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "owner_id")
     private Client owner;
 
     @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
-    List<Transaction> transactions = new ArrayList<>();
-    public List<Transaction> getTransactions(){return transactions;}
+    Set<Transaction> transactions = new HashSet<>();
+    public Set<Transaction> getTransactions(){return transactions;}
     public void addTransactions(Transaction transaction){
         transaction.setAccount(this);
         transactions.add(transaction);
@@ -55,6 +54,8 @@ public class Account{
     @JsonIgnore
     public Client getOwner(){ return owner;}
     public void setOwner(Client owner){ this.owner = owner;}
+
+
 
     public String toString(){ return number + " " + date + " " + balance ;}
 

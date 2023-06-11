@@ -1,5 +1,6 @@
 package com.mindhub.homeBanking.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -16,20 +17,25 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-
-
     private long id;
+
     private String firstName;
     private String lastName;
     private String email;
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
-    List<Account> accounts = new ArrayList<>();
-    public List<Account> getAccounts(){ return accounts;}
+    Set<Account> accounts = new HashSet<>();
+    @JsonIgnore
+    public Set<Account> getAccounts(){ return accounts;}
     public void addAccounts (Account account){
         account.setOwner( this );
         accounts.add( account );
     }
+
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+    private List<ClientLoan> clientLoan;
+    @JsonIgnore
+    public List<ClientLoan> getLoans(){return clientLoan;}
 
 
     public Client(){}

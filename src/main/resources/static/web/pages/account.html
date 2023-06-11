@@ -87,11 +87,12 @@
                                             </thead>
                                             <tbody>
                                                 <tr v-for="transaction of transactions">
-                                                    <td v-if="transaction.type == 'CREDIT'" class="text-success">{{transaction.type}}</td>
-                                                    <td v-else="transaction.type == 'DEBIT'" class="text-danger">{{transaction.type}}</td>
-                                                    <td>{{transaction.amount}}</td>
+                                                    <td v-if="transaction.type == 'CREDIT'" :class="['text-success']">{{transaction.type}}</td>
+                                                    <td v-else :class="['text-danger']">{{transaction.type}}</td>
+                                                    <td v-if="transaction.type == 'CREDIT'" :class="['text-success']">${{transaction.amount}}</td>
+                                                    <td v-else :class="['text-danger']">${{transaction.amount}}</td>
                                                     <td>{{transaction.description}}</td>
-                                                    <td>{{transaction.date}}</td>
+                                                    <td>{{transaction.date.slice(length, -7).replace('T', ' ')}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -111,7 +112,7 @@
             <div id="redessociales" class="ms-3">
                 <a class="smedia facebook" href="#">Uno</a>
                 <a class="smedia twitter" href="#">Dos</a>
-                <a class="smedia instagram" href="https://www.instagram.com/lemarch___/">Tres</a>
+                <a class="smedia instagram" href="https://www.instagram.com/lemarch___/" target="_blank">Tres</a>
                 <a class="smedia youtube" href="#">Cuatro</a>
                 <a class="smedia vimeo" href="#">Cinco</a>
                 <a class="smedia email" href="#">Seis</a>

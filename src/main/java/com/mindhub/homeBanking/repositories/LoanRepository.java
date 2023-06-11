@@ -1,13 +1,12 @@
 package com.mindhub.homeBanking.repositories;
 
-import com.mindhub.homeBanking.models.Account;
+import com.mindhub.homeBanking.models.Loan;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.Set;
 
 @RepositoryRestResource
-public interface AccountRepository extends JpaRepository <Account, Long> {
-    Set<Account> findById(long id);
+public interface LoanRepository extends JpaRepository<Loan, Long> {
+    Set<Loan> findById(long id);
 }
-
