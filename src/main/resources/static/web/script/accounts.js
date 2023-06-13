@@ -6,7 +6,7 @@ createApp({
     return {
       clients: [],
       accounts: [],
-      owners: {},
+      loans: [],
     };
   },
   created() {
@@ -18,11 +18,21 @@ createApp({
         .get("http://localhost:8080/api/clients/1")
         .then((response) => {
           this.clients = response.data;
-          console.log(this.clients.accounts);
           this.accounts = this.clients.accounts;
           this.accounts.sort((a,b)=> a.balance-b.balance);
-          console.log(this.accounts);
-          
+          this.loans = this.clients.loans
+
+          this.format = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+        });
+        this.accounts.forEach( e => {
+            e.balance = this.format.format(e.balance)
+        })
+        this.loans.forEach( e => {
+            e.amount = this.format.format(e.amount)
+        })
+        
           
 
         })

@@ -4,16 +4,16 @@ console.log(Vue);
 createApp({
     data(){
         return {
-            accounts: [],
             account: [],
             clients: [],
             transactions: [],
             param: "",
-            
+            format: [],
         }
     },
     created(){
         this.loadData()
+
     },
     methods: {
         loadData(){
@@ -24,8 +24,15 @@ createApp({
                     this.account = response.data;
                     this.transactions = this.account.transactions;
                     this.transactions.sort((a,b) => a.amount-b.amount);
-
-                    console.log(this.account);
+                    
+                    this.format = new Intl.NumberFormat('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                    });
+                    this.transactions.forEach( e => {
+                        e.amount = this.format.format(e.amount)
+                    })
+                    this.account.balance = this.format.format(this.account.balance)
                 })
                 .catch((error) => {
                     console.error(error);

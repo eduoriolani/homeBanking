@@ -21,7 +21,6 @@ public class ClientController {
     private ClientRepository clientRepository;
 
     @RequestMapping ("/clients")
-    @JsonIgnore
     public Set<ClientDTO> getClient(){ return clientRepository.findAll().stream().map(ClientDTO::new).collect(Collectors.toSet()); }
 
     @RequestMapping ("/clients/{id}")

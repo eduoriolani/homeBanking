@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class ClientLoan {
@@ -20,6 +19,7 @@ public class ClientLoan {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
     private Client client;
+
     private Integer payments;
     private Double amount;
 
@@ -44,7 +44,7 @@ public class ClientLoan {
     public void setLoan(Loan loan) {
         this.loan = loan;
     }
-@JsonIgnore
+    @JsonIgnore
     public Client getClient() {
         return client;
     }

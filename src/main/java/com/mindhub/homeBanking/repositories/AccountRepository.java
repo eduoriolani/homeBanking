@@ -8,6 +8,5 @@ import java.util.Set;
 
 @RepositoryRestResource
 public interface AccountRepository extends JpaRepository <Account, Long> {
-    Set<Account> findById(long id);
 }
 

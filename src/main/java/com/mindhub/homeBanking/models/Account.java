@@ -20,10 +20,10 @@ public class Account{
     private LocalDate date;
     private Double balance;
 
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "owner_id")
     private Client owner;
+
 
     @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
     Set<Transaction> transactions = new HashSet<>();

@@ -8,5 +8,4 @@ import java.util.Set;
 
 @RepositoryRestResource
 public interface LoanRepository extends JpaRepository<Loan, Long> {
-    Set<Loan> findById(long id);
 }

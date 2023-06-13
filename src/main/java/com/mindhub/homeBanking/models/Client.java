@@ -33,9 +33,9 @@ public class Client {
     }
 
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
-    private List<ClientLoan> clientLoan;
+    private Set<ClientLoan> clientLoan;
     @JsonIgnore
-    public List<ClientLoan> getLoans(){return clientLoan;}
+    public Set<ClientLoan> getLoans(){return clientLoan;}
 
 
     public Client(){}

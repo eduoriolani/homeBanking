@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 
 
@@ -37,10 +36,10 @@ public class HomeBankingApplication {
 			accountRepository.save(account2);
 			accountRepository.save(account3);
 
-			Transaction transaction1 = new Transaction(TransactionType.DEBIT, -400.0, "Debito de 400", LocalDateTime.now());
-			Transaction transaction2 = new Transaction(TransactionType.CREDIT, 5400.0, "Acreditacion de 5400", LocalDateTime.now());
-			Transaction transaction3 = new Transaction(TransactionType.CREDIT, 3400.0, "Acreditacion de $3400", LocalDateTime.now());
-			Transaction transaction4 = new Transaction(TransactionType.CREDIT, 3250.0, "Acreditacion de $3250", LocalDateTime.now());
+			Transaction transaction1 = new Transaction(TransactionType.DEBIT, -400.00, "Shopping", LocalDateTime.now());
+			Transaction transaction2 = new Transaction(TransactionType.CREDIT, 5400.00, "Loading", LocalDateTime.now());
+			Transaction transaction3 = new Transaction(TransactionType.DEBIT, -3400.00, "Tax Fee", LocalDateTime.now());
+			Transaction transaction4 = new Transaction(TransactionType.CREDIT, 3250.00, "Loading", LocalDateTime.now());
 			account1.addTransactions(transaction1);
 			account1.addTransactions(transaction2);
 			account2.addTransactions(transaction4);
@@ -51,12 +50,12 @@ public class HomeBankingApplication {
 			transactionRepository.save(transaction3);
 			transactionRepository.save(transaction4);
 
-			List<Integer> hipotecario = List.of(12,24,36,48,60);
-			List<Integer> personal = List.of(6,12,24);
-			List<Integer> automotriz = List.of(12,24,36);
-			Loan loan1 = new Loan("Hipotecario", hipotecario, 500000.0);
+			Set<Integer> mortgage = Set.of(12,24,36,48,60);
+			Set<Integer> personal = Set.of(6,12,24);
+			Set<Integer> automotive = Set.of(12,24,36);
+			Loan loan1 = new Loan("Mortgage", mortgage, 500000.0);
 			Loan loan2 = new Loan("Personal", personal , 100000.0);
-			Loan loan3 = new Loan( "Automotriz", automotriz, 300000.0);
+			Loan loan3 = new Loan( "Automotive", automotive, 300000.0);
 			loanRepository.save(loan1);
 			loanRepository.save(loan2);
 			loanRepository.save(loan3);
