@@ -1,5 +1,8 @@
 package com.mindhub.homeBanking;
 
+import com.mindhub.homeBanking.enums.CardColorType;
+import com.mindhub.homeBanking.enums.CardType;
+import com.mindhub.homeBanking.enums.TransactionType;
 import com.mindhub.homeBanking.models.*;
 import com.mindhub.homeBanking.repositories.*;
 import org.springframework.boot.SpringApplication;
@@ -19,8 +22,8 @@ public class HomeBankingApplication {
 		SpringApplication.run(HomeBankingApplication.class, args);
 	}
 	@Bean
-	public CommandLineRunner initData(ClientRepository repositoryClient, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository){
-		return (args -> {
+	public CommandLineRunner initData(ClientRepository repositoryClient, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository){
+		return args -> {
 			Client client1 = new Client("Melba", "Morel", "melba@mindhub.com");
 			Client client2 = new Client( "Edu", "Oriolani", "edu.oriolani@gmail.com");
 			repositoryClient.save(client1);
@@ -59,13 +62,18 @@ public class HomeBankingApplication {
 			loanRepository.save(loan1);
 			loanRepository.save(loan2);
 			loanRepository.save(loan3);
-			ClientLoan clientLoan1 = new ClientLoan(loan1, client1, 48 , 400000.0);
-			ClientLoan clientLoan2 = new ClientLoan(loan2, client1, 12 , 50000.0);
-			ClientLoan clientLoan3 = new ClientLoan(loan3, client2, 36, 200000.0);
+			ClientLoan clientLoan1 = new ClientLoan(loan1,48 , 400000.0);
+			ClientLoan clientLoan2 = new ClientLoan(loan2,12 , 50000.0);
+			ClientLoan clientLoan3 = new ClientLoan(loan3, 36, 200000.0);
+
 			clientLoanRepository.save(clientLoan1);
 			clientLoanRepository.save(clientLoan2);
 			clientLoanRepository.save(clientLoan3);
-		});
+
+
+			Card card = new Card(CardType.DEBIT, CardColorType.GOLD, 5366501119761273L, LocalDate.now(), LocalDate.now().plusYears(5),client1.getFirstName()+" "+client1.getLastName(), 945);
+			cardRepository.save(card);
+		};
 
 
 	}

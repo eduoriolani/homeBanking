@@ -33,9 +33,15 @@ public class Client {
     }
 
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
-    private Set<ClientLoan> clientLoan;
+    Set<Card> cards = new HashSet<>();
     @JsonIgnore
-    public Set<ClientLoan> getLoans(){return clientLoan;}
+    public Set<Card> getCards(){return cards;}
+
+
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+    private Set<ClientLoan> clientLoans;
+    @JsonIgnore
+    public Set<ClientLoan> getLoans(){return clientLoans;}
 
 
     public Client(){}

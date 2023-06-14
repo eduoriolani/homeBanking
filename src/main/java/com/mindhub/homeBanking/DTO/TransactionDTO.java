@@ -1,7 +1,7 @@
 package com.mindhub.homeBanking.DTO;
 
 import com.mindhub.homeBanking.models.Transaction;
-import com.mindhub.homeBanking.models.TransactionType;
+import com.mindhub.homeBanking.enums.TransactionType;
 
 import java.time.LocalDateTime;
 public class TransactionDTO {

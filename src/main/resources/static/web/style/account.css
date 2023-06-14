@@ -23,12 +23,19 @@ header{
     mix-blend-mode: luminosity;
   }
   .logoMind{
-    height: 50%;
-    width: 50%;
+    height: 100%;
+    width: 100%;
     filter: hue-rotate(180deg);
     filter: saturate(2);
     filter: brightness(1.1);
     mix-blend-mode: multiply;
+  }
+  .userIcon{
+    display: flex;
+    align-items: center;
+    height: 1.2rem;
+    width: 1.2rem;
+    color: rgb(233, 233, 0);
   }
 .navbar-toggler{
     border: 1px solid black;

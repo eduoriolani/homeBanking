@@ -1,6 +1,7 @@
 package com.mindhub.homeBanking.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mindhub.homeBanking.enums.TransactionType;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

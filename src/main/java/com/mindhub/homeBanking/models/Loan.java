@@ -21,10 +21,13 @@ public class Loan {
     private Double maxAmount;
 
     @OneToMany(mappedBy = "loan", fetch = FetchType.EAGER)
-    private Set<ClientLoan> clientLoan;
-
+    private Set<ClientLoan> clientLoans;
     @JsonIgnore
-    public Set<ClientLoan> getClients(){return clientLoan;}
+    public Set<ClientLoan> getClients(){return clientLoans;}
+    public void addClients(ClientLoan clientLoan){
+        clientLoan.setLoan(this);
+        clientLoans.add(clientLoan);
+    }
 
 
     public Loan (){}

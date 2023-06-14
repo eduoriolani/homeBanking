@@ -24,18 +24,13 @@
                       </button>
                     </div>
                   </nav>
-                  <a href="../index.html"><img class="logoMind" src="../../web/images/mindHub-icon.png" alt="mindHub-Brothers"></a>
-                <div class="d-flex flex-column">
+                  <img class="logoMind" src="../../web/images/mindHub-icon.png" alt="mindHub-Brothers">
+                  <div class="d-flex flex-column">
                     <h5 class="align-self-center">Confidence & Grow</h5>
-                    <form action="" class="d-flex gap-4">
-                        <label for="username">
-                            <input type="text" name="username" id="username" placeholder="Username">
-                        </label>
-                        <label for="password">
-                            <input type="password" name="password" id="password" placeholder="*******">
-                        </label>
-                        <input type="submit" id="submit" value="Login">
-                    </form>
+                    <div class="d-flex align-items-center">
+                        <img class="userIcon" src="../images/perfil.png" alt="user">
+                        <i class="mt-1 ps-1">{{clients.firstName}}</i>
+                </div>
                 </div>
             </div>
         </header>
@@ -87,7 +82,7 @@
                                                 <th>Time</th>
                                             </thead>
                                             <tbody>
-                                                <tr v-for="transaction of transactions">
+                                                <tr v-else v-for="transaction of transactions">
                                                     <td v-if="transaction.type == 'CREDIT'" :class="['text-success']">{{transaction.type}}</td>
                                                     <td v-else :class="['text-danger']">{{transaction.type}}</td>
                                                     <td v-if="transaction.type == 'CREDIT'" :class="['text-success']">{{transaction.amount}}</td>
@@ -98,6 +93,7 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+                                        <h4 v-if="transactions.length == 0" class="text-danger">No transactions made</h4>
                                         <hr>
                                         <table>
                                             <thead>
