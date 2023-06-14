@@ -27,11 +27,7 @@ public class Account{
 
     @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
     Set<Transaction> transactions = new HashSet<>();
-    public Set<Transaction> getTransactions(){return transactions;}
-    public void addTransactions(Transaction transaction){
-        transaction.setAccount(this);
-        transactions.add(transaction);
-    }
+
     public Account (){}
     public Account (String number, LocalDate date, Double balance, Client client){
         this.number = number;
@@ -47,13 +43,16 @@ public class Account{
 
     public LocalDate getDate(){ return date;}
     public void setDate(LocalDate date){ this.date = date;}
-
     public Double getBalance(){ return this.balance = balance; }
     public void setBalance(LocalDate date){ this.date = date;}
-
     @JsonIgnore
     public Client getOwner(){ return owner;}
     public void setOwner(Client owner){ this.owner = owner;}
+    public Set<Transaction> getTransactions(){return transactions;}
+    public void addTransactions(Transaction transaction){
+        transaction.setAccount(this);
+        transactions.add(transaction);
+    }
 
 
 

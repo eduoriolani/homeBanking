@@ -1,68 +1,66 @@
 @import url("https://fonts.google.com/specimen/Josefin+Sans/");
 *{
-    font-family: 'Josefin+Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+  font-family: 'Josefin Sans', sans-serif;
 }
-.layout{
-    min-height: 100vh !important;
-}
-header{
-    height: 14vh;
-    width: 100vw;
-    background: linear-gradient( to left, rgb(38, 137, 236), rgb(93, 108, 238) ) !important;
-    /* background-color: rgb(62, 122, 182) !important; */
-    display: flex !important;
-    justify-content: center !important;
-    padding-top: .5em; 
-}
-.remove-bg{
-    background: transparent !important;
+.navbar-toggler{
+  border: 1px solid black;
 }
 #button:hover{
-    background: rgba(0, 0, 0, 0.472);
-    filter: opacity(1.1);
-    mix-blend-mode: luminosity;
-  }
-  .logoMind{
-    height: 100%;
-    width: 100%;
-    filter: hue-rotate(180deg);
-    filter: saturate(2);
-    filter: brightness(1.1);
-    mix-blend-mode: multiply;
-  }
-  .userIcon{
-    display: flex;
-    align-items: center;
-    height: 1.2rem;
-    width: 1.2rem;
-    color: rgb(233, 233, 0);
-  }
-.navbar-toggler{
-    border: 1px solid black;
+background: rgba(0, 0, 0, 0.472);
+filter: opacity(1.1);
+mix-blend-mode: luminosity;
+}
+.logoMind{
+height: 50%;
+width: 50%;
+filter: hue-rotate(180deg);
+filter: saturate(2);
+filter: brightness(1.1);
+mix-blend-mode: multiply;
+}
+.userIcon{
+  width: 1.2rem;
+  height: 1.2rem;
+}
+.loginButton:hover{
+background-color: rgb(116, 94, 122);
+}
+
+header{
+  height: 14vh;
+  width: 100vw;
+  background: linear-gradient( rgb(100, 116, 255), rgb(38, 137, 236) ) !important;
+  display: flex !important;
+  justify-content: center !important;
+  padding-top: .5em; 
 }
 .layout{
-    width: 100vw !important;
-    height: 100vh !important;
+  width: 100vw !important;
+  height: 100vh !important;
 }
-header img {
-        width: 8rem;
-        height: 5rem;
-        object-fit: contain;
+.header img {
+  width: 8rem;
+  height: 5rem;
+  object-fit: contain;
 }
 
 header .header{
-    height: 90%;
-    width: 90%;
-    display: flex;
-    justify-content: space-between;
-
+  height: 90%;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
 }
+
 .header h2 {
-    align-self: center;
-    font-style: oblique;
+  align-self: center;
+  font-style: oblique;
 }
 .header h5{
-    align-self: center;
+  align-self: center;
 }
 
 form input {
