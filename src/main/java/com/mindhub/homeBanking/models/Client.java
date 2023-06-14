@@ -24,8 +24,8 @@ public class Client {
     private String email;
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
-    List<Account> accounts = new ArrayList<>();
-    public List<Account> getAccounts(){ return accounts;}
+    Set<Account> accounts = new HashSet<>();
+    public Set<Account> getAccounts(){ return accounts;}
     public void addAccounts (Account account){
         account.setOwner( this );
         accounts.add( account );

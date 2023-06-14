@@ -24,18 +24,10 @@
                       </button>
                     </div>
                   </nav>
-                <img class="logoMind" src="../../web/images/mindHub-icon.png" alt="mindHub-Brothers">
+                  <a href="../index.html"> <img class="logoMind" src="../../web/images/mindHub-icon.png" alt="mindHub-Brothers"></a>
                 <div class="d-flex flex-column">
                     <h5 class="align-self-center">Confidence & Grow</h5>
-                    <form action="" class="d-flex gap-4">
-                        <label for="username">
-                            <input type="text" name="username" id="username" placeholder="Username">
-                        </label>
-                        <label for="password">
-                            <input type="password" name="password" id="password" placeholder="*******">
-                        </label>
-                        <input type="submit" id="submit" value="Login">
-                    </form>
+                    <i>Melba</i>
                 </div>
             </div>
         </header>
@@ -46,7 +38,7 @@
                     <div class="modal-content">
                       <span class="close" @click="cerrarModal()">&times;</span>
                         <h3 class="text-center mt-2">HomeBanking</h3>
-                        <div>
+                        <div class="d-flex flex-column">
                             <ul class="pagesList">
                                 <li class="p-1 mt-2 text-decoration-none"><a href="../index.html">Home | Client</a></li>
                                 <hr>
@@ -58,8 +50,8 @@
                                 <hr>
                                 <li class="p-1 text-decoration-none"><a href="../pages/contact.html">More Information</a></li>
                                 <hr>
-                                <a href="../index.html"> <img class="d-flex align-items-end logoMind" src="../images/mindHub-icon.png" alt="mindhub"></a>
                             </ul>
+                            <img class="align-self-center logoMind" src="../images/mindHub-icon.png" alt="mindhub">
                         </div>
                     </div>
                 </div>
@@ -75,7 +67,7 @@
                                 <div class="card-body col-xs-10 d-flex flex-column justify-content-around gap-3" >
                                     <div>
                                         <h5 class="card-title pb-2">Account Number: {{account.number}}</h5>
-                                        <h5 class="card-text pb-2">Balance: ${{account.balance}}</h5>
+                                        <h5 class="card-text pb-2">Balance: {{account.balance}}</h5>
                                         <p class="card-text pb-2">Date of creation: {{account.date}}</p>
                                     </div>
                                         <table>
@@ -84,16 +76,27 @@
                                                 <th>Amount</th>
                                                 <th>Description</th>
                                                 <th>Date</th>
+                                                <th>Time</th>
                                             </thead>
                                             <tbody>
                                                 <tr v-for="transaction of transactions">
-                                                    <td v-if="transaction.type == 'CREDIT'" class="text-success">{{transaction.type}}</td>
-                                                    <td v-else="transaction.type == 'DEBIT'" class="text-danger">{{transaction.type}}</td>
-                                                    <td>{{transaction.amount}}</td>
+                                                    <td v-if="transaction.type == 'CREDIT'" :class="['text-success']">{{transaction.type}}</td>
+                                                    <td v-else :class="['text-danger']">{{transaction.type}}</td>
+                                                    <td v-if="transaction.type == 'CREDIT'" :class="['text-success']">{{transaction.amount}}</td>
+                                                    <td v-else :class="['text-danger']">{{transaction.amount}}</td>
                                                     <td>{{transaction.description}}</td>
-                                                    <td>{{transaction.date}}</td>
+                                                    <td>{{transaction.date.slice(0,10)}}</td>
+                                                    <td>{{transaction.date.slice(11,19)}}</td>
                                                 </tr>
                                             </tbody>
+                                        </table>
+                                        <hr>
+                                        <table>
+                                            <thead>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </thead>
                                         </table>
                                         <a href="#" class="btn btn-primary pb-2">Make a transfer</a>
                                         <a href="#" class="btn btn-primary pb-2">Request a loan</a>
@@ -111,7 +114,7 @@
             <div id="redessociales" class="ms-3">
                 <a class="smedia facebook" href="#">Uno</a>
                 <a class="smedia twitter" href="#">Dos</a>
-                <a class="smedia instagram" href="https://www.instagram.com/lemarch___/">Tres</a>
+                <a class="smedia instagram" href="https://www.instagram.com/lemarch___/" target="_blank">Tres</a>
                 <a class="smedia youtube" href="#">Cuatro</a>
                 <a class="smedia vimeo" href="#">Cinco</a>
                 <a class="smedia email" href="#">Seis</a>

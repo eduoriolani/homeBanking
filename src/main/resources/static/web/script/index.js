@@ -24,9 +24,15 @@ createApp({
         .then((response) => {
           console.log(response);
           this.clients = response.data;
-
           this.accounts = this.clients.flatMap( client => client.accounts)
-          console.log(this.accounts);
+
+          this.format = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+        });
+          this.accounts.forEach( e => {
+            e.balance = this.format.format(e.balance)
+        })
         })
         .catch((error) => {
           console.error(error);

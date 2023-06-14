@@ -27,8 +27,8 @@ public class Account{
     private Client owner;
 
     @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
-    List<Transaction> transactions = new ArrayList<>();
-    public List<Transaction> getTransactions(){return transactions;}
+    Set<Transaction> transactions = new HashSet<>();
+    public Set<Transaction> getTransactions(){return transactions;}
     public void addTransactions(Transaction transaction){
         transaction.setAccount(this);
         transactions.add(transaction);

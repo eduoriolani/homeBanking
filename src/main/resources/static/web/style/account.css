@@ -22,7 +22,10 @@ header{
     filter: opacity(1.1);
     mix-blend-mode: luminosity;
   }
-.logoMind{
+  .logoMind{
+    height: 50%;
+    width: 50%;
+    filter: hue-rotate(180deg);
     filter: saturate(2);
     filter: brightness(1.1);
     mix-blend-mode: multiply;
@@ -88,6 +91,7 @@ ul {
 
   .modal-content {
     background-color: #fefefe;
+    transition-duration: 1s;
     padding: 20px;
     width: 30%;
     height: 100%;
@@ -114,7 +118,7 @@ ul {
 
   .card {
     width: 50rem !important;
-    min-height: 20rem;
+    min-height: 20rem !important;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #aeb2ffc7;
@@ -299,5 +303,8 @@ h5{
     }  
     .card-title{
         font-size: x-large;
+    }
+    table, th, td{
+      font-size: smaller;
     }
 }
