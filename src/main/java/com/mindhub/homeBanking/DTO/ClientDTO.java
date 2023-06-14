@@ -1,8 +1,6 @@
 package com.mindhub.homeBanking.DTO;
 
 import com.mindhub.homeBanking.models.Client;
-
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
