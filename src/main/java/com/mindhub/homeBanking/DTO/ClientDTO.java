@@ -13,8 +13,6 @@ public class ClientDTO {
     public Set<AccountDTO> accounts;
     public Set<ClientLoanDTO> loans;
 
-    public ClientDTO(){}
-
     public ClientDTO(Client client) {
 
         this.id = client.getId();

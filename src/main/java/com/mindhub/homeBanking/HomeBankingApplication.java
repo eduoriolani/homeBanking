@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 
@@ -50,21 +51,41 @@ public class HomeBankingApplication {
 			transactionRepository.save(transaction3);
 			transactionRepository.save(transaction4);
 
-			Set<Integer> mortgage = Set.of(12,24,36,48,60);
-			Set<Integer> personal = Set.of(6,12,24);
-			Set<Integer> automotive = Set.of(12,24,36);
+			List<Integer> mortgage = List.of(12,24,36,48,60);
+			List<Integer> personal = List.of(6,12,24);
+			List<Integer> automotive = List.of(12,24,36);
 			Loan loan1 = new Loan("Mortgage", mortgage, 500000.0);
 			Loan loan2 = new Loan("Personal", personal , 100000.0);
 			Loan loan3 = new Loan( "Automotive", automotive, 300000.0);
 			loanRepository.save(loan1);
 			loanRepository.save(loan2);
 			loanRepository.save(loan3);
-			ClientLoan clientLoan1 = new ClientLoan(loan1, client1, 48 , 400000.0);
-			ClientLoan clientLoan2 = new ClientLoan(loan2, client1, 12 , 50000.0);
-			ClientLoan clientLoan3 = new ClientLoan(loan3, client2, 36, 200000.0);
+
+			ClientLoan clientLoan1 = new ClientLoan( 48 , 400000.0);
+			ClientLoan clientLoan2 = new ClientLoan( 12 , 50000.0);
+			ClientLoan clientLoan3 = new ClientLoan( 24, 100000.0);
+			ClientLoan clientLoan4 = new ClientLoan( 36, 200000.0);
+
+			client1.addClientLoan(clientLoan1);
+			loan1.addClientLoan(clientLoan1);
 			clientLoanRepository.save(clientLoan1);
+			client1.addClientLoan(clientLoan2);
+			loan2.addClientLoan(clientLoan2);
 			clientLoanRepository.save(clientLoan2);
+
+			client2.addClientLoan(clientLoan3);
+			loan2.addClientLoan(clientLoan3);
 			clientLoanRepository.save(clientLoan3);
+			client2.addClientLoan(clientLoan4);
+			loan3.addClientLoan(clientLoan4);
+			clientLoanRepository.save(clientLoan4);
+
+
+
+
+
+
+
 		});
 
 

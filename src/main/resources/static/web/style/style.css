@@ -30,7 +30,7 @@
 header{
     height: 14vh;
     width: 100vw;
-    background: linear-gradient( rgb(38, 137, 236), rgb(100, 116, 255) ) !important;
+    background: linear-gradient( rgb(100, 116, 255), rgb(38, 137, 236)) !important;
     display: flex !important;
     justify-content: center !important;
     padding-top: .5em; 
@@ -68,7 +68,7 @@ main {
 }
 article{
   min-height: 68vh !important;
-  background: linear-gradient(#62a1d5, #e5f3fe ) !important;
+  background: linear-gradient(rgb(38, 137, 236), #e5f3fe ) !important;
   width: 100vw !important;
 }
 

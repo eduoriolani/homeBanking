@@ -16,8 +16,6 @@ public class AccountDTO{
     private Client owner;
     public Set<TransactionDTO> transactions;
 
-
-    public AccountDTO(){};
     public AccountDTO(Account account) {
         this.number = account.getNumber();
         this.date = account.getDate();

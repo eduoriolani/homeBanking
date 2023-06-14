@@ -25,11 +25,10 @@ public class ClientLoan {
 
     public ClientLoan(){}
 
-    public ClientLoan(Loan loan, Client client, Integer payments, Double amount) {
-        this.loan = loan;
-        this.client = client;
+    public ClientLoan(Integer payments, Double amount) {
         this.payments = payments;
         this.amount = amount;
+
     }
 
     public Long getId() {
@@ -44,6 +43,7 @@ public class ClientLoan {
     public void setLoan(Loan loan) {
         this.loan = loan;
     }
+
     @JsonIgnore
     public Client getClient() {
         return client;

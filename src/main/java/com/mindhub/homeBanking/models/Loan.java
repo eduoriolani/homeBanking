@@ -3,6 +3,9 @@ package com.mindhub.homeBanking.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -17,19 +20,19 @@ public class Loan {
 
     @ElementCollection
     @Column(name = "payment")
-    private Set<Integer> payments;
+    private List<Integer> payments;
     private Double maxAmount;
 
     @OneToMany(mappedBy = "loan", fetch = FetchType.EAGER)
-    private Set<ClientLoan> clientLoan;
+    private Set<ClientLoan> clientLoans = new HashSet<>();
 
     @JsonIgnore
-    public Set<ClientLoan> getClients(){return clientLoan;}
+    public Set<ClientLoan> getClients(){return clientLoans;}
 
 
     public Loan (){}
 
-    public Loan (String name, Set<Integer> payments, Double maxAmount){
+    public Loan (String name, List<Integer> payments, Double maxAmount){
         this.name = name;
         this.payments = payments;
         this.maxAmount = maxAmount;
@@ -48,11 +51,11 @@ public class Loan {
         this.name = name;
     }
 
-    public Set<Integer> getPayments() {
+    public List<Integer> getPayments() {
         return payments;
     }
 
-    public void setPayments(Set<Integer> payments) {
+    public void setPayments(List<Integer> payments) {
         this.payments = payments;
     }
 
@@ -63,5 +66,10 @@ public class Loan {
     public void setMaxAmount(Double maxAmount) {
         this.maxAmount = maxAmount;
     }
+    public void addClientLoan(ClientLoan clientLoan){
+        clientLoan.setLoan(this);
+        clientLoans.add(clientLoan);
+    }
+
 
 }
