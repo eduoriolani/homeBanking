@@ -6,6 +6,7 @@ import com.mindhub.homeBanking.enums.CardColor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class Card {
@@ -16,17 +17,17 @@ public class Card {
     private String cardHolder;
     private CardType type;
     private CardColor color;
-    private Long number;
+    private String number;
     private Integer cvv;
-    private LocalDate fromDate;
-    private LocalDate thruDate;
+    private LocalDateTime fromDate;
+    private LocalDateTime thruDate;
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
 
     public Card (){}
 
-    public Card(String cardHolder, CardType type, CardColor color, Long number, Integer cvv, LocalDate fromDate, LocalDate thruDate) {
+    public Card(String cardHolder, CardType type, CardColor color, String number, Integer cvv, LocalDateTime fromDate, LocalDateTime thruDate) {
         this.cardHolder = cardHolder;
         this.type = type;
         this.color = color;
@@ -64,11 +65,11 @@ public class Card {
         this.color = color;
     }
 
-    public Long getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(Long number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
@@ -80,19 +81,19 @@ public class Card {
         this.cvv = cvv;
     }
 
-    public LocalDate getFromDate() {
+    public LocalDateTime getFromDate() {
         return fromDate;
     }
 
-    public void setFromDate(LocalDate fromDate) {
+    public void setFromDate(LocalDateTime fromDate) {
         this.fromDate = fromDate;
     }
 
-    public LocalDate getThruDate() {
+    public LocalDateTime getThruDate() {
         return thruDate;
     }
 
-    public void setThruDate(LocalDate thruDate) {
+    public void setThruDate(LocalDateTime thruDate) {
         this.thruDate = thruDate;
     }
 

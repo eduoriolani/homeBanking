@@ -26,7 +26,9 @@ public class ClientDTO {
 
         accounts = client.getAccounts().stream().map(AccountDTO::new).collect(Collectors.toSet());
 
-        loans = client.getLoans().stream().map(ClientLoanDTO::new).collect(Collectors.toSet());
+        loans = client.getLoans()
+                .stream()
+                .map(ClientLoanDTO::new).collect(Collectors.toSet());
 
         cards = client.getCards().stream().map(CardDTO::new).collect(Collectors.toSet());
 
@@ -48,7 +50,7 @@ public class ClientDTO {
         return email;
     }
 
-    public Set<ClientLoanDTO> getLoans() {
+    public Set<ClientLoanDTO> getClientLoan() {
         return loans;
     }
 

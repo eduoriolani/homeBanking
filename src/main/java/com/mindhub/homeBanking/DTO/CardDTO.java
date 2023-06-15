@@ -3,20 +3,18 @@ package com.mindhub.homeBanking.DTO;
 import com.mindhub.homeBanking.enums.CardColor;
 import com.mindhub.homeBanking.enums.CardType;
 import com.mindhub.homeBanking.models.Card;
-import com.mindhub.homeBanking.models.Client;
-
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class CardDTO {
     private Long id;
     private String cardHolder;
     private CardType type;
     private CardColor color;
-    private Long number;
+    private String number;
     private Integer cvv;
-    private LocalDate fromDate;
-    private LocalDate thruDate;
-    private Client client;
+    private LocalDateTime fromDate;
+    private LocalDateTime thruDate;
 
     public CardDTO(Card card){
         id = card.getId();
@@ -27,8 +25,6 @@ public class CardDTO {
         cvv = card.getCvv();
         fromDate = card.getFromDate();
         thruDate = card.getThruDate();
-        client = card.getClient();
-
     }
 
     public Long getId() {
@@ -47,7 +43,7 @@ public class CardDTO {
         return color;
     }
 
-    public Long getNumber() {
+    public String getNumber() {
         return number;
     }
 
@@ -55,15 +51,12 @@ public class CardDTO {
         return cvv;
     }
 
-    public LocalDate getFromDate() {
+    public LocalDateTime getFromDate() {
         return fromDate;
     }
 
-    public LocalDate getThruDate() {
+    public LocalDateTime getThruDate() {
         return thruDate;
     }
 
-    public Client getClient() {
-        return client;
-    }
 }
