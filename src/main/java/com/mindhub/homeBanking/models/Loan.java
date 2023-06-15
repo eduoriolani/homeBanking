@@ -26,9 +26,6 @@ public class Loan {
     @OneToMany(mappedBy = "loan", fetch = FetchType.EAGER)
     private Set<ClientLoan> clientLoans = new HashSet<>();
 
-    @JsonIgnore
-    public Set<ClientLoan> getClients(){return clientLoans;}
-
 
     public Loan (){}
 
@@ -66,6 +63,8 @@ public class Loan {
     public void setMaxAmount(Double maxAmount) {
         this.maxAmount = maxAmount;
     }
+    @JsonIgnore
+    public Set<ClientLoan> getClients(){return clientLoans;}
     public void addClientLoan(ClientLoan clientLoan){
         clientLoan.setLoan(this);
         clientLoans.add(clientLoan);

@@ -21,9 +21,16 @@ public class ClientController {
     private ClientRepository clientRepository;
 
     @RequestMapping ("/clients")
-    public Set<ClientDTO> getClient(){ return clientRepository.findAll().stream().map(ClientDTO::new).collect(Collectors.toSet()); }
+    public Set<ClientDTO> getClient(){ return clientRepository
+            .findAll()
+            .stream()
+            .map(ClientDTO::new)
+            .collect(Collectors.toSet()); }
 
     @RequestMapping ("/clients/{id}")
-    public ClientDTO getClient(@PathVariable Long id){ return clientRepository.findById(id).map(ClientDTO::new).orElse(null); }
+    public ClientDTO getClient(@PathVariable Long id){ return clientRepository
+            .findById(id)
+            .map(ClientDTO::new)
+            .orElse(null); }
 
 }
