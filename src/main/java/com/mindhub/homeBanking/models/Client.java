@@ -20,7 +20,7 @@ public class Client {
     private String firstName;
     private String lastName;
     private String email;
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     Set<Account> accounts = new HashSet<>();
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Set<ClientLoan> clientLoans = new HashSet<>();
@@ -56,7 +56,7 @@ public class Client {
     @JsonIgnore
     public Set<Account> getAccounts(){ return accounts;}
     public void addAccounts (Account account){
-        account.setOwner( this );
+        account.setClient( this );
         accounts.add( account );
     }
     @JsonIgnore

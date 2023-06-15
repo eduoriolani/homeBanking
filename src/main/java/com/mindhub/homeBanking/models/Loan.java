@@ -66,6 +66,11 @@ public class Loan {
     public void setMaxAmount(Double maxAmount) {
         this.maxAmount = maxAmount;
     }
+@JsonIgnore
+    public Set<ClientLoan> getClientLoans() {
+        return clientLoans;
+    }
+
     public void addClientLoan(ClientLoan clientLoan){
         clientLoan.setLoan(this);
         clientLoans.add(clientLoan);

@@ -30,7 +30,7 @@ public class ClientDTO {
         }
 
 
-    public Set<AccountDTO> getAccounts(){return accounts;}
+
 
     public long getId(){ return id;}
     public String getFirstName(){
@@ -44,6 +44,7 @@ public class ClientDTO {
     public String getEmail(){
         return email;
     }
+    public Set<AccountDTO> getAccounts(){return accounts;}
 
     public Set<ClientLoanDTO> getLoans() {
         return loans;

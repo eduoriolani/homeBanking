@@ -35,7 +35,6 @@ public class ClientLoan {
         return id;
     }
 
-    @JsonIgnore
     public Loan getLoan() {
         return loan;
     }
@@ -44,7 +43,6 @@ public class ClientLoan {
         this.loan = loan;
     }
 
-    @JsonIgnore
     public Client getClient() {
         return client;
     }
