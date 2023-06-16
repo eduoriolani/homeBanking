@@ -15,17 +15,17 @@ public class ClientDTO {
 
     public ClientDTO(Client client) {
 
-        this.id = client.getId();
+        id = client.getId();
 
-        this.firstName = client.getFirstName();
+        firstName = client.getFirstName();
 
-        this.lastName = client.getLastName();
+        lastName = client.getLastName();
 
-        this.email = client.getEmail();
+        email = client.getEmail();
 
-        this.accounts = client.getAccounts().stream().map(AccountDTO::new).collect(Collectors.toSet());
+        accounts = client.getAccounts().stream().map(AccountDTO::new).collect(Collectors.toSet());
 
-        this.loans = client.getLoans().stream().map(ClientLoanDTO::new).collect(Collectors.toSet());
+        loans = client.getLoans().stream().map(ClientLoanDTO::new).collect(Collectors.toSet());
 
         }
 
