@@ -69,6 +69,12 @@ main {
     min-height: 76vh !important;
     filter: blur(2.0);
 }
+.pagesList li > a {
+  text-decoration: none !important;
+}
+ul {
+  list-style-type: none !important;
+}
 .modal {
   display: none;
   position: fixed;
@@ -139,7 +145,7 @@ main {
           animation: flip 2.5s ease;
 }
 .front{
-  background-color: #CFB53B;
+  background-image: linear-gradient(to right, #111, #555);
 }
 .front,
 .back {
@@ -152,7 +158,7 @@ main {
   box-shadow: 0 1px 10px 1px rgba(0,0,0,0.3);
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
-  background-image: linear-gradient(to right, #111, #555);
+
   overflow: hidden;
 }
 .front {
@@ -167,6 +173,7 @@ main {
 }
 .gold{
   background: linear-gradient(to bottom, #CFB53B, #C5B358);
+  
 }
 
 .silver{
@@ -290,7 +297,8 @@ main {
 }
 .back {
   transform: rotateY(180deg) translateZ(0);
-  background-image: #878681;
+  background-image: linear-gradient(to right, rgba(35, 35, 35, 0.133), #898989);
+
 }
 .back .strip-black {
   position: absolute;
