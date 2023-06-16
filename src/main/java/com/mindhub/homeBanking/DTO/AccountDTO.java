@@ -17,12 +17,12 @@ public class AccountDTO{
     public Set<TransactionDTO> transactions;
 
     public AccountDTO(Account account) {
-        this.number = account.getNumber();
-        this.date = account.getDate();
-        this.balance = account.getBalance();
-        this.transactions = account.getTransactions().stream().map(TransactionDTO::new).collect(Collectors.toSet());
-        this.id = account.getId();
-        this.owner = account.getOwner();
+        number = account.getNumber();
+        date = account.getDate();
+        balance = account.getBalance();
+        transactions = account.getTransactions().stream().map(TransactionDTO::new).collect(Collectors.toSet());
+        id = account.getId();
+        owner = account.getClient();
     }
 
     public Long getId(){return id;}

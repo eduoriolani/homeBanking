@@ -29,11 +29,10 @@ public class Account{
     Set<Transaction> transactions = new HashSet<>();
 
     public Account (){}
-    public Account (String number, LocalDate date, Double balance, Client client){
+    public Account (String number, LocalDate date, Double balance){
         this.number = number;
         this.date = date;
         this.balance = balance;
-        this.client = client;
     }
 
     public Long getId(){return id;}
@@ -46,8 +45,8 @@ public class Account{
     public Double getBalance(){ return this.balance = balance; }
     public void setBalance(LocalDate date){ this.date = date;}
     @JsonIgnore
-    public Client getOwner(){ return client;}
-    public void setOwner(Client client){ this.client = client;}
+    public Client getClient(){ return client;}
+    public void setClient(Client client){ this.client = client;}
     public Set<Transaction> getTransactions(){return transactions;}
     public void addTransactions(Transaction transaction){
         transaction.setAccount(this);

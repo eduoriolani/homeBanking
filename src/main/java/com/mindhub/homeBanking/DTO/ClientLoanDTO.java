@@ -8,10 +8,10 @@ public class ClientLoanDTO {
     private Integer payments;
 
     public ClientLoanDTO(ClientLoan clientLoan) {
-        this.id = clientLoan.getId();
-        this.name = clientLoan.getLoan().getName();
-        this.amount = clientLoan.getAmount();
-        this.payments = clientLoan.getPayments();
+        id = clientLoan.getId();
+        name = clientLoan.getLoan().getName();
+        amount = clientLoan.getAmount();
+        payments = clientLoan.getPayments();
     }
 
     public Long getId() {

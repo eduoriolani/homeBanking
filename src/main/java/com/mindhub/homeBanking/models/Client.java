@@ -27,54 +27,70 @@ public class Client {
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Set<Card> cards = new HashSet<>();
 
-    public Client(){}
-    public Client(String first, String last, String contact){
+    public Client() {
+    }
+
+    public Client(String first, String last, String contact) {
         firstName = first;
         lastName = last;
         email = contact;
     }
 
-    public long getId(){ return id;}
-    public String getFirstName(){
+    public long getId() {
+        return id;
+    }
+
+    public String getFirstName() {
         return firstName;
     }
-    public void setFirstName(String firstName){
+
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getLastName(){
+    public String getLastName() {
         return lastName;
     }
-    public void setLastName(String lastName){
+
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public String getEmail(){
+    public String getEmail() {
         return email;
     }
-    public void setEmail(String email){
+
+    public void setEmail(String email) {
         this.email = email;
     }
+
     @JsonIgnore
-    public Set<Account> getAccounts(){ return accounts;}
-    public void addAccounts (Account account){
-        account.setOwner( this );
-        accounts.add( account );
+    public Set<Account> getAccounts() {
+        return accounts;
     }
+
+    public void addAccounts(Account account) {
+        account.setClient(this);
+        accounts.add(account);
+    }
+
     @JsonIgnore
-    public Set<ClientLoan> getLoans(){return clientLoans;}
-    public void addClientLoan(ClientLoan clientLoan){
+    public Set<ClientLoan> getLoans() {
+        return clientLoans;
+    }
+
+    public void addClientLoan(ClientLoan clientLoan) {
         clientLoan.setClient(this);
         clientLoans.add(clientLoan);
     }
-@JsonIgnore
-    public Set<Card> getCards() {return cards;}
-    public void addCard(Card card){
-        card.setClient(this);
-        cards.add(card);
+
+    @JsonIgnore
+    public Set<Card> getCards() {
+        return cards;
     }
 
-    public String toString(){
-        return firstName + " " + lastName;
+    public void addCard(Card card) {
+        card.setClient(this);
+        cards.add(card);
     }
 }

@@ -21,6 +21,8 @@ createApp({
                 .then((response) => {
                     this.client = response.data;
                     this.cards = this.client.cards
+                    console.log(this.cards);
+                    this.cards.sort((a,b) => a.id-b.id)
                 })
                 .catch((error) => {
                     console.error(error);
