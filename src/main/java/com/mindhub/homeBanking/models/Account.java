@@ -10,8 +10,6 @@ import java.util.Set;
 
 @Entity
 public class Account{
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
@@ -19,7 +17,6 @@ public class Account{
     private String number;
     private LocalDate date;
     private Double balance;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "client_id")
     private Client client;
