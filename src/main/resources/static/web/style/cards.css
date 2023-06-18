@@ -124,12 +124,12 @@ ul {
 }
 #divCards{
     width: 80%;
-    height: 70vh;
+    min-height: 100vh;
     margin-bottom: 3rem;
     border-radius: 1rem;
     background: linear-gradient( to right, #4b87c3, #74b6f8);
-
 }
+
 .card {
   width: 400px;
   height: 250px;
@@ -164,7 +164,6 @@ ul {
 .front {
   transform: translateZ(0);
 }
-.strip-bottom,
 .strip-top {
   position: absolute;
   right: 0;
@@ -182,10 +181,6 @@ ul {
 
 .titanium {
   background: linear-gradient(to bottom, #878681, #929087);
-}
-.strip-bottom {
-  width: 200px;
-  transform: skewX(-15deg) translateX(50px);
 }
 .strip-top {
   width: 180px;

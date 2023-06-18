@@ -84,10 +84,13 @@ public class HomeBankingApplication {
 
 			Card card1 = new Card(client1.getFirstName()+" "+client1.getLastName(), CardType.DEBIT, CardColor.GOLD, "4517-5697-4524-5421", 954, LocalDateTime.now(), LocalDateTime.now().plusYears(5));
 			Card card2 = new Card(client1.getFirstName()+" "+client1.getLastName(), CardType.CREDIT, CardColor.TITANIUM, "7517-2697-4534-2462", 414, LocalDateTime.now(), LocalDateTime.now().plusYears(5));
+			Card card3 = new Card(client1.getFirstName()+" "+client1.getLastName(), CardType.DEBIT, CardColor.SILVER, "1354-2642-8543-2752", 264, LocalDateTime.now(), LocalDateTime.now().plusYears(4));
 			client1.addCard(card1);
 			client1.addCard(card2);
+			client1.addCard(card3);
 			cardRepository.save(card1);
 			cardRepository.save(card2);
+			cardRepository.save(card3);
 
 
 

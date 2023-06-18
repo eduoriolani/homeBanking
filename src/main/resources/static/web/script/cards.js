@@ -15,14 +15,12 @@ createApp({
     },
     methods: {
         loadData(){
-                this.param = new URLSearchParams(location.search).get("id")
                 axios
                 .get(`http://localhost:8080/api/clients/1`)
                 .then((response) => {
                     this.client = response.data;
                     this.cards = this.client.cards
                     console.log(this.cards);
-                    this.cards.sort((a,b) => a.id-b.id)
                 })
                 .catch((error) => {
                     console.error(error);

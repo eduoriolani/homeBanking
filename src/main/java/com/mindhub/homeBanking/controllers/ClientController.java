@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mindhub.homeBanking.DTO.ClientDTO;
+import com.mindhub.homeBanking.models.Client;
 import com.mindhub.homeBanking.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,9 +29,10 @@ public class ClientController {
             .collect(Collectors.toSet()); }
 
     @RequestMapping ("/clients/{id}")
-    public ClientDTO getClient(@PathVariable Long id){ return clientRepository
-            .findById(id)
-            .map(ClientDTO::new)
-            .orElse(null); }
+    public ClientDTO getClient(@PathVariable Long id){
+        Client client = clientRepository.findById(id).orElse(null);
+        ClientDTO clientDTO = new ClientDTO(client);
+        return clientDTO;
+    }
 
 }
