@@ -5,7 +5,8 @@ createApp({
     data(){
         return {
             client: {},
-            cards: []
+            cards: [],
+
             
         }
     },
@@ -20,6 +21,12 @@ createApp({
                 .then((response) => {
                     this.client = response.data;
                     this.cards = this.client.cards
+                    console.log(this.cards);
+                    this.cards.forEach( card => {
+                        
+                        card.thruDate = card.thruDate.slice(2,7);
+                        card.thruDate = card.thruDate.split("/").reverse().join("/");
+                    })
                     console.log(this.cards);
                 })
                 .catch((error) => {

@@ -24,8 +24,12 @@
   mix-blend-mode: multiply;
 }
 .userIcon{
-    width: 1.2rem !important;
-    height: 1.2rem !important;
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    filter: hue-rotate(180deg);
+    filter: saturate(2);
+    filter: brightness(1.1);
+    mix-blend-mode: multiply;
   }
 .loginButton:hover{
   background-color: rgb(116, 94, 122);
@@ -170,16 +174,16 @@ ul {
   height: inherit;
   box-shadow: 0 0 10px 0px rgba(0,0,0,0.5);
 }
-.gold{
+.GOLD{
   background: linear-gradient(to bottom, #CFB53B, #C5B358);
   
 }
 
-.silver{
+.SILVER{
   background: linear-gradient(to bottom, silver, lightgrey);
 }
 
-.titanium {
+.TITANIUM {
   background: linear-gradient(to bottom, #878681, #929087);
 }
 .strip-top {
@@ -362,9 +366,12 @@ footer{
     padding-top: 2rem;
     background: linear-gradient( to right, rgb(62, 122, 182), rgb(93, 108, 238) ) !important;
 }
-#redessociales {
+#socialMedia {
     width: 64px;
     height: 64px;
+    position: fixed !important;
+    top: 75%;
+    left: 1%;
     border-radius: 75px;
     border: 5px solid #fff;
     background: url(https://4.bp.blogspot.com/-gKMIOgeaEBY/UWHsOA382oI/AAAAAAAABpI/5GdyRTAeKII/s1600/share_core_square.jpg);
@@ -387,7 +394,7 @@ footer{
     left:3px;
   }
   
-  #redessociales:hover .smedia {
+  #socialMedia:hover .smedia {
     opacity: 1;
     transform: translate(0px,0);
     -webkit-transform: translate(0px,0);
@@ -396,24 +403,24 @@ footer{
     margin:10px 0px 0px 20px;
     position: absolute;
   }
-  #redessociales:hover .smedia:nth-child(1) {
+  #socialMedia:hover .smedia:nth-child(1) {
     position: absolute;
     left:65px;
   }
   
-  #redessociales:hover .smedia:nth-child(2) {
+  #socialMedia:hover .smedia:nth-child(2) {
     position: absolute;
     left:110px;
   }
-  #redessociales:hover .smedia:nth-child(3) {
+  #socialMedia:hover .smedia:nth-child(3) {
     position: absolute;
     left:155px;
   }
-  #redessociales:hover .smedia:nth-child(4) {
+  #socialMedia:hover .smedia:nth-child(4) {
     position: absolute;
     left:200px;
   }
-  #redessociales:hover .smedia:nth-child(5) {
+  #socialMedia:hover .smedia:nth-child(5) {
     position: absolute;
     left:245px;
   }
@@ -442,4 +449,44 @@ footer{
   }
   .credit{
     background-color: rgb(213, 22, 22);
+  }
+
+  @media screen and (max-width: 550px) {
+    body{
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+  }
+  header{
+      height: 55vh;
+  }
+  
+  form{
+      flex-wrap: wrap;
+      align-items: center !important;
+      justify-content: center !important;
+    } 
+  .header{
+      display: flex;
+      flex-direction: column;    
+  }  
+  .modal-content{
+      width: 100% !important;
+  }
+  main{
+      min-height: 50vh !important;
+      flex-grow: 1;
+  }
+  .card-section{
+      width: 320px;
+      display: flex;
+  }
+  #divCards{
+    width: 100vw !important;
+  }  
+    
+    .card{
+        width: 280px;
+      }
+
   }
