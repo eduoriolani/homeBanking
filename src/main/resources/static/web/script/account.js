@@ -17,8 +17,8 @@ createApp({
     },
     methods: {
         loadData(){
-                this.param = new URLSearchParams(location.search).get("id")
-                axios
+            this.param = new URLSearchParams(location.search).get("id")
+            axios
                 .get(`http://localhost:8080/api/accounts/${this.param}`)
                 .then((response) => {
                     this.account = response.data;
@@ -36,15 +36,20 @@ createApp({
                 })
                 .catch((error) => {
                     console.error(error);
-                });
-            },
-          mostrarMenu() {
-            // Mostrar la ventana emergente
-            document.getElementById("myModal").style.display = "block";
+            });
         },
-          cerrarModal() {
-            // Cerrar la ventana emergente
-            document.getElementById("myModal").style.display = "none";
+
+        logOut(){
+            axios.post('/api/logout').then(response => console.log('signed out!!!'))
+        },
+
+        mostrarMenu() {
+        // Mostrar la ventana emergente
+        document.getElementById("myModal").style.display = "block";
+        },
+        cerrarModal() {
+        // Cerrar la ventana emergente
+        document.getElementById("myModal").style.display = "none";
         }
     },
 

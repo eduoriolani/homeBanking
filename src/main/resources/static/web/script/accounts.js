@@ -40,6 +40,9 @@ createApp({
           console.error(error);
         });
     },
+    logOut(){
+      axios.post('/api/logout').then(response => console.log('signed out!!!'))
+    },
     mostrarMenu() {
       // Mostrar la ventana emergente
       document.getElementById("myModal").style.display = "block";

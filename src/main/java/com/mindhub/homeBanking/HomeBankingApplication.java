@@ -5,10 +5,12 @@ import com.mindhub.homeBanking.enums.CardType;
 import com.mindhub.homeBanking.enums.TransactionType;
 import com.mindhub.homeBanking.models.*;
 import com.mindhub.homeBanking.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,11 +23,15 @@ public class HomeBankingApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HomeBankingApplication.class, args);
 	}
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	@Bean
 	public CommandLineRunner initData(ClientRepository repositoryClient, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository){
 		return (args -> {
-			Client client1 = new Client("Melba", "Morel", "melba@mindhub.com");
-			Client client2 = new Client( "Edu", "Oriolani", "edu.oriolani@gmail.com");
+
+			Client client1 = new Client("Melba", "Morel", "melba@mindhub.com", passwordEncoder.encode("melbaMorel"));
+			Client client2 = new Client( "Edu", "Oriolani", "edu.oriolani@gmail.com", passwordEncoder.encode("eduOriolani"));
 			repositoryClient.save(client1);
 			repositoryClient.save(client2);
 

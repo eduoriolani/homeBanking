@@ -2,7 +2,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Login Page in HTML with CSS Code Example</title>
+  <title>Login MindHub</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
 
@@ -12,7 +12,7 @@
 </head>
 <body>
 <!-- partial:index.partial.html -->
-<div class="box-form">
+<div id="app" class="box-form">
 	<div class="left">
 		<div class="overlay">
 		<h1>MindHub Brothers.</h1>
@@ -32,9 +32,12 @@
 		<h5>Login</h5>
 		<p>Don't have an account? <a href="#">Creat Your Account</a> it takes less than a minute</p>
 		<div class="inputs">
-			<input type="text" placeholder="user name">
+			<form>
+			<input type="text" name="email" v-model="clientData.email" placeholder="email">
 			<br>
-			<input type="password" placeholder="password">
+			<input type="password" name="password" v-model="clientData.password" placeholder="password">
+			
+			
 		</div>
 			
 			<br><br>
@@ -45,15 +48,30 @@
 		<input type="checkbox" name="item" checked/>
 		<span class="text-checkbox">Remember me</span>
 	</label>
-			<p>forget password?</p>
+			<p>Forget password?</p>
 		</div>
 			
 			<br>
-			<a href="../index.html"><button type="button">Login</button></a>
+			<button @click="logClient" type="submit">Login</button>
+		</form>
 	</div>
+	<div id="loginModal" class=" modal">
+		<div class="modal-content">
+		  <span class="close" @click="closeModal()">&times;</span>
+		  <p>Login successful, let's see your accounts!</p>
+		</div>
+	  </div>
+	<div id="errorModal" class=" modal">
+		<div class="modal-content">
+		  <span class="close" @click="closeModal()">&times;</span>
+		  <p>Email or password invalid, please try again!</p>
+		</div>
+	  </div>
 	
 </div>
 <!-- partial -->
-  
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="../script/login.js"></script>
 </body>
 </html>
