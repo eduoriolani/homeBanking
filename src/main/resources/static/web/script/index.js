@@ -38,6 +38,7 @@ createApp({
           console.error(error);
         });
     },
+    
     mostrarMenu() {
       // Mostrar la ventana emergente
       document.getElementById("myModal").style.display = "block";

@@ -7,41 +7,67 @@ console.log(Vue)
 createApp({
   data() {
     return {
-      clientData: {
         email: "",
         password: "",
-      },
-
+        firstName: "",
+        lastName: "",
+        showRegister: false
 
     }
   },
   created(){
 
   },
-  methods : {
-    
+  methods : { 
     logClient() {
-    if(this.clientData.email !== "" && this.clientData.password !== ""){
-        this.postClient();
-    }else{
-        alert("Please complete all the fields")
-    }
-
+      if(this.email !== "" && this.password !== ""){
+          this.postClient();
+      }else{
+          this.logError();
+      }
     },
-    
-    postClient() {
-        
-        axios.post('/api/login','email=' + this.clientData.email + '&password=' + this.clientData.password ,{headers:{'content-type':'application/x-www-form-urlencoded'}})
+    registerClient(){
+      if(this.emailRegister !== "" && this.passwordRegister !== "" && this.firstName !== "" && this.lastName !== ""){
+        this.registration();
+      } else{
+        this.logError();
+      }
+    },  
+    postClient() { 
+        axios.post('/api/login','email=' + this.email + '&password=' + this.password ,{headers:{'content-type':'application/x-www-form-urlencoded'}})
             .then(response => {
                 console.log("Signed in!!")
                 this.logSuccessful();
-                window.location.href = "../pages/accounts.html";
+                
+            })
+            .then(response => {
+              window.location.href = "../pages/accounts.html";
             })
             .catch(error => {
                 this.logError();
-                this.clientData.email = "";
-                this.clientData.password = "";
+                this.email = "";
+                this.password = "";
             });
+    },
+    registration(){
+      axios.post('/api/clients','firstName='+ this.firstName +'&lastName='+ this.lastName +'&email=' + this.email +'&password='+ this.password ,{headers:{'content-type':'application/x-www-form-urlencoded'}})
+          .then(response => {
+            console.log('registered')
+            this.logSuccessful();
+            this.logClient();
+          })
+          .catch(error => {
+            this.logError();
+                this.email = "";
+                this.password = "";
+                this.firstName = ""
+                this.lastName = ""
+          })
+
+    },
+
+    showForm(){
+        this.showRegister = true
     },
     logSuccessful() {
         // Mostrar la ventana emergente
@@ -56,8 +82,6 @@ createApp({
         // Cerrar la ventana emergente
         document.getElementById('loginModal').style.display = 'none';
         document.getElementById('errorModal').style.display = 'none';
-       
-        
       },
     
 

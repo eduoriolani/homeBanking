@@ -68,7 +68,8 @@ body {
 }
 
 .box-form .right {
-  padding: 40px;
+  width: 50%;
+  padding: 20px;
   overflow: hidden;
 }
 .modal {

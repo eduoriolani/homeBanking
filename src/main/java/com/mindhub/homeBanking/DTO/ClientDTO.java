@@ -10,6 +10,7 @@ public class ClientDTO {
     private String firstName;
     private String lastName;
     private String email;
+    private String password;
     public Set<AccountDTO> accounts;
     public Set<ClientLoanDTO> loans;
     public Set<CardDTO> cards;
@@ -23,6 +24,8 @@ public class ClientDTO {
         lastName = client.getLastName();
 
         email = client.getEmail();
+
+        password = client.getPassword();
 
         accounts = client.getAccounts().stream().map(AccountDTO::new).collect(Collectors.toSet());
 
@@ -43,7 +46,7 @@ public class ClientDTO {
     public String getLastName(){
         return lastName;
     }
-
+    public String getPassword(){return password;}
     public String getEmail(){
         return email;
     }

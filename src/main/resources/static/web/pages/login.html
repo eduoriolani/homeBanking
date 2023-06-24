@@ -12,9 +12,9 @@
 </head>
 <body>
 <!-- partial:index.partial.html -->
-<div id="app" class="box-form">
+<div id="app" class="box-form d-flex">
 	<div class="left">
-		<div class="overlay">
+		<div class="overlay d-flex">
 		<h1>MindHub Brothers.</h1>
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 		Curabitur et est sed felis aliquet sollicitudin</p>
@@ -26,16 +26,59 @@
 		</span>
 		</div>
 	</div>
-	
-	
-		<div class="right">
+
+	<!-- ////////////////// LOGIN ////////////////// -->
+		
+	<div v-if="showRegister == false" class="right">
 		<h5>Login</h5>
-		<p>Don't have an account? <a href="#">Creat Your Account</a> it takes less than a minute</p>
+		<p>Don't have an account? <a href="#" @click="showForm()">Create Your Account</a> it takes less than a minute</p>
 		<div class="inputs">
 			<form>
-			<input type="text" name="email" v-model="clientData.email" placeholder="email">
+			<input type="text" name="email" v-model="email" placeholder="email">
 			<br>
-			<input type="password" name="password" v-model="clientData.password" placeholder="password">
+			<input type="password" name="password" v-model="password" placeholder="password">		
+		</div>			
+			<br><br>			
+		<div class="remember-me--forget-password">
+				<!-- Angular -->
+	<label>
+		<input type="checkbox" name="item" checked/>
+		<span class="text-checkbox">Remember me</span>
+	</label>
+			<p>Forget password?</p>
+		</div>
+			<br>
+			<button @click="logClient" type="submit">Login</button>
+		</form>
+
+	<div id="loginModal" class=" modal">
+		<div class="modal-content">
+		  <span class="close" @click="closeModal()">&times;</span>
+		  <p>Login successful, let's see your accounts!</p>
+		</div>
+	  </div>
+	<div id="errorModal" class=" modal">
+		<div class="modal-content">
+		  <span class="close" @click="closeModal()">&times;</span>
+		  <p>Email or password invalid, please try again!</p>
+		</div>
+	  </div>
+	</div>
+
+	<!-- //////////////////// REGISTER ////////////////////// -->
+
+	<div v-else class="right">
+		<h5>Register</h5>
+		<p>Already have an account?  <a href="" @click="showForm(false)">Just sign in</a></p>
+		<div class="inputs">
+			<form>
+            <input type="text" name="firstName" v-model="firstName" placeholder="First Name">
+            <br>
+            <input type="text" name="lastName" v-model="lastName" placeholder="Last Name">
+            <br>
+			<input type="text" name="email" v-model="email" placeholder="Email">
+			<br>
+			<input type="password" name="password" v-model="password" placeholder="Password">
 			
 			
 		</div>
@@ -50,25 +93,26 @@
 	</label>
 			<p>Forget password?</p>
 		</div>
-			
 			<br>
-			<button @click="logClient" type="submit">Login</button>
+			<button @click="registerClient()" type="submit">Register</button>
 		</form>
-	</div>
+	
 	<div id="loginModal" class=" modal">
 		<div class="modal-content">
 		  <span class="close" @click="closeModal()">&times;</span>
-		  <p>Login successful, let's see your accounts!</p>
+		  <p>Register successful, you are now part of our community!</p>
 		</div>
 	  </div>
 	<div id="errorModal" class=" modal">
 		<div class="modal-content">
 		  <span class="close" @click="closeModal()">&times;</span>
-		  <p>Email or password invalid, please try again!</p>
+		  <p>Some of your fields are invalid, please try again!</p>
 		</div>
 	  </div>
-	
+    </div>
+
 </div>
+
 <!-- partial -->
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>

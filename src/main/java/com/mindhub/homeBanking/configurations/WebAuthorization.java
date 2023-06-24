@@ -2,9 +2,9 @@ package com.mindhub.homeBanking.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
@@ -22,8 +22,8 @@ class WebAuthorization{
     protected SecurityFilterChain filterchain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/web/index.html","/api/login","/web/pages/login.html").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
                 .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-//                .antMatchers("/web/index.html", "/web/style/style.css", "/web/script/index.js").hasAuthority("CLIENT")
                 .antMatchers("/web/pages/accounts.html", "/web/style/accounts.css", "/web/script/accounts.js").hasAuthority("CLIENT")
                 .antMatchers("/web/pages/account.html", "/web/style/account.css", "/web/script/account.js").hasAuthority("CLIENT")
                 .antMatchers("/web/pages/cards.html", "/web/style/cards.css", "/web/script/cards.js").hasAuthority("CLIENT");
@@ -31,13 +31,13 @@ class WebAuthorization{
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .loginPage("/api/login");
-        http.logout().logoutUrl("/api/logout");
+        http.logout().logoutUrl("/api/logout").deleteCookies();
 
         // turn off checking for CSRF tokens
         http.csrf().disable();
 
         // if user is not authenticated, just send an authentication failure response
-        http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
+        http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendRedirect("/web/pages/login.html"));
 
         // if login is successful, just clear the flags asking for authentication
         http.formLogin().successHandler((req, res, auth) -> clearAuthenticationAttributes(req));
