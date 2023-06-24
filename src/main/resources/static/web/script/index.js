@@ -5,13 +5,8 @@ console.log(Vue);
 createApp({
   data() {
     return {
-      clients: [],
-      accounts: [],
-      clientData: {
-        firstName: "",
-        lastName: "",
-        email: "",
-      },
+      client: {},
+      logged: true,
     };
   },
   created() {
@@ -20,25 +15,21 @@ createApp({
   methods: {
     loadData() {
       axios
-        .get("http://localhost:8080/api/clients")
+        .get("http://localhost:8080/api/clients/current")
         .then((response) => {
           console.log(response);
-          this.clients = response.data;
-          this.accounts = this.clients.flatMap( client => client.accounts)
+          this.client = response.data;
 
-          this.format = new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-        });
-          this.accounts.forEach( e => {
-            e.balance = this.format.format(e.balance)
-        })
         })
         .catch((error) => {
-          console.error(error);
+          this.logged = false;
         });
+        
     },
-    
+
+    logOut(){
+      axios.post('/api/logout').then(response => console.log('signed out!!!'))
+    },
     mostrarMenu() {
       // Mostrar la ventana emergente
       document.getElementById("myModal").style.display = "block";
@@ -47,5 +38,6 @@ createApp({
       // Cerrar la ventana emergente
       document.getElementById("myModal").style.display = "none";
     },
+  
   },
 }).mount("#app");

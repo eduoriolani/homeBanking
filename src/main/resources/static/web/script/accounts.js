@@ -1,10 +1,9 @@
-const button = document.getElementById("button");
 const { createApp } = Vue;
 
 createApp({
   data() {
     return {
-      clients: [],
+      client: {},
       accounts: [],
       loans: [],
     };
@@ -17,10 +16,10 @@ createApp({
       axios
         .get("http://localhost:8080/api/clients/current")
         .then((response) => {
-          this.clients = response.data;
-          this.accounts = this.clients.accounts;
+          this.client = response.data;
+          this.accounts = this.client.accounts;
           this.accounts.sort((a,b)=> a.balance-b.balance);
-          this.loans = this.clients.loans
+          this.loans = this.client.loans
 
           this.format = new Intl.NumberFormat('en-US', {
             style: 'currency',

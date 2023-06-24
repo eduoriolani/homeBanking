@@ -30,10 +30,16 @@
                 <img class="logoMind" src="../web/images/mindHub-icon.png" alt="mindHub-Brothers">
                 <div class="d-flex flex-column">
                     <h5 class="align-self-center">Confidence & Grow</h5>
-                    <div class="d-flex gap-3">
-                      <a href="./pages/login.html" class="btn bg-white">Sign in</a>
-                      <a href="./pages/login.html" @click="showForm()" class="btn bg-white">Sign up</a>
+                    <div v-if="logged">
+                      <a href="./index.html" @click="logOut()" class="text-decoration-none text-white"><div class="d-flex align-items-center">
+                        <img class="userIcon" src="../web/images/logOut1.png" alt="user">
+                        <i class="mt-1 ps-1 ">Log out</i>
+                      </div></a>
                     </div>
+                      <div v-else class="d-flex gap-3">
+                        <a href="./pages/login.html" class="btn bg-white">Sign in</a>
+                        <a href="./pages/login.html" @click="showForm()" class="btn bg-white">Sign up</a>
+                      </div>
                 </div>
             </div>
         </header>

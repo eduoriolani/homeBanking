@@ -21,9 +21,9 @@ class WebAuthorization{
     @Bean
     protected SecurityFilterChain filterchain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers( "/admin/**","/rest/**", "/h2-console/**").hasAuthority("ADMIN")
                 .antMatchers("/web/index.html","/api/login","/web/pages/login.html").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
-                .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/web/pages/accounts.html", "/web/style/accounts.css", "/web/script/accounts.js").hasAuthority("CLIENT")
                 .antMatchers("/web/pages/account.html", "/web/style/account.css", "/web/script/account.js").hasAuthority("CLIENT")
                 .antMatchers("/web/pages/cards.html", "/web/style/cards.css", "/web/script/cards.js").hasAuthority("CLIENT");
@@ -35,6 +35,9 @@ class WebAuthorization{
 
         // turn off checking for CSRF tokens
         http.csrf().disable();
+
+        //disabling frameOptions so h2-console can be accessed
+        http.headers().frameOptions().disable();
 
         // if user is not authenticated, just send an authentication failure response
         http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendRedirect("/web/pages/login.html"));
