@@ -34,8 +34,14 @@ public class ClientController {
         return clientDTO;
     }
     @RequestMapping("/clients/current")
-    public ClientDTO getCurrentClient(Authentication authentication){
-        return new ClientDTO(clientRepository.findByEmail(authentication.getName()));
+    public ResponseEntity<Object> getCurrentClient(Authentication authentication){
+        Client client = clientRepository.findByEmail(authentication.getName());
+        if(client != null){
+            ClientDTO clientDTO = new ClientDTO(client);
+            return new ResponseEntity<>(clientDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Client not found", HttpStatus.FORBIDDEN);
+        }
     }
 
 
@@ -48,9 +54,10 @@ public class ClientController {
         }
         if (clientRepository.findByEmail(email) != null){
             return new ResponseEntity<>("Email already in use, please try again", HttpStatus.FORBIDDEN);
+        } else {
+            clientRepository.save(new Client(firstName, lastName, email, passwordEncoder.encode(password)));
+            return new ResponseEntity<>(HttpStatus.CREATED);
         }
-        clientRepository.save(new Client(firstName, lastName, email, passwordEncoder.encode(password)));
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 

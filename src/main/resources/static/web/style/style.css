@@ -76,11 +76,10 @@ main {
     width: 100vw !important;
     min-height: 76vh !important;
     filter: blur(2.0);
-    
+    background: linear-gradient(rgb(38, 137, 236), #e5f3fe ) !important;  
 }
 article{
   min-height: 68vh !important;
-  background: linear-gradient(rgb(38, 137, 236), #e5f3fe ) !important;
   width: 100vw !important;
 }
 .articleInfo > h2 {
@@ -274,6 +273,11 @@ ul {
   
   .btn-primary:hover {
     background-color: #064385d0;
+  }
+  .publicity{
+    height: 40rem;
+    width: 100%;
+    object-fit: scale-down;
   }
   
   footer{
