@@ -11,11 +11,17 @@ createApp({
         password: "",
         firstName: "",
         lastName: "",
-        showRegister: false
+        showRegister: false,
+        isRegisterParam: false
 
     }
   },
   created(){
+    const urlParams = new URLSearchParams(window.location.search);
+    this.isRegisterParam = urlParams.get('register') === 'true';
+    if (this.isRegisterParam) {
+      this.showRegister = true;
+    }
 
   },
   methods : { 
@@ -27,7 +33,7 @@ createApp({
       }
     },
     registerClient(){
-      if(this.emailRegister !== "" && this.passwordRegister !== "" && this.firstName !== "" && this.lastName !== ""){
+      if(this.email !== "" && this.password !== "" && this.firstName !== "" && this.lastName !== ""){
         this.registration();
       } else{
         this.logError();
@@ -38,7 +44,6 @@ createApp({
             .then(response => {
                 console.log("Signed in!!")
                 this.logSuccessful();
-                
             })
             .then(response => {
               window.location.href = "../pages/accounts.html";
@@ -50,7 +55,7 @@ createApp({
             });
     },
     registration(){
-      axios.post('/api/clients','firstName='+ this.firstName +'&lastName='+ this.lastName +'&email=' + this.email +'&password='+ this.password ,{headers:{'content-type':'application/x-www-form-urlencoded'}})
+      axios.post('/api/clients','firstName='+ this.firstName +'&lastName='+ this.lastName +'&email=' + this.email +'&password='+ this.password,{headers:{'content-type':'application/x-www-form-urlencoded'}})
           .then(response => {
             console.log('registered')
             this.logSuccessful();
@@ -67,7 +72,7 @@ createApp({
     },
 
     showForm(){
-        this.showRegister = true
+        this.showRegister = !this.isRegisterParam;
     },
     logSuccessful() {
         // Mostrar la ventana emergente

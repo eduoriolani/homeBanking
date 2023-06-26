@@ -4,10 +4,9 @@
   <meta charset="UTF-8">
   <title>Login MindHub</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-
-
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <link rel="stylesheet" href="../style/login.css">
+<link rel="shortcut icon" href="../images/mindHub-icon.png" type="image/x-icon">
 
 </head>
 <body>
@@ -18,18 +17,18 @@
 		<h1>MindHub Brothers.</h1>
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 		Curabitur et est sed felis aliquet sollicitudin</p>
-		<span>
+		<!-- <span>
 			<p>login with social media</p>
 			<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i> Login with Facebook</a>
 			<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> Login with Twitter</a>
 			<a href="#"><i class="fa fa-google" aria-hidden="true"></i> Login with Google</a>
-		</span>
+		</span> -->
 		</div>
 	</div>
 
 	<!-- ////////////////// LOGIN ////////////////// -->
 		
-	<div v-if="!showRegister" class="right">
+	<div v-if="!showRegister && !isRegisterParam" class="right">
 		<h5>Login</h5>
 		<p>Don't have an account? <a href="#" @click="showForm()">Create Your Account</a> it takes less than a minute</p>
 		<div class="inputs">
@@ -69,7 +68,7 @@
 
 	<div v-else class="right">
 		<h5>Register</h5>
-		<p>Already have an account?  <a href="" @click="showForm()">Just sign in</a></p>
+		<p>Already have an account?  <a href="./login.html" @click="showForm(true)">Just sign in</a></p>
 		<div class="inputs">
 			<form>
             <input type="text" name="firstName" v-model="firstName" placeholder="First Name">

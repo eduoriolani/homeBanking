@@ -27,7 +27,7 @@
                   </nav>
                 <img class="logoMind" src="../images/mindHub-icon.png" alt="mindHub-Brothers">
                 <div class="d-flex flex-column">
-                    <h5 class="align-self-center pt-3">Confidence & Grow</h5>
+                    <h5 class="align-self-center pt-1">Confidence & Grow</h5>
                     <a href="../index.html" @click="logOut()" class="text-decoration-none text-white"><div class="d-flex align-items-center w-100 logOut justify-content-between btn">
                       <img class="userIcon" src="../images/logOut1.png" alt="user">
                       <p class="mt-1 ps-1 pt-2">Log out</p>
@@ -62,14 +62,15 @@
                 
             </section>
            <section class="d-flex flex-column align-items-center col-12 card-section">
-                <h3 class="text-center mt-5 pt-5 pb-3">Hello {{client.firstName}}!</h3>
+                <h3 class="text-center mt-5 pt-5 pb-3">Hello {{client.firstName}}, these are all your cards!</h3>
                 <div id="divCards"  class=" col-10 d-flex flex-column">
                   <div v-if="cards.length == 0"> <h3 class="text-center mt-5">You have no cards</h3></div>
                   <div v-else>
-                  <h4 class="pt-4 text-center">Your debit card</h4>
-                  <div v-for="card of cards" class="d-flex justify-content-center col-12 p-2">
+                  <h4 class="ps-5 pb-3 pt-4 mt-5">Your debit cards</h4>
+                  <div class="d-flex flex-row w-100 justify-content-center col-12 gap-2 cardsWrap">
+                  <div v-for="card of debitCards" class="d-flex justify-content-center flex-wrap col-xs-10 col-5 p-2">
                     <div v-if="card.type == 'DEBIT'">
-                            <div class="card d-flex">
+                            <div class="card d-flex pb-3">
                               <div class="flip">
                                 <div class="front">
                                   <div :class="'strip-top '+ card.color "></div>
@@ -113,11 +114,15 @@
                               </div>
                             </div>
                           </div>
-                          
-                    </div>
-                    <h4 class="pt-4 text-center">Your credit card</h4>
-                    <div class=" d-flex flex-column align-items-center p-5" >
-                      <div v-for="card of cards">
+                        </div>
+                      </div>
+                      <div class="divisor d-flex justify-content-center mt-5 mb-2 pt-5 pb-2">
+                        <p class="divisorBar"> </p>
+                        </div>
+
+                      <h4 class="ps-5 pb-3 pt-4 mt-5">Your credit cards</h4>
+                    <div class=" d-flex flex-column align-items-center p-2 pb-5" >
+                      <div v-for="card of creditCards">
                     <div v-if="card.type == 'CREDIT'">
                             <div class="card" >
                               <div class="flip">
@@ -179,12 +184,11 @@
             </div>
         </main>
         <footer class="d-flex justify-content-around p-1">  
-          <svg class="logo pt-2" width="40" height="40" viewbox="0 0 17.5 16.2">
+          <svg class=" pt-2" width="40" height="40" viewbox="0 0 17.5 16.2">
               <path d="M3.2 0l5.4 5.6L14.3 0l3.2 3v9L13 16.2V7.8l-4.4 4.1L4.5 8v8.2L0 12V3l3.2-3z" fill="white"></path>
             </svg>
           <h5 class="align-self-center">Developed by Edu</h5>
-      
-      </footer>
+        </footer>
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>

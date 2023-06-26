@@ -6,6 +6,8 @@ createApp({
         return {
             client: {},
             cards: [],
+            debitCards: [],
+            creditCards: [],
 
             
         }
@@ -22,12 +24,14 @@ createApp({
                     this.client = response.data;
                     this.cards = this.client.cards
                     console.log(this.cards);
-                    this.cards.forEach( card => {
-                        
+                    this.cards.forEach( card => {    
                         card.thruDate = card.thruDate.slice(2,7);
                         card.thruDate = card.thruDate.split("-").reverse().join("/");
                     })
-                    console.log(this.cards);
+                    this.debitCards = this.cards.filter( card => card.type == "DEBIT");
+                    console.log(this.debitCards);
+                    this.creditCards = this.cards.filter( card => card.type == "CREDIT");
+
                 })
                 .catch((error) => {
                     console.error(error);

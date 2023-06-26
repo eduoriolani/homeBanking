@@ -138,7 +138,7 @@ ul {
 }
 
 .card {
-  width: 400px;
+  width: 25rem;
   height: 250px;
   border: none;
   /* background:  linear-gradient( to right, #579ce1, #74b6f8); */
@@ -363,6 +363,14 @@ ul {
   }
 }
 
+.divisor{
+  width: 100%;
+}
+.divisorBar{
+  border: 1px solid black;
+  width: 60%;
+}
+
 
 footer{
     min-height: 10vh !important;
@@ -487,10 +495,24 @@ footer{
   }
   #divCards{
     width: 100vw !important;
-  }  
-    
+  }   
+  .cardsWrap{
+    flex-direction: column !important;
+    align-items: center !important;
+  }
     .card{
         width: 280px;
+        flex-direction: column !important;
       }
 
+  }
+  @media screen and (min-width: 551px) and (max-width: 1040px) {
+    .card{
+      width: 25rem;
+      flex-direction: column !important;
+    }
+    .cardsWrap{
+      flex-direction: column !important;
+      align-items: center !important;
+    }
   }

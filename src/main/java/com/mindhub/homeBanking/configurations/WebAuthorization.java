@@ -21,10 +21,10 @@ class WebAuthorization{
     @Bean
     protected SecurityFilterChain filterchain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers( "/admin/**","/rest/**", "/api/clients" ,"/h2-console/**").hasAuthority("ADMIN")
                 .antMatchers("/web/index.html","/api/login","/web/pages/login.html", "/web/style/**", "/web/script/**", "/web/images/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
-                .antMatchers("/web/pages/**", "/api/accounts/**" , "/api/clients/current").hasAuthority("CLIENT")
+                .antMatchers( "/admin/**","/api/clients" ,"/rest/**","/h2-console/**").hasAuthority("ADMIN")
+                .antMatchers("/web/pages/**", "/api/accounts/**", "/api/clients/current").hasAuthority("CLIENT")
                 .anyRequest().denyAll();
         http.formLogin()
                 .usernameParameter("email")
@@ -50,7 +50,7 @@ class WebAuthorization{
         // if logout is successful, just send a success response
         http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
 
-        // Defining that there could be only one session at a time
+        // Defining that there could be only one session at a time and redirect to login page if session expires
         http.sessionManagement().maximumSessions(1).expiredUrl("/web/pages/login.html");
 
         return http.build();

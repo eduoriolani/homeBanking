@@ -17,6 +17,8 @@ public class ClientController {
 
     @Autowired
     private ClientRepository clientRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @RequestMapping ("/clients")
     public Set<ClientDTO> getClient(){ return clientRepository
@@ -36,10 +38,6 @@ public class ClientController {
         return new ClientDTO(clientRepository.findByEmail(authentication.getName()));
     }
 
-
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @RequestMapping(path = "/clients", method = RequestMethod.POST)
     public ResponseEntity<Object> register(
