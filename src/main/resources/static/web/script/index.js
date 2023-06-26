@@ -1,4 +1,3 @@
-const button = document.getElementById("button");
 const { createApp } = Vue;
 console.log(Vue);
 
@@ -18,10 +17,12 @@ createApp({
         .get("http://localhost:8080/api/clients/current")
         .then((response) => {
           console.log(response);
-          this.client = response.data;
+          console.log("hola");
+          this.logged = true;
 
         })
         .catch((error) => {
+          
           this.logged = false;
         });
         

@@ -4,7 +4,7 @@
   padding: 0;
   box-sizing: border-box;
   
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Pathway Gothic One', serif;
 }
 .navbar-toggler{
   border: 1px solid black;
@@ -23,12 +23,15 @@ filter: brightness(1.1);
 mix-blend-mode: multiply;
 }
 .userIcon{
-  width: 1.5rem !important;
-  height: 1.5rem !important;
+  width: 2.5rem !important;
+  height: 2.5rem !important;
   filter: hue-rotate(180deg);
   filter: saturate(2);
   filter: brightness(1.1);
   mix-blend-mode: multiply;
+}
+.logOut{
+  height: 3rem;
 }
 .loginButton:hover{
 background-color: rgb(116, 94, 122);
@@ -70,10 +73,11 @@ header .header{
 form input {
     width: 7rem;
 }
+main{
+  background-color: #cbe8ff !important;
+}
 .card-section{
     min-height: 86vh !important;
-    width: 100vw !important;
-    background-color: #cbe8ff !important;
     filter: opacity(1.1);
     mix-blend-mode: multiply;
     z-index: 0;
@@ -171,23 +175,44 @@ ul {
   .btn-primary:hover {
     background-color: #064385d0;
   }
+  #searchDiv{
+    height: 10rem;
+  }
+  .searchers{
+    background-color: #b8e5f4;
+    border-radius: 1rem;
+  }
+  .searchers:hover{
+    background-color: #7eaee2;
+    transform: scale(1.1);
+  }
+  .searchers img{
+    padding-top: 1.5em;
+    object-position: center;
+    width:100%;
+    height: 60%;
+    object-fit: contain;
+  }
+  .publicity{
+    height: 15rem;
+  }
+  .publicity img{
+    height: 100%;
+    width: 100%;
+    border-radius: 1rem;
+    object-fit: contain;
+    
+  }
 
-main{
-    width: 100vw !important;
-    min-height: 86vh !important;
-}
+
+
 footer{
     min-height: 10vh !important;
     width: 100vw !important;
     padding-top: 2rem;
     background: linear-gradient( to right, rgb(62, 122, 182), rgb(93, 108, 238) ) !important;
 }
-.card-section{
-    width: 100vw !important;
-}
-h5{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+
 #socialMedia {
   width: 64px;
   height: 64px;

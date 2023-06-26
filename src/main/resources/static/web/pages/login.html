@@ -29,7 +29,7 @@
 
 	<!-- ////////////////// LOGIN ////////////////// -->
 		
-	<div v-if="showRegister == false" class="right">
+	<div v-if="!showRegister" class="right">
 		<h5>Login</h5>
 		<p>Don't have an account? <a href="#" @click="showForm()">Create Your Account</a> it takes less than a minute</p>
 		<div class="inputs">
@@ -69,7 +69,7 @@
 
 	<div v-else class="right">
 		<h5>Register</h5>
-		<p>Already have an account?  <a href="" @click="showForm(false)">Just sign in</a></p>
+		<p>Already have an account?  <a href="" @click="showForm()">Just sign in</a></p>
 		<div class="inputs">
 			<form>
             <input type="text" name="firstName" v-model="firstName" placeholder="First Name">

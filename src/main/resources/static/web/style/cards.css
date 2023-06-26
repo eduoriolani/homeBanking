@@ -5,7 +5,7 @@
     padding: 0;
     box-sizing: border-box;
     
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: 'Pathway Gothic One', serif;
 }
 .navbar-toggler{
     border: 1px solid black;
@@ -24,13 +24,16 @@
   mix-blend-mode: multiply;
 }
 .userIcon{
-    width: 1.5rem !important;
-    height: 1.5rem !important;
-    filter: hue-rotate(180deg);
-    filter: saturate(2);
-    filter: brightness(1.1);
-    mix-blend-mode: multiply;
-  }
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  filter: hue-rotate(180deg);
+  filter: saturate(2);
+  filter: brightness(1.1);
+  mix-blend-mode: multiply;
+}
+.logOut{
+  height: 3rem;
+}
 .loginButton:hover{
   background-color: rgb(116, 94, 122);
 }
@@ -138,7 +141,8 @@ ul {
   width: 400px;
   height: 250px;
   border: none;
-  background:  linear-gradient( to right, #579ce1, #74b6f8);
+  /* background:  linear-gradient( to right, #579ce1, #74b6f8); */
+  background: inherit;
 }
 .flip {
   width: inherit;

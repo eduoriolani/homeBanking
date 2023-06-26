@@ -25,7 +25,7 @@ createApp({
                     this.cards.forEach( card => {
                         
                         card.thruDate = card.thruDate.slice(2,7);
-                        card.thruDate = card.thruDate.split("/").reverse().join("/");
+                        card.thruDate = card.thruDate.split("-").reverse().join("/");
                     })
                     console.log(this.cards);
                 })

@@ -21,12 +21,11 @@ class WebAuthorization{
     @Bean
     protected SecurityFilterChain filterchain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers( "/admin/**","/rest/**", "/h2-console/**").hasAuthority("ADMIN")
-                .antMatchers("/web/index.html","/api/login","/web/pages/login.html").permitAll()
+                .antMatchers( "/admin/**","/rest/**", "/api/clients" ,"/h2-console/**").hasAuthority("ADMIN")
+                .antMatchers("/web/index.html","/api/login","/web/pages/login.html", "/web/style/**", "/web/script/**", "/web/images/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
-                .antMatchers("/web/pages/accounts.html", "/web/style/accounts.css", "/web/script/accounts.js").hasAuthority("CLIENT")
-                .antMatchers("/web/pages/account.html", "/web/style/account.css", "/web/script/account.js").hasAuthority("CLIENT")
-                .antMatchers("/web/pages/cards.html", "/web/style/cards.css", "/web/script/cards.js").hasAuthority("CLIENT");
+                .antMatchers("/web/pages/**", "/api/accounts/**" , "/api/clients/current").hasAuthority("CLIENT")
+                .anyRequest().denyAll();
         http.formLogin()
                 .usernameParameter("email")
                 .passwordParameter("password")
@@ -39,8 +38,8 @@ class WebAuthorization{
         //disabling frameOptions so h2-console can be accessed
         http.headers().frameOptions().disable();
 
-        // if user is not authenticated, just send an authentication failure response
-        http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendRedirect("/web/pages/login.html"));
+        // if user is not authenticated, just redirect to the login page
+        http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
 
         // if login is successful, just clear the flags asking for authentication
         http.formLogin().successHandler((req, res, auth) -> clearAuthenticationAttributes(req));
@@ -50,6 +49,10 @@ class WebAuthorization{
 
         // if logout is successful, just send a success response
         http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
+
+        // Defining that there could be only one session at a time
+        http.sessionManagement().maximumSessions(1).expiredUrl("/web/pages/login.html");
+
         return http.build();
     }
 

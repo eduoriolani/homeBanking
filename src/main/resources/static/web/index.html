@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="./style/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.google.com/specimen/Josefin+Sans/">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap">
-
     <link rel="stylesheet" href="./style/style.css">
     <link rel="shortcut icon" href="./images/mindHub-icon.png" type="image/x-icon">
     <title>Mindhub Brothers | Client</title>
@@ -29,16 +28,16 @@
                   </nav>
                 <img class="logoMind" src="../web/images/mindHub-icon.png" alt="mindHub-Brothers">
                 <div class="d-flex flex-column">
-                    <h5 class="align-self-center">Confidence & Grow</h5>
+                    <h5 class="align-self-center pt-3">Confidence & Grow</h5>
                     <div v-if="logged">
-                      <a href="./index.html" @click="logOut()" class="text-decoration-none text-white"><div class="d-flex align-items-center">
-                        <img class="userIcon" src="../web/images/logOut1.png" alt="user">
-                        <i class="mt-1 ps-1 ">Log out</i>
-                      </div></a>
+                      <a href="./index.html" @click="logOut()" class="text-decoration-none text-white"><div class="d-flex align-items-center logOut w-100 justify-content-between btn">
+                        <img class="userIcon" src="./images/logOut1.png" alt="user">
+                        <p class="mt-1 ps-1 pt-2">Log out</p>
+                </div></a>
                     </div>
                       <div v-else class="d-flex gap-3">
                         <a href="./pages/login.html" class="btn bg-white">Sign in</a>
-                        <a href="./pages/login.html" @click="showForm()" class="btn bg-white">Sign up</a>
+                        <a href="./pages/login.html" class="btn bg-white">Sign up</a>
                       </div>
                 </div>
             </div>
@@ -157,9 +156,6 @@
                     </div>
                   </article>
             
-            
-        </main>
-        <footer>
             <div id="socialMedia" class="ms-3">
                 <a class="smedia facebook" href="#">Uno</a>
                 <a class="smedia twitter" href="#">Dos</a>
@@ -168,8 +164,14 @@
                 <a class="smedia vimeo" href="#">Cinco</a>
                 <a class="smedia email" href="#">Seis</a>
             </div>
-            <h5 class="text-center">Developed by Edu</h5>
-        </footer>
+        </main>
+        <footer class="d-flex justify-content-around p-1">  
+          <svg class="logo pt-2" width="40" height="40" viewbox="0 0 17.5 16.2">
+              <path d="M3.2 0l5.4 5.6L14.3 0l3.2 3v9L13 16.2V7.8l-4.4 4.1L4.5 8v8.2L0 12V3l3.2-3z" fill="white"></path>
+            </svg>
+          <h5 class="align-self-center">Developed by Edu</h5>
+      
+      </footer>
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>

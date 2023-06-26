@@ -24,12 +24,15 @@
   mix-blend-mode: multiply;
 }
 .userIcon{
-  width: 1.5rem !important;
-  height: 1.5rem !important;
+  width: 2.5rem !important;
+  height: 2.5rem !important;
   filter: hue-rotate(180deg);
   filter: saturate(2);
   filter: brightness(1.1);
   mix-blend-mode: multiply;
+}
+.logOut{
+  height: 3rem;
 }
 .loginButton:hover{
   background-color: rgb(116, 94, 122);

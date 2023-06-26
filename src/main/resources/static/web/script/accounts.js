@@ -20,6 +20,7 @@ createApp({
           this.accounts = this.client.accounts;
           this.accounts.sort((a,b)=> a.balance-b.balance);
           this.loans = this.client.loans
+          console.log(this.loans);
 
           this.format = new Intl.NumberFormat('en-US', {
             style: 'currency',
