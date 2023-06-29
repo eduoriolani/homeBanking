@@ -13,7 +13,7 @@ public class AccountDTO{
     private String number;
     private LocalDate date;
     private Double balance;
-    private Client owner;
+    private Client client;
     public Set<TransactionDTO> transactions;
 
     public AccountDTO(Account account) {
@@ -22,7 +22,7 @@ public class AccountDTO{
         balance = account.getBalance();
         transactions = account.getTransactions().stream().map(TransactionDTO::new).collect(Collectors.toSet());
         id = account.getId();
-        owner = account.getClient();
+        client = account.getClient();
     }
 
     public Long getId(){return id;}
@@ -32,6 +32,6 @@ public class AccountDTO{
 
     public Double getBalance(){ return balance; }
 
-    public Client getOwner(){return owner;}
+    public Client getOwner(){return client;}
 
 }

@@ -6,6 +6,7 @@ createApp({
       client: {},
       accounts: [],
       loans: [],
+      balance: 0,
     };
   },
   created() {
@@ -20,7 +21,6 @@ createApp({
           this.accounts = this.client.accounts;
           this.accounts.sort((a,b)=> a.balance-b.balance);
           this.loans = this.client.loans
-          console.log(this.loans);
 
           this.format = new Intl.NumberFormat('en-US', {
             style: 'currency',
@@ -32,13 +32,19 @@ createApp({
         this.loans.forEach( e => {
             e.amount = this.format.format(e.amount)
         })
-        
-          
-
         })
         .catch((error) => {
           console.error(error);
         });
+    },
+    createAccount(){
+      axios
+      .post('/api/clients/current/accounts')
+      .then(response => {
+        this.loadData();
+        console.log(response);
+      })
+      .catch(err => console.error(err))
     },
     logOut(){
       axios.post('/api/logout').then(response => console.log('signed out!!!'))

@@ -39,7 +39,7 @@
 }
 
 header{
-    height: 14vh;
+    height: 18vh;
     width: 100vw;
     background: linear-gradient( rgb(100, 116, 255), rgb(38, 137, 236) ) !important;
     display: flex !important;
@@ -106,6 +106,16 @@ ul {
         0 0  0 2px rgb(255,255,255),
         0.3em 0.3em 1em rgba(0,0,0,0.3);
 }
+.modal-content-error {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 70%;
+}
+.modal-content-error p {
+  margin-top: 1rem;
+}
 
 .close {
   color: #aaa;
@@ -123,14 +133,12 @@ ul {
 }
 .card-section{
     min-height: 86vh !important;
-    width: 100vw !important;
     background-color: #cbe8ff !important;
     filter: opacity(1.1);
     mix-blend-mode: multiply;
     z-index: 0;
 }
 #divCards{
-    width: 80%;
     min-height: 100vh;
     margin-bottom: 3rem;
     border-radius: 1rem;
@@ -142,7 +150,7 @@ ul {
   height: 250px;
   border: none;
   /* background:  linear-gradient( to right, #579ce1, #74b6f8); */
-  background: inherit;
+  background-color : inherit;
 }
 .flip {
   width: inherit;

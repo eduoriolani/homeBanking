@@ -1,9 +1,16 @@
 package com.mindhub.homeBanking.controllers;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import com.mindhub.homeBanking.DTO.AccountDTO;
 import com.mindhub.homeBanking.DTO.ClientDTO;
+import com.mindhub.homeBanking.models.Account;
 import com.mindhub.homeBanking.models.Client;
+import com.mindhub.homeBanking.repositories.AccountRepository;
 import com.mindhub.homeBanking.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +26,8 @@ public class ClientController {
     private ClientRepository clientRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private AccountRepository accountRepository;
 
     @RequestMapping ("/clients")
     public Set<ClientDTO> getClient(){ return clientRepository
@@ -38,11 +47,12 @@ public class ClientController {
         Client client = clientRepository.findByEmail(authentication.getName());
         if(client != null){
             ClientDTO clientDTO = new ClientDTO(client);
-            return new ResponseEntity<>(clientDTO, HttpStatus.OK);
+            return new ResponseEntity<>(clientDTO, HttpStatus.ACCEPTED);
         } else {
             return new ResponseEntity<>("Client not found", HttpStatus.FORBIDDEN);
         }
     }
+
 
 
     @RequestMapping(path = "/clients", method = RequestMethod.POST)
@@ -55,7 +65,15 @@ public class ClientController {
         if (clientRepository.findByEmail(email) != null){
             return new ResponseEntity<>("Email already in use, please try again", HttpStatus.FORBIDDEN);
         } else {
-            clientRepository.save(new Client(firstName, lastName, email, passwordEncoder.encode(password)));
+            Client client = clientRepository.save(new Client(firstName, lastName, email, passwordEncoder.encode(password)));
+            String randomNum;
+            do {
+                Random random = new Random();
+                randomNum = "VIN-" + random.nextInt(90000000);
+            } while (accountRepository.findByNumber(randomNum) != null);
+            Account newAccount = new Account(randomNum, LocalDate.now(), 0.0);
+            client.addAccounts(newAccount);
+            accountRepository.save(newAccount);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
     }

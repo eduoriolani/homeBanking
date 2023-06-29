@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap">
     <link rel="stylesheet" href="../style/cards.css">
     <link rel="shortcut icon" href="../images/mindHub-icon.png" type="image/x-icon">
-    <title>Mindhub Brothers | Account</title>
+    <title>Mindhub Brothers | Cards</title>
 </head>
 <body>
     <div class="layout" id="app">
@@ -37,7 +37,6 @@
         </header>
         <main class="d-flex flex-column">
             <section class="d-flex flex-column flex-start" id="navbar">
-                
                 <div id="myModal" class="modal">
                     <div class="modal-content">
                       <span class="close" @click="cerrarModal()">&times;</span>
@@ -62,12 +61,17 @@
                 
             </section>
            <section class="d-flex flex-column align-items-center col-12 card-section">
-                <h3 class="text-center mt-5 pt-5 pb-3">Hello {{client.firstName}}, these are all your cards!</h3>
-                <div id="divCards"  class=" col-10 d-flex flex-column">
+            <div class="col-10">
+             <div class="pb-2 align-self-start">
+               <h3 class=" mt-5 pt-5 pb-3">Hello <span class="text-danger">{{client.firstName}}</span>, these are all your cards!</h3>
+               <a class="btn btn-primary" v-if="cards.length < 6" href="./create-cards.html">Request a new card</a>
+              </div>
+              <div id="divCards" class="align-self-center">
                   <div v-if="cards.length == 0"> <h3 class="text-center mt-5">You have no cards</h3></div>
                   <div v-else>
-                  <h4 class="ps-5 pb-3 pt-4 mt-5">Your debit cards</h4>
-                  <div class="d-flex flex-row w-100 justify-content-center col-12 gap-2 cardsWrap">
+                  <h4 class="ps-5 pb-3 pt-4 mt-5" v-if="debitCards.length > 0">Your debit cards</h4>
+                  <h4 class="ps-5 pb-3 pt-4 mt-5" v-else>You dont have debit cards yet!</h4>
+                  <div class=" d-flex flex-column align-items-center p-2 pb-5" >
                   <div v-for="card of debitCards" class="d-flex justify-content-center flex-wrap col-xs-10 col-5 p-2">
                     <div v-if="card.type == 'DEBIT'">
                             <div class="card d-flex pb-3">
@@ -120,9 +124,10 @@
                         <p class="divisorBar"> </p>
                         </div>
 
-                      <h4 class="ps-5 pb-3 pt-4 mt-5">Your credit cards</h4>
+                        <h4 class="ps-5 pb-3 pt-4 mt-5" v-if="creditCards.length > 0">Your credit cards</h4>
+                        <h4 class="ps-5 pb-3 pt-4 mt-5" v-else>You dont have credit cards yet!</h4>
                     <div class=" d-flex flex-column align-items-center p-2 pb-5" >
-                      <div v-for="card of creditCards">
+                      <div v-for="card of creditCards" class="d-flex justify-content-center flex-wrap col-xs-10 col-5 p-2">
                     <div v-if="card.type == 'CREDIT'">
                             <div class="card" >
                               <div class="flip">
@@ -171,7 +176,8 @@
                     </div>
                   </div>
                 </div>
-                </div>
+              </div>
+            </div>
                         
             </section>
             <div id="socialMedia" class="ms-3">

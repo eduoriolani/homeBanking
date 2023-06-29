@@ -24,13 +24,15 @@ class WebAuthorization{
                 .antMatchers("/web/index.html","/api/login","/web/pages/login.html", "/web/style/**", "/web/script/**", "/web/images/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
                 .antMatchers( "/admin/**","/api/clients" ,"/rest/**","/h2-console/**").hasAuthority("ADMIN")
-                .antMatchers("/web/pages/**", "/api/accounts/**", "/api/clients/current").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST, "/api/clients/current/cards").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST, "/api/clients/current/accounts").hasAuthority("CLIENT")
+                .antMatchers("/web/pages/**", "/api/clients/current").hasAuthority("CLIENT")
                 .anyRequest().denyAll();
         http.formLogin()
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .loginPage("/api/login");
-        http.logout().logoutUrl("/api/logout").deleteCookies();
+        http.logout().logoutUrl("/api/logout").deleteCookies("JSESSIONID");
 
         // turn off checking for CSRF tokens
         http.csrf().disable();

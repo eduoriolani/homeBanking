@@ -64,16 +64,17 @@
                 <h3 class="align-self-start ps-2 pt-2 mt-5">
                     Hello <span class="text-danger">{{client.firstName}}</span>, here are your accounts information!
                 </h3>
+                <button class="btn btn-primary w-25" v-if="accounts.length < 3" @click="createAccount">Create Account</button>
                 <div id="divCards" class="d-flex flex-row flex-wrap mt-4 gap-5 justify-content-start">
                     <div class="card col-xs-10" v-for="account of accounts" >
-                        <div class="card-body col-xs-10 d-flex flex-column justify-content-around gap-3" >
+                        <a :href="'./account.html?id='+account.id" class="text-decoration-none text-black" > <div class="card-body col-xs-10 d-flex flex-column justify-content-around gap-3" >
                             <div>
                                 <h5 class="card-title pb-2">Account Number: {{account.number}}</h5>
                                 <h5 class="card-text pb-2">Balance: {{account.balance}}</h5>
                                 <p class="card-text pb-2">Date of creation: {{account.date}}</p>
                             </div>
-                                <a :href="'./account.html?id='+account.id" class="btn btn-primary pb-2">Show Account Info</a>
                         </div>
+                    </a>
                     </div>
                 </div>
 

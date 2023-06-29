@@ -1,0 +1,58 @@
+package com.mindhub.homeBanking.controllers;
+
+import com.mindhub.homeBanking.enums.CardColor;
+import com.mindhub.homeBanking.enums.CardType;
+import com.mindhub.homeBanking.models.Card;
+import com.mindhub.homeBanking.models.Client;
+import com.mindhub.homeBanking.repositories.CardRepository;
+import com.mindhub.homeBanking.repositories.ClientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDateTime;
+import java.util.Random;
+
+@RestController
+@RequestMapping("/api")
+public class CardController {
+    @Autowired
+    ClientRepository clientRepository;
+    @Autowired
+    CardRepository cardRepository;
+
+    @PostMapping("/clients/current/cards")
+    public ResponseEntity<Object> createCards(@RequestParam CardType cardType, @RequestParam CardColor cardColor, Authentication authentication){
+        Client client = clientRepository.findByEmail(authentication.getName());
+        String randomCardNumber;
+        Random randomNumber = new Random();
+        int randomNumber1 = randomNumber.nextInt(9000) + 1000;
+        int randomNumber2 = randomNumber.nextInt(9000) + 1000;
+        int randomNumber3 = randomNumber.nextInt(9000) + 1000;
+        int randomNumber4 = randomNumber.nextInt(9000) + 1000;
+        Random randomCvv = new Random();
+        int randomCvvNumber = randomCvv.nextInt(900) + 100;
+
+        do {
+            randomCardNumber = randomNumber1 + "-" + randomNumber2 + "-" + randomNumber3 + "-" + randomNumber4;
+        } while (cardRepository.findByNumber(randomCardNumber) != null );
+
+        if(client.getCards().stream().filter(card -> card.getType() == cardType).count() >= 3) {
+            return new ResponseEntity<>("Max amount of cards reached", HttpStatus.FORBIDDEN);
+
+        } if (client.getCards().stream().anyMatch(card -> card.getType() == cardType && card.getColor() == cardColor)){
+            return new ResponseEntity<>("Can't create another card with same color and type", HttpStatus.FORBIDDEN);
+
+        } else {
+            Card newCard = new Card(client.getFirstName() + " " + client.getLastName(), cardType, cardColor, randomCardNumber, randomCvvNumber, LocalDateTime.now(), LocalDateTime.now().plusYears(5));
+            client.addCard(newCard);
+            cardRepository.save(newCard);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+    }
+}
