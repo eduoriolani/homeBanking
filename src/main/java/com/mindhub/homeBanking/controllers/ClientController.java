@@ -1,12 +1,10 @@
 package com.mindhub.homeBanking.controllers;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.mindhub.homeBanking.DTO.AccountDTO;
 import com.mindhub.homeBanking.DTO.ClientDTO;
 import com.mindhub.homeBanking.models.Account;
 import com.mindhub.homeBanking.models.Client;
@@ -59,8 +57,17 @@ public class ClientController {
     public ResponseEntity<Object> register(
             @RequestParam String firstName, @RequestParam String lastName,
             @RequestParam String email, @RequestParam String password){
-        if (firstName.isBlank() || lastName.isBlank() || email.isBlank() || password.isBlank()) {
-            return new ResponseEntity<>("Please complete all the fields", HttpStatus.FORBIDDEN);
+        if (firstName.isBlank()) {
+            return new ResponseEntity<>("Please complete your first name", HttpStatus.FORBIDDEN);
+        }
+        if (lastName.isBlank()) {
+            return new ResponseEntity<>("Please complete your last name", HttpStatus.FORBIDDEN);
+        }
+        if (email.isBlank()) {
+            return new ResponseEntity<>("Please complete your email", HttpStatus.FORBIDDEN);
+        }
+        if (password.isBlank()) {
+            return new ResponseEntity<>("Please complete your password", HttpStatus.FORBIDDEN);
         }
         if (clientRepository.findByEmail(email) != null){
             return new ResponseEntity<>("Email already in use, please try again", HttpStatus.FORBIDDEN);

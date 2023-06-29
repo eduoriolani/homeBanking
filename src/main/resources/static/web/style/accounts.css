@@ -38,9 +38,9 @@ background-color: rgb(116, 94, 122);
 }
 
 header{
-  height: 18vh;
+  height: 20vh;
   width: 100vw;
-  background: linear-gradient( rgb(100, 116, 255), rgb(38, 137, 236) ) !important;
+  background: linear-gradient( rgb(100, 183, 255), rgb(38, 137, 236) ) !important;
   display: flex !important;
   justify-content: center !important;
   padding-top: .5em; 
@@ -210,7 +210,7 @@ footer{
     min-height: 10vh !important;
     width: 100vw !important;
     padding-top: 2rem;
-    background: linear-gradient( to right, rgb(62, 122, 182), rgb(93, 108, 238) ) !important;
+    background: linear-gradient(rgb(38, 137, 236), rgb(100, 183, 255)  ) !important;
 }
 
 #socialMedia {

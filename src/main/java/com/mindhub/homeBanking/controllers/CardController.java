@@ -31,12 +31,13 @@ public class CardController {
         Client client = clientRepository.findByEmail(authentication.getName());
         String randomCardNumber;
         Random randomNumber = new Random();
+        //Para los 16 digitos de la tarjeta
         int randomNumber1 = randomNumber.nextInt(9000) + 1000;
         int randomNumber2 = randomNumber.nextInt(9000) + 1000;
         int randomNumber3 = randomNumber.nextInt(9000) + 1000;
         int randomNumber4 = randomNumber.nextInt(9000) + 1000;
-        Random randomCvv = new Random();
-        int randomCvvNumber = randomCvv.nextInt(900) + 100;
+        //Para el CVV
+        int randomCvvNumber = randomNumber.nextInt(900) + 100;
 
         do {
             randomCardNumber = randomNumber1 + "-" + randomNumber2 + "-" + randomNumber3 + "-" + randomNumber4;

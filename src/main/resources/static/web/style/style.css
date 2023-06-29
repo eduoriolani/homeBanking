@@ -40,9 +40,9 @@
 }
 
 header{
-    height: 18vh;
+    height: 20vh;
     width: 100vw;
-    background: linear-gradient( rgb(100, 116, 255), rgb(38, 137, 236) ) !important;
+    background: linear-gradient( rgb(100, 183, 255), rgb(38, 137, 236) ) !important;
     display: flex !important;
     justify-content: center !important;
     padding-top: .5em; 
@@ -71,6 +71,15 @@ header .header{
 .header h5{
     align-self: center;
 }
+#behindHeader{
+  height: 80vh;
+  width: 100%;
+  padding-top: 1rem;
+  background-image: url(https://images.pexels.com/photos/1422408/pexels-photo-1422408.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+  background-size: cover;
+  background-position: top;
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.1);
+}
 
 main {
     width: 100vw !important;
@@ -91,7 +100,8 @@ article{
   background-color: rgb(248, 243, 255);
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
   border-radius: 3em;
-  margin-top: 2rem;
+  margin-top: 5rem;
+  margin-bottom: 3rem;
   padding: 3rem 3rem 0 3rem;
 }
 
@@ -289,7 +299,7 @@ ul {
     min-height: 10vh !important;
     width: 100vw !important;
     padding-top: 2rem;
-    background: linear-gradient( to right, rgb(62, 122, 182), rgb(93, 108, 238) ) !important;
+    background: linear-gradient(rgb(38, 137, 236), rgb(100, 183, 255)  ) !important;
 }
 
 #socialMedia {

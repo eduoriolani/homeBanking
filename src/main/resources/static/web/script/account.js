@@ -22,7 +22,6 @@ createApp({
             .then((response) => {
                 this.client = response.data
                 this.account = this.client.accounts
-                console.log(this.account);
                 this.param = new URLSearchParams(location.search).get("id")
                 const filteredAccount = this.account.find(account => account.id == this.param)
                 this.account = filteredAccount;

@@ -17,7 +17,7 @@ createApp({
             axios
             .post('/api/clients/current/cards','cardType=' + this.cardType +'&cardColor=' + this.cardColor)
             .then( response => {
-                    window.location.href = "/web/pages/cards.html"
+                window.location.href = "/web/pages/cards.html"
             })
             .catch( err => {
                 this.createError();

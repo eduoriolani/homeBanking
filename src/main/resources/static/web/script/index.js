@@ -22,7 +22,6 @@ createApp({
 
         })
         .catch((error) => {
-          
           this.logged = false;
         });
         

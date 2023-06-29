@@ -2,7 +2,6 @@ package com.mindhub.homeBanking.controllers;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mindhub.homeBanking.DTO.AccountDTO;
-import com.mindhub.homeBanking.DTO.ClientDTO;
 import com.mindhub.homeBanking.models.Account;
 import com.mindhub.homeBanking.models.Client;
 import com.mindhub.homeBanking.repositories.AccountRepository;
@@ -20,8 +19,6 @@ import java.time.LocalDate;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.toList;
 
 @RestController @RequestMapping ("/api")
 public class AccountController {
@@ -53,6 +50,7 @@ public class AccountController {
         do {
             Random random = new Random();
             randomNum = "VIN-" + random.nextInt(90000000);
+            System.out.println("Hola");
         } while (accountRepository.findByNumber(randomNum) != null);
 
         if ( accounts.size() >= 3 ){

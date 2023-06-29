@@ -133,7 +133,8 @@
                     <div class="card d-flex justify-content-center col-xs-10">
                         <div class="card-body col-xs-10 d-flex flex-column align-items-center gap-3" >
                             <table>
-                                <h5 class="text-center card-title">Loans requested</h5>
+                                <h4 v-if="loans == 0">No loans requested</h4>
+                                <h5 v-else class="text-center card-title">Loans requested</h5>
                                 <thead>
                                     <th class="p-2">Loan</th>
                                     <th class="p-2">Amount</th>
@@ -141,8 +142,8 @@
                                     <th class="p-2">Date</th>
                                 </thead>
                                 <tbody >
-                                    <h4 v-if="loans == 0">No loans requested</h4>
-                                    <tr v-else v-for="loan of loans">
+                                    
+                                    <tr v-for="loan of loans">
                                         <td class="p-2">{{loan.name}}</td>
                                         <td class="p-2">{{loan.amount}}</td>
                                         <td class="p-2">{{loan.payments}} dues</td>
