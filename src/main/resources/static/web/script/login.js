@@ -49,7 +49,7 @@ createApp({
               window.location.href = "../pages/accounts.html";
             })
             .catch(error => {
-                this.logError();
+                alert(error.response.data);
                 this.email = "";
                 this.password = "";
             });
@@ -62,6 +62,7 @@ createApp({
             this.logClient();
           })
           .catch(error => {
+            console.log(error);
             this.logError();
                 this.email = "";
                 this.password = "";

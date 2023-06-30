@@ -1,10 +1,13 @@
 package com.mindhub.homeBanking.configurations;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
@@ -17,6 +20,14 @@ import javax.servlet.http.HttpSession;
 @Configuration
 @EnableWebSecurity
 class WebAuthorization{
+    @Autowired
+    private final WebAuthentication webAuthentication;
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    public WebAuthorization(WebAuthentication webAuthentication) {
+        this.webAuthentication = webAuthentication;
+    }
 
     @Bean
     protected SecurityFilterChain filterchain(HttpSecurity http) throws Exception {
@@ -37,6 +48,8 @@ class WebAuthorization{
         // turn off checking for CSRF tokens
         http.csrf().disable();
 
+        http.authenticationProvider(webAuthentication.authenticationProvider(userDetailsService));
+
         //disabling frameOptions so h2-console can be accessed
         http.headers().frameOptions().disable();
 
@@ -47,7 +60,19 @@ class WebAuthorization{
         http.formLogin().successHandler((req, res, auth) -> clearAuthenticationAttributes(req));
 
         // if login fails, just send an authentication failure response
-        http.formLogin().failureHandler((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
+        //http.formLogin().failureHandler((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
+
+        http.formLogin()
+                .failureUrl("/api/login?error")
+                .failureHandler((request, response, exception) -> {
+                    if (exception instanceof UsernameNotFoundException) {
+                        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                        response.getWriter().write(exception.getMessage());
+                        response.getWriter().flush();
+                    } else {
+                        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication failed");
+                    }
+                });
 
         // if logout is successful, just send a success response
         http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
