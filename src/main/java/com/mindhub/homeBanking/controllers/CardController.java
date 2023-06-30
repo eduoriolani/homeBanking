@@ -22,9 +22,9 @@ import java.util.Random;
 @RequestMapping("/api")
 public class CardController {
     @Autowired
-    ClientRepository clientRepository;
+    private ClientRepository clientRepository;
     @Autowired
-    CardRepository cardRepository;
+    private CardRepository cardRepository;
 
     @PostMapping("/clients/current/cards")
     public ResponseEntity<Object> createCards(@RequestParam CardType cardType, @RequestParam CardColor cardColor, Authentication authentication){
@@ -32,10 +32,10 @@ public class CardController {
         String randomCardNumber;
         Random randomNumber = new Random();
         //Para los 16 digitos de la tarjeta
-        int randomNumber1 = randomNumber.nextInt(9000) + 1000;
-        int randomNumber2 = randomNumber.nextInt(9000) + 1000;
-        int randomNumber3 = randomNumber.nextInt(9000) + 1000;
-        int randomNumber4 = randomNumber.nextInt(9000) + 1000;
+        int randomNumber1 = randomNumber.nextInt(9000) + 999;
+        int randomNumber2 = randomNumber.nextInt(9000) + 999;
+        int randomNumber3 = randomNumber.nextInt(9000) + 999;
+        int randomNumber4 = randomNumber.nextInt(9000) + 999;
         //Para el CVV
         int randomCvvNumber = randomNumber.nextInt(900) + 100;
 

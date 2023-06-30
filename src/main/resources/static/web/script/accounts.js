@@ -11,6 +11,7 @@ createApp({
   },
   created() {
     this.loadData();
+    AOS.init();
   },
   methods: {
     loadData() {
