@@ -21,13 +21,10 @@ import javax.servlet.http.HttpSession;
 @EnableWebSecurity
 class WebAuthorization{
     @Autowired
-    private final WebAuthentication webAuthentication;
+    private WebAuthentication webAuthentication;
     @Autowired
     private UserDetailsService userDetailsService;
 
-    public WebAuthorization(WebAuthentication webAuthentication) {
-        this.webAuthentication = webAuthentication;
-    }
 
     @Bean
     protected SecurityFilterChain filterchain(HttpSecurity http) throws Exception {
