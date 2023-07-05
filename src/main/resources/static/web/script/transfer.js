@@ -75,8 +75,14 @@ createApp({
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes!'
               }).then((result) => {
+                if(result.isConfirmed){
                 this.transferForm();
-                
+                } else {
+                  Swal.fire(
+                    'Transfer failed!',
+                    'Please try again',
+                    'error')
+                }
               })    
         },
 

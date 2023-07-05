@@ -62,10 +62,13 @@
                 
             </section>
            <section class="d-flex flex-column col-10 card-section">
-                <h3 class="align-self-start ps-2 pt-2 mt-5">
-                    Hello <span class="text-danger">{{client.firstName}}</span>, here are your accounts information!
-                </h3>
-                <button class="btn btn-primary w-25" v-if="accounts.length < 3" @click="createAccount">Create Account</button>
+                <div class="d-flex justify-content-between col-12  ps-2 pt-2 mt-5">
+                    <h3 class="align-self-start">
+                        Hello <span class="text-danger">{{client.firstName}}</span>, here are your accounts information!
+                    </h3>
+                    <button class="btn btn-primary w-25" v-if="accounts.length < 3" @click="createAccount">Create Account</button>
+
+                </div>
                 <div id="divCards" class="d-flex flex-row flex-wrap mt-4 gap-5 justify-content-start">
                     <div class="card col-xs-10" data-aos="zoom-in" v-for="account of accounts" >
                         <a :href="'./account.html?id='+account.id"  class="text-decoration-none text-black" > <div class="card-body col-xs-10 d-flex flex-column justify-content-around gap-3" >
@@ -127,8 +130,13 @@
                 </div>
 
 
-                <div class="col-10 mt-5 align-self-center publicity">
-                    <img src="../images/publicity.jpeg" alt="">
+                <div class="col-12 mt-5 d-flex justify-content-between publicity">
+                    <img id="creditImg" src="../images/creditCard.png" alt="">
+                    <div class="d-flex flex-column justify-content-center p-2 ms-3">
+                        <h3>Advantages of Having a Credit Card</h3>
+                        <p>Convenience and Security:
+                            Credit cards provide a convenient way to make purchases without carrying large amounts of cash. They are widely accepted at various merchants, both online and offline, allowing you to shop and pay with ease. Additionally, credit cards come with built-in security features such as fraud protection, purchase dispute resolution, and zero-liability policies, which safeguard your funds and provide peace of mind.</p>
+                    </div>
                 </div>
 
                 <h4 class="ps-2 pt-3 mt-5">Your loans</h4>

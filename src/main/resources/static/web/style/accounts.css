@@ -195,7 +195,9 @@ ul {
     object-fit: contain;
   }
   .publicity{
-    height: 15rem;
+    height: 20rem;
+    background-color: #b8e5f4;
+    border-radius: 2rem;
   }
   .publicity img{
     height: 100%;

@@ -517,7 +517,7 @@ footer{
   }
   @media screen and (min-width: 551px) and (max-width: 1040px) {
     .card{
-      width: 25rem;
+      width: 20rem;
       flex-direction: column !important;
     }
     .cardsWrap{
