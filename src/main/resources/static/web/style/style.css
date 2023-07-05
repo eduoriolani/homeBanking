@@ -42,7 +42,7 @@
 header{
     height: 20vh;
     width: 100vw;
-    background: linear-gradient( rgb(100, 183, 255), rgb(38, 137, 236) ) !important;
+    background-color: #6EC6FF;
     display: flex !important;
     justify-content: center !important;
     padding-top: .5em; 
@@ -85,7 +85,7 @@ main {
     width: 100vw !important;
     min-height: 76vh !important;
     filter: blur(2.0);
-    background-color: #cbe8ff !important;
+    background-color: #eaf3fb !important;
 }
 
 article{
@@ -299,7 +299,7 @@ ul {
     min-height: 10vh !important;
     width: 100vw !important;
     padding-top: 2rem;
-    background: linear-gradient(rgb(38, 137, 236), rgb(100, 183, 255)  ) !important;
+    background-color: #6EC6FF;
 }
 
 #socialMedia {

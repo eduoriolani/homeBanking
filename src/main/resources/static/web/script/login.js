@@ -25,49 +25,53 @@ createApp({
 
   },
   methods : { 
-    logClient() {
-      if(this.email !== "" && this.password !== ""){
-          this.postClient();
-      }else{
-          this.logError();
-      }
-    },
-    registerClient(){
-      if(this.email !== "" && this.password !== "" && this.firstName !== "" && this.lastName !== ""){
-        this.registration();
-      } else{
-        this.logError();
-      }
-    },  
+
     postClient() { 
         axios.post('/api/login','email=' + this.email + '&password=' + this.password ,{headers:{'content-type':'application/x-www-form-urlencoded'}})
             .then(response => {
-                console.log("Signed in!!")
-                this.logSuccessful();
-            })
-            .then(response => {
-              window.location.href = "../pages/accounts.html";
+              console.log(response);
+              Swal.fire(
+                'Login successful!',
+                'Now take a look at your accounts.',
+                'success'
+              ).then(() => {
+                window.location.href = "/web/pages/accounts.html";
+              });
             })
             .catch(error => {
-                alert(error.response.data);
-                this.email = "";
-                this.password = "";
+                console.log(error.response);
+                Swal.fire(
+                'Login failed!',
+                error.response.data,
+                'error'
+              );
+              this.email = "";
+              this.password = "";
             });
     },
     registration(){
       axios.post('/api/clients','firstName='+ this.firstName +'&lastName='+ this.lastName +'&email=' + this.email +'&password='+ this.password,{headers:{'content-type':'application/x-www-form-urlencoded'}})
           .then(response => {
-            console.log('registered')
-            this.logSuccessful();
-            this.logClient();
+            console.log(response);
+              Swal.fire(
+                'Register successful!',
+                'Please wait while you are being logged.',
+                'success'
+              ).then(() => {
+                this.postClient();
+              });
           })
           .catch(error => {
-            console.log(error);
-            this.logError();
-                this.email = "";
-                this.password = "";
-                this.firstName = ""
-                this.lastName = ""
+            console.log(error.response);
+                Swal.fire(
+                'Register failed!',
+                error.response.data,
+                'error'
+              );
+              this.firstName = "";
+              this.lastName = "";
+              this.email = "";
+              this.password = "";
           })
 
     },
@@ -75,21 +79,6 @@ createApp({
     showForm(){
         this.showRegister = !this.isRegisterParam;
     },
-    logSuccessful() {
-        // Mostrar la ventana emergente
-        document.getElementById('loginModal').style.display = 'block';
-      },
-    logError() {
-        // Mostrar la ventana emergente
-        document.getElementById('errorModal').style.display = 'block';
-      },
-      
-    closeModal() {
-        // Cerrar la ventana emergente
-        document.getElementById('loginModal').style.display = 'none';
-        document.getElementById('errorModal').style.display = 'none';
-      },
-    
 
   }
 

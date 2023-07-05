@@ -31,8 +31,8 @@ class WebAuthorization{
         http.authorizeRequests()
                 .antMatchers("/web/index.html","/api/login","/web/pages/login.html", "/web/style/**", "/web/script/**", "/web/images/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
-                .antMatchers( "/admin/**","/api/clients" ,"/rest/**","/h2-console/**").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.POST, "/api/clients/current/cards").hasAuthority("CLIENT")
+                .antMatchers( "/admin/**","/api/clients", "/api/accounts" ,"/rest/**","/h2-console/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/clients/current/cards", "/api/clients/current/transactions").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.POST, "/api/clients/current/accounts").hasAuthority("CLIENT")
                 .antMatchers("/web/pages/**", "/api/clients/current").hasAuthority("CLIENT")
                 .anyRequest().denyAll();
@@ -50,7 +50,7 @@ class WebAuthorization{
         //disabling frameOptions so h2-console can be accessed
         http.headers().frameOptions().disable();
 
-        // if user is not authenticated, just redirect to the login page
+        // if user is not authenticated, just send an 401 response
         http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
 
         // if login is successful, just clear the flags asking for authentication
@@ -73,9 +73,6 @@ class WebAuthorization{
 
         // if logout is successful, just send a success response
         http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
-
-        // Defining that there could be only one session at a time and redirect to login page if session expires
-        http.sessionManagement().maximumSessions(1).expiredUrl("/web/pages/login.html");
 
         return http.build();
     }

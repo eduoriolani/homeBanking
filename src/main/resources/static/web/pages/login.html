@@ -47,21 +47,8 @@
 			<p>Forget password?</p>
 		</div>
 			<br>
-			<button @click="logClient" type="submit">Login</button>
+			<button @click="postClient" type="submit">Login</button>
 		</form>
-
-	<div id="loginModal" class=" modal">
-		<div class="modal-content">
-		  <span class="close" @click="closeModal()">&times;</span>
-		  <p>Login successful, let's see your accounts!</p>
-		</div>
-	  </div>
-	<div id="errorModal" class=" modal">
-		<div class="modal-content">
-		  <span class="close" @click="closeModal()">&times;</span>
-		  <p>Email or password invalid, please try again!</p>
-		</div>
-	  </div>
 	</div>
 
 	<!-- //////////////////// REGISTER ////////////////////// -->
@@ -93,21 +80,8 @@
 			<p>Forget password?</p>
 		</div>
 			<br>
-			<button @click="registerClient()" type="submit">Register</button>
+			<button @click="registration" type="submit">Register</button>
 		</form>
-	
-	<div id="loginModal" class=" modal">
-		<div class="modal-content">
-		  <span class="close" @click="closeModal()">&times;</span>
-		  <p>Register successful, you are now part of our community!</p>
-		</div>
-	  </div>
-	<div id="errorModal" class=" modal">
-		<div class="modal-content">
-		  <span class="close" @click="closeModal()">&times;</span>
-		  <p>Some of your fields are invalid, please try again!</p>
-		</div>
-	  </div>
     </div>
 
 </div>
@@ -115,6 +89,7 @@
 <!-- partial -->
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../script/login.js"></script>
 </body>
 </html>

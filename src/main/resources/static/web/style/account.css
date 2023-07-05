@@ -40,7 +40,7 @@ background-color: rgb(116, 94, 122);
 header{
   height: 20vh;
   width: 100vw;
-  background: linear-gradient( rgb(100, 183, 255), rgb(38, 137, 236) ) !important;
+  background-color: #6EC6FF;
   display: flex !important;
   justify-content: center !important;
   padding-top: .5em; 
@@ -76,7 +76,7 @@ form input {
 .card-section{
     min-height: 86vh !important;
     width: 100vw !important;
-    background-color: #cbe8ff !important;
+    background-color: #f2f8fe !important;
     filter: opacity(1.1);
     mix-blend-mode: multiply;
     z-index: 0;
@@ -182,7 +182,7 @@ footer{
     min-height: 10vh !important;
     width: 100vw !important;
     padding-top: 2rem;
-    background: linear-gradient(rgb(38, 137, 236), rgb(100, 183, 255)  ) !important;
+    background-color: #6EC6FF;
 }
 
 #socialMedia {

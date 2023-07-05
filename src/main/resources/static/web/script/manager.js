@@ -44,7 +44,7 @@ createApp({
 
     },
     postClient() {
-        axios.post("http://localhost:8080/api/ clients", this.clientData)
+        axios.post("http://localhost:8080/api/clients", this.clientData)
            .then( res => {
           
            this.loadData();

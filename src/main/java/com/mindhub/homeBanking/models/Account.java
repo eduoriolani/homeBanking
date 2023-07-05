@@ -43,7 +43,7 @@ public class Account{
     public LocalDate getDate(){ return date;}
     public void setDate(LocalDate date){ this.date = date;}
     public Double getBalance(){ return this.balance = balance; }
-    public void setBalance(LocalDate date){ this.date = date;}
+    public void setBalance(Double balance){ this.balance = balance;}
     @JsonIgnore
     public Client getClient(){ return client;}
     public void setClient(Client client){ this.client = client;}

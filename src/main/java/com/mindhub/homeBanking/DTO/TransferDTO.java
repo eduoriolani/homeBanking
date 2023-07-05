@@ -7,6 +7,8 @@ public class TransferDTO {
     private String sourceAccount;
     private String destinationAccount;
 
+    public TransferDTO(){}
+
     public TransferDTO(Double amount, String description, String sourceAccount, String destinationAccount) {
         this.amount = amount;
         this.description = description;
