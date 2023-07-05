@@ -76,6 +76,8 @@ public class TransactionController {
 
             sourceAccount.setBalance(sourceAccount.getBalance() - transferDTO.getAmount());
             destinationAccount.setBalance(destinationAccount.getBalance() + transferDTO.getAmount());
+            accountRepository.save(sourceAccount);
+            accountRepository.save(destinationAccount);
             transactionRepository.save(debitTransfer);
             transactionRepository.save(creditTransfer);
             return new ResponseEntity<>(HttpStatus.CREATED);
