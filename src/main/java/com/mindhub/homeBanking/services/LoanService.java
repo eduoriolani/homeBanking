@@ -8,4 +8,5 @@ import java.util.Set;
 public interface LoanService {
     Loan findByName(String name);
     Set<LoanDTO> getLoansDTO();
+    Loan save(Loan loan);
 }
