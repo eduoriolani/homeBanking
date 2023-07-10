@@ -6,6 +6,8 @@ import com.mindhub.homeBanking.models.Card;
 import com.mindhub.homeBanking.models.Client;
 import com.mindhub.homeBanking.repositories.CardRepository;
 import com.mindhub.homeBanking.repositories.ClientRepository;
+import com.mindhub.homeBanking.services.CardService;
+import com.mindhub.homeBanking.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +24,13 @@ import java.util.Random;
 @RequestMapping("/api")
 public class CardController {
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientService clientService;
     @Autowired
-    private CardRepository cardRepository;
+    private CardService cardService;
 
     @PostMapping("/clients/current/cards")
     public ResponseEntity<Object> createCards(@RequestParam CardType cardType, @RequestParam CardColor cardColor, Authentication authentication){
-        Client client = clientRepository.findByEmail(authentication.getName());
+        Client client = clientService.findByEmail(authentication.getName());
         String randomCardNumber;
         Random randomNumber = new Random();
         //Para los 16 digitos de la tarjeta
@@ -41,7 +43,7 @@ public class CardController {
 
         do {
             randomCardNumber = randomNumber1 + "-" + randomNumber2 + "-" + randomNumber3 + "-" + randomNumber4;
-        } while (cardRepository.findByNumber(randomCardNumber) != null );
+        } while (cardService.findByNumber(randomCardNumber) != null );
 
         if(client.getCards().stream().filter(card -> card.getType() == cardType).count() >= 3) {
             return new ResponseEntity<>("Max amount of cards reached", HttpStatus.FORBIDDEN);
@@ -52,7 +54,7 @@ public class CardController {
         } else {
             Card newCard = new Card(client.getFirstName() + " " + client.getLastName(), cardType, cardColor, randomCardNumber, randomCvvNumber, LocalDateTime.now(), LocalDateTime.now().plusYears(5));
             client.addCard(newCard);
-            cardRepository.save(newCard);
+            cardService.save(newCard);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
     }

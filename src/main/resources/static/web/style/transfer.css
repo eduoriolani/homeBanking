@@ -277,6 +277,15 @@ footer{
     }
     #transferDiv{
         width: 80vw !important;
+        
+    }
+    .formMedia, form{
+      flex-direction: column !important;
+      width: 100% !important;
+      align-items: center;
+    }
+    form{
+      padding: 1rem;
     }
     .card-section{
         display: flex;

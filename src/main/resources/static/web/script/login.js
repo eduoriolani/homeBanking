@@ -53,13 +53,18 @@ createApp({
       axios.post('/api/clients','firstName='+ this.firstName +'&lastName='+ this.lastName +'&email=' + this.email +'&password='+ this.password,{headers:{'content-type':'application/x-www-form-urlencoded'}})
           .then(response => {
             console.log(response);
-              Swal.fire(
-                'Register successful!',
-                'Please wait while you are being logged.',
-                'success'
-              ).then(() => {
-                this.postClient();
-              });
+            Swal.fire({
+              title: 'Register successful!',
+              text: 'Please wait while you are being logged.',
+              timer: 2000,
+              showConfirmButton: false,
+              timerProgressBar: true,
+              onBeforeOpen: () => {
+                Swal.showLoading();
+              }
+            }).then(() => {
+              this.postClient();
+            });
           })
           .catch(error => {
             console.log(error.response);

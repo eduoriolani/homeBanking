@@ -10,6 +10,8 @@ import com.mindhub.homeBanking.models.Account;
 import com.mindhub.homeBanking.models.Client;
 import com.mindhub.homeBanking.repositories.AccountRepository;
 import com.mindhub.homeBanking.repositories.ClientRepository;
+import com.mindhub.homeBanking.services.AccountService;
+import com.mindhub.homeBanking.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,34 +23,23 @@ import org.springframework.web.bind.annotation.*;
 public class ClientController {
 
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientService clientService;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
-    private AccountRepository accountRepository;
+    private AccountService accountService;
 
     @RequestMapping ("/clients")
-    public Set<ClientDTO> getClient(){ return clientRepository
-            .findAll()
-            .stream()
-            .map(ClientDTO::new)
-            .collect(Collectors.toSet()); }
+    public Set<ClientDTO> getClientsDTO(){ return clientService.getClientsDTO(); }
 
     @RequestMapping ("/clients/{id}")
-    public ClientDTO getClient(@PathVariable Long id){
-        Client client = clientRepository.findById(id).orElse(null);
-        ClientDTO clientDTO = new ClientDTO(client);
-        return clientDTO;
+    public ClientDTO getClientDTO(@PathVariable Long id){
+        return clientService.getClientDTO(id);
     }
     @RequestMapping("/clients/current")
     public ResponseEntity<Object> getCurrentClient(Authentication authentication){
-        Client client = clientRepository.findByEmail(authentication.getName());
-        if(client != null){
-            ClientDTO clientDTO = new ClientDTO(client);
-            return new ResponseEntity<>(clientDTO, HttpStatus.ACCEPTED);
-        } else {
-            return new ResponseEntity<>("Client not found", HttpStatus.FORBIDDEN);
-        }
+        ClientDTO clientDTO = clientService.getCurrentClient(authentication);
+        return new ResponseEntity<>(clientDTO, HttpStatus.ACCEPTED);
     }
 
 
@@ -69,18 +60,19 @@ public class ClientController {
         if (password.isBlank()) {
             return new ResponseEntity<>("Please complete your password", HttpStatus.FORBIDDEN);
         }
-        if (clientRepository.findByEmail(email) != null){
+        if (clientService.findByEmail(email) != null){
             return new ResponseEntity<>("Email already in use, please try again", HttpStatus.FORBIDDEN);
         } else {
-            Client client = clientRepository.save(new Client(firstName, lastName, email, passwordEncoder.encode(password)));
+            Client client = new Client(firstName, lastName, email, passwordEncoder.encode(password));
+            clientService.save(client);
             String randomNum;
             do {
                 Random random = new Random();
                 randomNum = "VIN-" + random.nextInt(90000000);
-            } while (accountRepository.findByNumber(randomNum) != null);
+            } while (accountService.findByNumber(randomNum) != null);
             Account newAccount = new Account(randomNum, LocalDate.now(), 0.0);
             client.addAccounts(newAccount);
-            accountRepository.save(newAccount);
+            accountService.save(newAccount);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
     }

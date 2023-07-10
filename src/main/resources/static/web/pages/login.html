@@ -33,9 +33,9 @@
 		<p>Don't have an account? <a href="#" @click="showForm()">Create Your Account</a> it takes less than a minute</p>
 		<div class="inputs">
 			<form>
-			<input type="text" name="email" v-model="email" placeholder="email">
+			<input type="text" name="email" v-model="email" @keyup.enter="postClient" placeholder="email">
 			<br>
-			<input type="password" name="password" v-model="password" placeholder="password">		
+			<input type="password" name="password" v-model="password" @keyup.enter="postClient" placeholder="password">		
 		</div>			
 			<br><br>			
 		<div class="remember-me--forget-password">
@@ -58,13 +58,13 @@
 		<p>Already have an account?  <a href="./login.html" @click="showForm(true)">Just sign in</a></p>
 		<div class="inputs">
 			<form>
-            <input type="text" name="firstName" v-model="firstName" placeholder="First Name">
+            <input type="text" name="firstName" v-model="firstName" @keyup.enter="registration" placeholder="First Name">
             <br>
-            <input type="text" name="lastName" v-model="lastName" placeholder="Last Name">
+            <input type="text" name="lastName" v-model="lastName" @keyup.enter="registration" placeholder="Last Name">
             <br>
-			<input type="text" name="email" v-model="email" placeholder="Email">
+			<input type="text" name="email" v-model="email" @keyup.enter="registration" placeholder="Email">
 			<br>
-			<input type="password" name="password" v-model="password" placeholder="Password">
+			<input type="password" name="password" v-model="password" @keyup.enter="registration" placeholder="Password">
 			
 			
 		</div>

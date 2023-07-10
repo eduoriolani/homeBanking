@@ -6,6 +6,7 @@ createApp({
         return {
             accounts: [],
             client: {},
+            transferTo: "",
             param: "",
             format: [],
             transfer: {

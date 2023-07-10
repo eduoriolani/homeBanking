@@ -52,7 +52,7 @@
                                 <hr>
                                 <li class="p-1 text-decoration-none"><a href="../pages/transfer.html">Transfer Options</a></li>
                                 <hr>
-                                <li class="p-1 text-decoration-none"><a href="../pages/loans.html">Loans</a> </li>
+                                <li class="p-1 text-decoration-none"><a href="../pages/loan-application.html">Loans</a> </li>
                                 <hr>
                                 <li class="p-1 text-decoration-none"><a href="../pages/contact.html">More Information</a></li>
                                 <hr>
@@ -66,9 +66,13 @@
            <section class="d-flex flex-column align-items-center justify-content-center col-12 card-section">
                 <h3 class="text-center mt-5 pb-3">Here you can make a new transfer!</h3>
                 <div id="transferDiv" class=" col-6 d-flex">
-                    <div class="col-12 d-flex align-items-center">
+                    <div class="col-12 formMedia d-flex align-items-center">
                         <form @submit.prevent class="ps-4 pb-4 pt-4 d-flex align-self-start col-6 flex-column">
                             <legend class="text-center">Transfer options</legend>
+                            <div class="d-flex justify-content-around pb-3 w-100">
+                                <label for="own">Own<input type="radio" v-model="transferTo" name="own" id="own" value="Own"></label>
+                                <label for="foreign">Foreign<input type="radio" name="foreign" v-model="transferTo" id="foreign" value="Foreign"></label>
+                            </div>
                             <div class="w-100 d-flex flex-column">
                                 <label for="sourceAccount">Source Account
                                 </label>
@@ -80,7 +84,11 @@
                             <div class="w-100 d-flex flex-column">
                                 <label for="destinationAccount">Destination account
                                 </label>
-                                <input class="w-100" type="text" v-model="transfer.destinationAccount" name="destinationAccount" id="destinationAccount" placeholder="i.e: VIN003">
+                                <p class="pt-2" v-if="transferTo === ''">Please choose a destination account</p>
+                                <input v-if="transferTo === 'Foreign'" class="w-100" type="text" v-model="transfer.destinationAccount" name="destinationAccount" id="destinationAccount" placeholder="i.e: VIN003">
+                                <select v-if="transferTo === 'Own'" name="destinationAccount" v-model="transfer.destinationAccount" id="destinationAccount">
+                                    <option v-for="account of accounts" :value="account.number">{{account.number}}</option>
+                                </select>
                             </div>
                             <hr>
                             <div class="w-100 d-flex flex-column">
@@ -94,7 +102,7 @@
                             </div>
                             <button @click="confirmTransfer" class="btn btn-primary align-self-center mt-3 w-25">Transfer</button>
                           </form>                          
-                          <div class="col-6">
+                          <div class="col-xs-10 col-sm-6 ">
                               <img id="transferImg" src="../images/illustrationTransfer.png" alt="">
                           </div>
                     </div>

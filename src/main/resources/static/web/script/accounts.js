@@ -22,6 +22,7 @@ createApp({
           this.accounts = this.client.accounts;
           this.accounts.sort((a,b)=> a.balance-b.balance);
           this.loans = this.client.loans
+          console.log(this.loans);
 
           this.format = new Intl.NumberFormat('en-US', {
             style: 'currency',
@@ -31,8 +32,11 @@ createApp({
             e.balance = this.format.format(e.balance)
         })
         this.loans.forEach( e => {
-            e.amount = this.format.format(e.amount)
+          e.amount = parseInt(e.amount);
         })
+        // this.loans.forEach( e => {
+        //     e.amount = this.format.format(e.amount)
+        // })
         })
         .catch((error) => {
           console.error(error);

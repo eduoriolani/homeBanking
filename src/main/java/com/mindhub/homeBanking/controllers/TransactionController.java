@@ -5,9 +5,10 @@ import com.mindhub.homeBanking.enums.TransactionType;
 import com.mindhub.homeBanking.models.Account;
 import com.mindhub.homeBanking.models.Client;
 import com.mindhub.homeBanking.models.Transaction;
-import com.mindhub.homeBanking.repositories.AccountRepository;
-import com.mindhub.homeBanking.repositories.ClientRepository;
 import com.mindhub.homeBanking.repositories.TransactionRepository;
+import com.mindhub.homeBanking.services.AccountService;
+import com.mindhub.homeBanking.services.ClientService;
+import com.mindhub.homeBanking.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +24,11 @@ import java.util.Set;
 public class TransactionController {
 
     @Autowired
-    private AccountRepository accountRepository;
+    private AccountService accountService;
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientService clientService;
     @Autowired
-    private TransactionRepository transactionRepository;
+    private TransactionService transactionService;
 
     @Transactional
     @PostMapping("/clients/current/transactions")
@@ -41,9 +42,9 @@ public class TransactionController {
         }
 
 
-        Client client = clientRepository.findByEmail(authentication.getName());
-        Account sourceAccount = accountRepository.findByNumber(transferDTO.getSourceAccount());
-        Account destinationAccount = accountRepository.findByNumber(transferDTO.getDestinationAccount());
+        Client client = clientService.findByEmail(authentication.getName());
+        Account sourceAccount = accountService.findByNumber(transferDTO.getSourceAccount());
+        Account destinationAccount = accountService.findByNumber(transferDTO.getDestinationAccount());
         Set<Account> accounts = client.getAccounts();
 
         if (transferDTO.getDescription().isBlank()){
@@ -76,10 +77,10 @@ public class TransactionController {
 
             sourceAccount.setBalance(sourceAccount.getBalance() - transferDTO.getAmount());
             destinationAccount.setBalance(destinationAccount.getBalance() + transferDTO.getAmount());
-            accountRepository.save(sourceAccount);
-            accountRepository.save(destinationAccount);
-            transactionRepository.save(debitTransfer);
-            transactionRepository.save(creditTransfer);
+            accountService.save(sourceAccount);
+            accountService.save(destinationAccount);
+            transactionService.save(debitTransfer);
+            transactionService.save(creditTransfer);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
     }

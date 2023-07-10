@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap">
     <link rel="stylesheet" href="../style/transfer.css">
     <link rel="shortcut icon" href="../images/mindHub-icon.png" type="image/x-icon">
-    <title>Mindhub Brothers | Account</title>
+    <title>Mindhub Brothers | Loans</title>
 </head>
 <body>
     <div class="layout" id="app">
@@ -63,9 +63,56 @@
                 </div>
                 
             </section>
-           <section class="d-flex flex-column align-items-center justify-content-center col-12 card-section">
-                <div id="transferDiv" class=" col-6 d-flex flex-column">
-                   <h2 class="text-center my-3">We're working on this page!</h2>
+            <section class="d-flex flex-column align-items-center justify-content-center col-12 card-section">
+                <h3 class="text-center mt-5 pb-3">Here you can request a new loan!</h3>
+                <div id="transferDiv" class=" col-6 d-flex">
+                    <div class="col-12 formMedia d-flex align-items-center">
+                        <form @submit.prevent class="ps-4 pb-4 pt-4 d-flex align-self-start col-6 flex-column">
+                            <legend class="text-center">Loan application options</legend>
+                            <div class="w-100 d-flex flex-column">
+                                <label for="loanType">Loan type
+                                    <select v-model="selectedLoan" class="w-100" name="loanType" id="loanType">
+                                        <option v-for="loan of loans" :value="loan">{{loan.name}}</option>
+                                    </select>
+                                    <p v-if="!selectedLoan">Please set a loan</p>
+                                    <p v-else>Max amount:{{format.format(selectedLoan.maxAmount)}}</p>
+                                </label>
+                            </div>
+                            {{showSelected}}
+                            <hr>
+                            <div class="w-100 d-flex flex-column">
+                                <label for="payments">
+                                </label>Payments options:
+                                    <select v-model="loan.payment" name="payments" id="payments">
+                                        <option v-for="payment of selectedLoan.payments" :value="payment">{{payment}}</option>
+                                    </select>
+                            </div>
+                            <hr>
+                            <div class="w-100 d-flex flex-column">
+                                <label for="amount">Amount:
+                                    <input type="text" v-model="loan.amount" name="amount" id="amount">
+                                </label>
+                                <div class="pt-2" v-if="loan.amount !== ''">
+                                    <p>You are going to pay ${{((parseInt(loan.amount) + parseInt(loan.amount)* 0.2) / loan.payment).toFixed(2)}} per month with the 20% tax fee</p>
+                                </div>
+                                <p class="pt-2" v-else>Please set an amount, remember that it will be included a 20% tax fee on each payment!</p>
+                                
+                            </div>
+                            <hr>
+                            <div class="w-100 d-flex flex-column">
+                                <label for="destinationAccount">Destination Account
+                                    <select v-model="loan.destinationAccount" name="account" id="account">
+                                        <option v-for="account of client.accounts">{{account.number}}</option>
+                                    </select>
+                                </label>
+
+                            </div>
+                            <button @click="confirmLoanRequest" class="btn btn-primary align-self-center mt-3 w-25">Apply</button>
+                          </form>                          
+                          <div class="col-xs-10 col-sm-6">
+                              <img id="transferImg" src="../images/loanRequest.png" alt="">
+                          </div>
+                    </div>
                 </div>
                 <a class="btn btn-primary d-flex align-self-start ms-3 mb-2" href="./accounts.html">Back to Accounts</a>
               
@@ -92,6 +139,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="../script/transfer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../script/loan-application.js"></script>
 </body>
 </html>

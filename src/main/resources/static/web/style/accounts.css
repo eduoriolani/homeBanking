@@ -206,6 +206,13 @@ ul {
     object-fit: contain;
     
   }
+  .request{
+    height: 52px;
+  }
+  #loanDiv > img{
+    height: 3rem;
+    width: 3rem;
+  }
 
 
 
