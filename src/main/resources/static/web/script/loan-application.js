@@ -7,7 +7,7 @@ createApp({
       client: {},
       logged: true,
       loans: [],
-      selectedLoan: {},
+      selectedLoan: "",
       loan: {
         loanName: "",
         payment: "",
@@ -55,7 +55,7 @@ createApp({
     loanForm(){
       this.loan.loanName = this.selectedLoan.name;
         axios
-        .post("/api/loans", this.loan, this.selectedLoan.name)
+        .post("/api/loans", this.loan)
         .then(response => {
           Swal.fire(
             'Loan request succeeded!',
@@ -108,9 +108,4 @@ createApp({
     },
   
   },
-  computed: {
-    showSelected(){
-      console.log(this.selectedLoan);
-    }  
-  }
 }).mount("#app");

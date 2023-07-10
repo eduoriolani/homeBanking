@@ -74,7 +74,7 @@
                                     <select v-model="selectedLoan" class="w-100" name="loanType" id="loanType">
                                         <option v-for="loan of loans" :value="loan">{{loan.name}}</option>
                                     </select>
-                                    <p v-if="!selectedLoan">Please set a loan</p>
+                                    <p v-if="selectedLoan === ''">Please select a loan</p>
                                     <p v-else>Max amount:{{format.format(selectedLoan.maxAmount)}}</p>
                                 </label>
                             </div>
