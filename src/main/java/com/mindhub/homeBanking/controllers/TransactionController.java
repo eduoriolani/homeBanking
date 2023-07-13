@@ -5,7 +5,6 @@ import com.mindhub.homeBanking.enums.TransactionType;
 import com.mindhub.homeBanking.models.Account;
 import com.mindhub.homeBanking.models.Client;
 import com.mindhub.homeBanking.models.Transaction;
-import com.mindhub.homeBanking.repositories.TransactionRepository;
 import com.mindhub.homeBanking.services.AccountService;
 import com.mindhub.homeBanking.services.ClientService;
 import com.mindhub.homeBanking.services.TransactionService;

@@ -29,14 +29,14 @@ public class ClientController {
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping ("/clients")
+    @GetMapping ("/clients")
     public Set<ClientDTO> getClientsDTO(){ return clientService.getClientsDTO(); }
 
-    @RequestMapping ("/clients/{id}")
+    @GetMapping ("/clients/{id}")
     public ClientDTO getClientDTO(@PathVariable Long id){
         return clientService.getClientDTO(id);
     }
-    @RequestMapping("/clients/current")
+    @GetMapping("/clients/current")
     public ResponseEntity<Object> getCurrentClient(Authentication authentication){
         ClientDTO clientDTO = clientService.getCurrentClient(authentication);
         return new ResponseEntity<>(clientDTO, HttpStatus.ACCEPTED);
@@ -44,7 +44,7 @@ public class ClientController {
 
 
 
-    @RequestMapping(path = "/clients", method = RequestMethod.POST)
+    @PostMapping("/clients")
     public ResponseEntity<Object> register(
             @RequestParam String firstName, @RequestParam String lastName,
             @RequestParam String email, @RequestParam String password){

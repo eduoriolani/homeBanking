@@ -87,7 +87,7 @@
                                 <p class="pt-2" v-if="transferTo === ''">Please choose a destination account</p>
                                 <input v-if="transferTo === 'Foreign'" class="w-100" type="text" v-model="transfer.destinationAccount" name="destinationAccount" id="destinationAccount" placeholder="i.e: VIN003">
                                 <select v-if="transferTo === 'Own'" name="destinationAccount" v-model="transfer.destinationAccount" id="destinationAccount">
-                                    <option v-for="account of accounts" :value="account.number">{{account.number}}</option>
+                                    <option v-for="account of accounts" :value="account.number" :disabled="account.number === sourceAccount.number">{{account.number}}</option>
                                 </select>
                             </div>
                             <hr>
