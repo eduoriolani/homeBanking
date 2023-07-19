@@ -69,12 +69,12 @@
               <div id="divCards" class="align-self-center">
                   <div v-if="cards.length == 0"> <h3 class="text-center pt-5 mt-5">You have no cards</h3></div>
                   <div v-else>
-                  <h4 class="ps-5 pb-3 pt-4 mt-5" v-if="debitCards.length > 0">Your debit cards</h4>
-                  <h4 class="ps-5 pb-3 pt-4 mt-5" v-else>You dont have debit cards yet!</h4>
-                  <div class=" d-flex flex-column align-items-center p-2 pb-5" >
-                  <div v-for="card of debitCards" class="d-flex justify-content-center flex-wrap col-xs-10 col-10 p-2">
-                    <div v-if="card.type == 'DEBIT'">
-                            <div class="card d-flex pb-3">
+                    <h4 class="ps-5 pb-3 pt-4 mt-5" v-if="debitCards.length > 0">Your debit cards</h4>
+                    <h4 class="ps-5 pb-3 pt-4 mt-5" v-else>You dont have debit cards yet!</h4>
+                    <div class=" d-flex flex-column align-items-center p-2 pb-5" >
+                    <div v-for="card of debitCards"  class="d-flex flex-column align-items-center flex-wrap col-xs-10 col-10 p-2">
+                    <div v-if="card.active == true" class="d-flex flex-column">
+                            <div v-if="card.type == 'DEBIT'" class="card d-flex pb-3">
                               <div class="flip">
                                 <div class="front">
                                   <div :class="'strip-top '+ card.color "></div>
@@ -97,7 +97,7 @@
                                   <div class="card-number"> 
                                     <div class="section">{{card.number}}</div>
                                   </div>
-                                  <div class="end"><span class="end-text">exp. end:</span><span class="end-date"> {{card.thruDate.slice(0,10)}}</span></div>
+                                  <div class="end"><span class="end-text">exp. end:</span><span class="end-date"> {{card.thruDate.slice(2,7).split("-").reverse().join("/")}}</span></div>
                                   <div class="card-holder">{{card.cardHolder}}</div>
                                   <div class="master">
                                     <div class="circle master-red"></div>
@@ -117,6 +117,11 @@
                                 </div>
                               </div>
                             </div>
+                            <div class="d-flex justify-content-around gap-3 w-100">
+                              <button @click="deleteCard(card.id)" class="btn btn-danger my-3">Delete Card</button>
+                              <p v-if="checkExpiration(card.thruDate)" class="btn btn-warning my-3">This card has expired</p>
+                              <p v-if="warningExpirationCard(card.thruDate)" class="btn btn-warning my-3">This card is about to expire</p>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -127,8 +132,9 @@
                         <h4 class="ps-5 pb-3 pt-4 mt-5" v-if="creditCards.length > 0">Your credit cards</h4>
                         <h4 class="ps-5 pb-3 pt-4 mt-5" v-else>You dont have credit cards yet!</h4>
                     <div class=" d-flex flex-column align-items-center p-2 pb-5" >
-                      <div v-for="card of creditCards" class="d-flex justify-content-center flex-wrap col-xs-10 col-5 p-2">
-                    <div v-if="card.type == 'CREDIT'">
+                    <div v-for="card of creditCards" class="d-flex justify-content-center flex-wrap col-xs-10 col-5 p-2">
+                    <div v-if="card.active == true" class="d-flex flex-column">
+                    <div v-if="card.type == 'CREDIT'" >
                             <div class="card" >
                               <div class="flip">
                                 <div class="front">
@@ -152,7 +158,7 @@
                                   <div class="card-number"> 
                                     <div class="section">{{card.number}}</div>
                                   </div>
-                                  <div class="end"><span class="end-text">exp. end:</span><span class="end-date">{{card.thruDate.slice(0,10)}}</span></div>
+                                  <div class="end"><span class="end-text">exp. end:</span><span class="end-date">{{card.thruDate.slice(2,7).split("-").reverse().join("/")}}</span></div>
                                   <div class="card-holder">{{card.cardHolder}}</div>
                                   <div class="master">
                                     <div class="circle master-red"></div>
@@ -173,9 +179,15 @@
                               </div>
                             </div>
                           </div>
+                          <div class="d-flex justify-content-around gap-3 w-100">
+                            <button @click="deleteCard(card.id)" class="btn btn-danger my-3">Delete Card</button>
+                            <p v-if="checkExpiration(card.thruDate)" class="btn btn-warning my-3">This card has expired</p>
+                            <p v-if="warningExpirationCard(card.thruDate)" class="btn btn-warning my-3">This card is about to expire</p>
+                          </div>
                     </div>
                   </div>
                 </div>
+              </div>
               </div>
             </div>
                         

@@ -27,8 +27,13 @@ createApp({
                 this.account = filteredAccount;
                 console.log(this.account);
                 this.transactions = this.account.transactions;
-                this.transactions.sort((a,b) => a.amount-b.amount);
-                
+                console.log(this.transactions);
+                this.transactions.sort((a, b) => {
+                    const timeA = a.date;
+                    const timeB = b.date;
+                    
+                    return timeB.localeCompare(timeA);
+                  });
                 this.format = new Intl.NumberFormat('en-US', {
                     style: 'currency',
                     currency: 'USD',

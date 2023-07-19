@@ -21,12 +21,14 @@ public class ClientLoan {
     private Client client;
 
     private Integer payments;
+    private Integer taxPercentage;
     private Double amount;
 
     public ClientLoan(){}
 
-    public ClientLoan(Integer payments, Double amount) {
+    public ClientLoan(Integer payments,Integer taxPercentage, Double amount) {
         this.payments = payments;
+        this.taxPercentage = taxPercentage;
         this.amount = amount;
 
     }
@@ -58,6 +60,10 @@ public class ClientLoan {
     public void setPayments(Integer payments) {
         this.payments = payments;
     }
+
+    public Integer getTaxPercentage() {return taxPercentage;}
+
+    public void setTaxPercentage(Integer taxPercentage) {this.taxPercentage = taxPercentage;}
 
     public Double getAmount() {
         return amount;

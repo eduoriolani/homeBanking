@@ -93,9 +93,9 @@
                                     <input type="text" v-model="loan.amount" name="amount" id="amount">
                                 </label>
                                 <div class="pt-2" v-if="loan.amount !== ''">
-                                    <p>You are going to pay ${{((parseInt(loan.amount) + parseInt(loan.amount)* 0.2) / loan.payment).toFixed(2)}} per month with the 20% tax fee</p>
+                                    <p>You are going to pay ${{((parseInt(loan.amount) + (parseInt(loan.amount) * parseInt(selectedLoan.taxPercentage) / 100)) / loan.payment).toFixed(2)}} per month with the {{selectedLoan.taxPercentage}}% tax fee</p>
                                 </div>
-                                <p class="pt-2" v-else>Please set an amount, remember that it will be included a 20% tax fee on each payment!</p>
+                                <p class="pt-2" v-if="selectedLoan !== ''">Remember that it will be included a {{selectedLoan.taxPercentage}}% tax fee on each payment!</p>
                                 
                             </div>
                             <hr>

@@ -10,5 +10,6 @@ public interface AccountService {
     Set<AccountDTO> getAccountsDTO();
     AccountDTO getAccountDTO(Long id);
     Account findByNumber(String number);
+    Account findById(Long id);
     Account save(Account account);
 }

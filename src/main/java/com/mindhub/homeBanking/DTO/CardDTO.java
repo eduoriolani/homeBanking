@@ -11,7 +11,8 @@ public class CardDTO {
     private CardType type;
     private CardColor color;
     private String number;
-    private Integer cvv;
+    private String cvv;
+    private boolean isActive;
     private LocalDateTime fromDate;
     private LocalDateTime thruDate;
 
@@ -22,6 +23,7 @@ public class CardDTO {
         color = card.getColor();
         number = card.getNumber();
         cvv = card.getCvv();
+        isActive = card.isActive();
         fromDate = card.getFromDate();
         thruDate = card.getThruDate();
     }
@@ -46,9 +48,11 @@ public class CardDTO {
         return number;
     }
 
-    public Integer getCvv() {
+    public String getCvv() {
         return cvv;
     }
+
+    public boolean isActive() {return isActive;}
 
     public LocalDateTime getFromDate() {
         return fromDate;

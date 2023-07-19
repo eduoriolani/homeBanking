@@ -7,4 +7,6 @@ import org.springframework.context.annotation.Configuration;
 public interface CardService {
     Card findByNumber(String number);
     void save(Card card);
+
+    Card findById(Long id);
 }

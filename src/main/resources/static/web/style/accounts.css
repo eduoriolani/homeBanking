@@ -1,4 +1,4 @@
-@import url("https://fonts.google.com/specimen/Josefin+Sans/");
+
 *{
   margin: 0;
   padding: 0;
@@ -177,7 +177,7 @@ ul {
     background-color: #064385d0;
   }
   #searchDiv{
-    height: 10rem;
+    min-height: 10rem !important;
   }
   .searchers{
     background-color: #b8e5f4;
@@ -337,6 +337,7 @@ footer{
     .card{
         display: flex;
         flex-direction: column;
+        align-items: center !important;
         flex-wrap: wrap;
         padding: 0;
         margin: 0;

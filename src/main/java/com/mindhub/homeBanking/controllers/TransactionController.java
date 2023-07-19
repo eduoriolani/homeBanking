@@ -69,13 +69,18 @@ public class TransactionController {
             return new ResponseEntity<>("Insufficient funds", HttpStatus.FORBIDDEN);
         }
         else{
-            Transaction debitTransfer = new Transaction(TransactionType.DEBIT, -transferDTO.getAmount(),  transferDTO.getDescription() + " " + destinationAccount.getNumber(), LocalDateTime.now() );
-            Transaction creditTransfer = new Transaction(TransactionType.CREDIT, +transferDTO.getAmount(), transferDTO.getDescription() + " " + sourceAccount.getNumber(), LocalDateTime.now() );
+            Transaction debitTransfer = new Transaction(TransactionType.DEBIT, -transferDTO.getAmount(), sourceAccount.getBalance() - transferDTO.getAmount() , transferDTO.getDescription() + " " + destinationAccount.getNumber(), LocalDateTime.now() );
+            Transaction creditTransfer = new Transaction(TransactionType.CREDIT, +transferDTO.getAmount(), destinationAccount.getBalance() + transferDTO.getAmount() ,transferDTO.getDescription() + " " + sourceAccount.getNumber(), LocalDateTime.now() );
             sourceAccount.addTransactions(debitTransfer);
             destinationAccount.addTransactions(creditTransfer);
+            Double sourceAccountBalance = sourceAccount.getBalance();
+            Double destinationAccountBalance = destinationAccount.getBalance();
 
-            sourceAccount.setBalance(sourceAccount.getBalance() - transferDTO.getAmount());
-            destinationAccount.setBalance(destinationAccount.getBalance() + transferDTO.getAmount());
+            debitTransfer.setBalance(sourceAccountBalance - transferDTO.getAmount());
+            creditTransfer.setBalance(destinationAccountBalance + transferDTO.getAmount());
+            sourceAccount.setBalance(sourceAccountBalance - transferDTO.getAmount());
+            destinationAccount.setBalance(destinationAccountBalance + transferDTO.getAmount());
+
             accountService.save(sourceAccount);
             accountService.save(destinationAccount);
             transactionService.save(debitTransfer);

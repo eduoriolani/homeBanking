@@ -80,7 +80,6 @@ public class Client {
         account.setClient(this);
         accounts.add(account);
     }
-
     @JsonIgnore
     public Set<ClientLoan> getLoans() {
         return clientLoans;
@@ -99,5 +98,9 @@ public class Client {
     public void addCard(Card card) {
         card.setClient(this);
         cards.add(card);
+    }
+    public void removeCards(Card card){
+        card.setClient(null);
+        cards.remove(card);
     }
 }

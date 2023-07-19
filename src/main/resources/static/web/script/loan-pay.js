@@ -9,10 +9,10 @@ createApp({
       loans: [],
       selectedLoan: "",
       loan: {
-        loanName: "",
+        loan: "",
         payment: "",
         amount: "",
-        destinationAccount: "",
+        account: "",
         taxPercentage: ""
       }
     };
@@ -53,13 +53,14 @@ createApp({
             console.log(error.response.data);
         })
     },
-    loanForm(){
-      this.loan.loanName = this.selectedLoan.name;
+    loanPayment(){
+      this.loan.name = this.selectedLoan.name;
+      console.log(this.loan.amount);
         axios
-        .post("/api/loans", this.loan)
+        .post("/api/loans/payment", this.loan)
         .then(response => {
           Swal.fire(
-            'Loan request succeeded!',
+            'Loan payment succeeded!',
             'You can see your updated balance.',
             'success'
           ).then(() => {
@@ -75,9 +76,9 @@ createApp({
           );
         });
     },
-    confirmLoanRequest(){
+    confirmLoanPayment(){
       Swal.fire({
-          title: 'Are you sure to request a new loan?',
+          title: 'Are you sure to pay a due?',
           text: "You won't be able to revert this!",
           icon: 'warning',
           showCancelButton: true,
@@ -86,7 +87,7 @@ createApp({
           confirmButtonText: 'Yes!'
         }).then((result) => {
           if(result.isConfirmed){
-          this.loanForm();
+          this.loanPayment();
           } else {
             Swal.fire(
               'Request failed!',
@@ -109,4 +110,20 @@ createApp({
     },
   
   },
+  computed: {
+    calculatePaymentAmount() {
+        const amount = parseInt(this.selectedLoan.amount);
+        const taxPercentage = parseInt(this.selectedLoan.taxPercentage);
+        const payments = parseInt(this.selectedLoan.payments);
+        const paymentAmountperDue = amount / payments;
+        const paymentAmount = paymentAmountperDue * this.loan.payment;
+
+        if (!isNaN(paymentAmount)) {
+          this.loan.amount = paymentAmount + (paymentAmount * taxPercentage / 100);
+          return this.loan.amount.toFixed(2);
+        } else {
+          return '';
+        }
+      },
+    }  
 }).mount("#app");

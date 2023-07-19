@@ -5,6 +5,7 @@ import com.mindhub.homeBanking.enums.TransactionType;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -16,6 +17,7 @@ public class Transaction {
     private Long id;
     private TransactionType type;
     private Double amount;
+    private Double balance;
     private String description;
     private LocalDateTime date;
 
@@ -24,9 +26,10 @@ public class Transaction {
     private Account account;
 
     public Transaction(){}
-    public Transaction(TransactionType type, Double amount, String description, LocalDateTime date){
+    public Transaction(TransactionType type, Double amount, Double balance, String description, LocalDateTime date){
         this.type = type;
         this.amount = amount;
+        this.balance = balance;
         this.description = description;
         this.date = date;
     }
@@ -46,10 +49,13 @@ public class Transaction {
     public Double getAmount() {
         return amount;
     }
-
     public void setAmount(Double amount) {
         this.amount = amount;
     }
+
+    public Double getBalance() {return balance;}
+
+    public void setBalance(Double balance) {this.balance = balance;}
 
     public String getDescription() {
         return description;

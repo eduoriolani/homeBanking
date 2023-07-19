@@ -83,6 +83,7 @@
                                                 <th>Description</th>
                                                 <th>Date</th>
                                                 <th>Time</th>
+                                                <th>Updated Balance</th>
                                             </thead>
                                             <tbody>
                                                 <tr v-else v-for="transaction of transactions">
@@ -93,6 +94,7 @@
                                                     <td>{{transaction.description}}</td>
                                                     <td>{{transaction.date.slice(0,10)}}</td>
                                                     <td>{{transaction.date.slice(11,19)}}</td>
+                                                    <td>{{format.format(transaction.balance)}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>

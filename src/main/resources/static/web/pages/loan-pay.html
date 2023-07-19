@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap">
     <link rel="stylesheet" href="../style/transfer.css">
     <link rel="shortcut icon" href="../images/mindHub-icon.png" type="image/x-icon">
-    <title>Mindhub Brothers | Account</title>
+    <title>Mindhub Brothers | Loans</title>
 </head>
 <body>
     <div class="layout" id="app">
@@ -52,7 +52,7 @@
                                 <hr>
                                 <li class="p-1 text-decoration-none"><a href="../pages/transfer.html">Transfer Options</a></li>
                                 <hr>
-                                <li class="p-1 text-decoration-none"><a href="../pages/loan-application.html">Loans</a> </li>
+                                <li class="p-1 text-decoration-none"><a href="../pages/loans.html">Loans</a> </li>
                                 <hr>
                                 <li class="p-1 text-decoration-none"><a href="../pages/contact.html">More Information</a></li>
                                 <hr>
@@ -63,48 +63,50 @@
                 </div>
                 
             </section>
-           <section class="d-flex flex-column align-items-center justify-content-center col-12 card-section">
-                <h3 class="text-center mt-5 pb-3">Here you can make a new transfer!</h3>
+            <section class="d-flex flex-column align-items-center justify-content-center col-12 card-section">
+                <h3 class="text-center mt-5 pb-3">Do you want to pay a due?</h3>
                 <div id="transferDiv" class=" col-6 d-flex">
                     <div class="col-12 formMedia d-flex align-items-center">
                         <form @submit.prevent class="ps-4 pb-4 pt-4 d-flex align-self-start col-6 flex-column">
-                            <legend class="text-center">Transfer options</legend>
-                            <div class="d-flex justify-content-around pb-3 w-100">
-                                <label for="own">Own<input type="radio" name="own" v-model="transferTo" id="own" value="Own"></label>
-                                <label for="foreign">Foreign<input type="radio" name="foreign" v-model="transferTo" id="foreign" value="Foreign"></label>
-                            </div>
+                            <legend class="text-center">Loan payment options</legend>
                             <div class="w-100 d-flex flex-column">
-                                <label for="sourceAccount">Source Account
+                                <label for="loanType">Loan requested
+                                    <select v-model="selectedLoan" class="w-100" name="loanType" id="loanType">
+                                        <option v-for="loan of client.loans" :value="loan">{{loan.name}}</option>
+                                    </select>
+                                    <p v-if="selectedLoan === ''">Please select the loan you want to pay</p>
+                                    <p v-else>Max amount:{{format.format(selectedLoan.amount)}}</p>
                                 </label>
-                                <select name="sourceAccount" v-model="transfer.sourceAccount" id="sourceAccount">
-                                    <option v-for="account of accounts" :value="account.number">{{account.number}}: Balance {{format.format(account.balance)}}</option>
-                                </select>
                             </div>
                             <hr>
                             <div class="w-100 d-flex flex-column">
-                                <label for="destinationAccount">Destination account
+                                <label for="payments">
+                                </label>How many dues you want to pay?
+                                    <select v-model="loan.payment" name="payments" id="payments">
+                                        <option v-for="payment of selectedLoan.payments" :value="payment">{{payment}}</option>
+                                    </select>
+                            </div>
+                            <hr>
+                            <div class="w-100 d-flex flex-column">
+                                <label for="amount">Amount:
+                                    <input type="text" name="amount" id="amount" v-model="loan.amount" :value="calculatePaymentAmount">
                                 </label>
-                                <p class="pt-2" v-if="transferTo === ''">Please choose a destination account</p>
-                                <input v-if="transferTo === 'Foreign'" class="w-100" type="text" v-model="transfer.destinationAccount" name="destinationAccount" id="destinationAccount" placeholder="i.e: VIN003">
-                                <select v-if="transferTo === 'Own'" name="destinationAccount" v-model="transfer.destinationAccount" id="destinationAccount">
-                                    <option v-for="account of accounts" :value="account.number" :disabled="account.number === transfer.sourceAccount">{{account.number}}</option>
-                                </select>
+                                <p class="pt-2" v-if="selectedLoan !== ''">Remember that it will be included a {{selectedLoan.taxPercentage}}% tax fee on each payment!</p>
+                                
                             </div>
                             <hr>
                             <div class="w-100 d-flex flex-column">
-                                <label for="amount">Transfer amount:</label>
-                                <input class="w-100" v-model="transfer.amount" type="text" id="amount" name="amount">
-                                <p v-if="transfer.amount !== ''" v-for="account of accounts" :hidden="account.number === transfer.destinationAccount" :value="account.balance">Updated balance on {{account.number}}: {{format.format(account.balance - parseInt(transfer.amount))}}</p>
+                                <label for="account">Set the account to pay
+                                    <select v-model="loan.account" name="account" id="account">
+                                        <option v-for="account of client.accounts" :value="account.number">{{account.number}}, balance: {{format.format(account.balance)}}</option>
+                                    </select>
+                                </label>
+
                             </div>
-                            <hr>
-                            <div class="w-100 d-flex flex-column">
-                                <label for="description">Description:</label>
-                                <input type="text" class="w-100" v-model="transfer.description" name="description" id="description">
-                            </div>
-                            <button @click="confirmTransfer" class="btn btn-primary align-self-center mt-3 w-25">Transfer</button>
+                            <button @click="confirmLoanPayment" class="btn btn-primary align-self-center mt-3 w-25">Pay Dues</button>
                           </form>                          
-                          <div class="col-xs-10 col-sm-6 ">
-                              <img id="transferImg" src="../images/illustrationTransfer.png" alt="">
+                          <div class="col-xs-10 col-sm-6">
+                              <img id="transferImg" src="../images/loanRequest.png" alt="">
                           </div>
                     </div>
                 </div>
@@ -134,6 +136,6 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../script/transfer.js"></script>
+    <script src="../script/loan-pay.js"></script>
 </body>
 </html>

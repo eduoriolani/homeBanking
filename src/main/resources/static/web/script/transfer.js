@@ -8,11 +8,12 @@ createApp({
             client: {},
             transferTo: "",
             param: "",
+            selectedAccount: "",
             format: [],
             transfer: {
                 amount: "",
                 description: "",
-                sourceAccount: null,
+                sourceAccount: "",
                 destinationAccount: "",
             }
         }
@@ -35,9 +36,7 @@ createApp({
                     style: 'currency',
                     currency: 'USD',
                 });
-                this.accounts.forEach( e => {
-                    e.balance = this.format.format(e.balance)
-                })
+                
                 
             })
                 .catch((error) => {

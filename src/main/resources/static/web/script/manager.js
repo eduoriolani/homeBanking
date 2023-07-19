@@ -9,11 +9,16 @@ createApp({
     return {
       clients: [],
       rest: [],
-      clientData: {
         firstName: "",
         lastName: "",
         email: "",
-      },
+        password: "",
+        newLoan: {
+          name: "",
+          maxAmount: "",
+          payments: [],
+          taxPercentage: ""
+        },
       restResponse: null,
 
 
@@ -36,7 +41,7 @@ createApp({
         });
     },
     addClient() {
-    if(this.clientData.firstName !== "" && this.clientData.lastName !== "" && this.clientData.email !== ""){
+    if(this.firstName !== "" && this.lastName !== "" && this.email !== ""){
         this.postClient();
     }else{
         alert("Please complete all the fields")
@@ -44,13 +49,14 @@ createApp({
 
     },
     postClient() {
-        axios.post("http://localhost:8080/api/clients", this.clientData)
+      axios.post('/api/clients','firstName='+ this.firstName +'&lastName='+ this.lastName +'&email=' + this.email +'&password='+ this.password,{headers:{'content-type':'application/x-www-form-urlencoded'}})
            .then( res => {
           
            this.loadData();
-           this.clientData.firstName = "";
-           this.clientData.lastName = "";
-           this.clientData.email = "";
+           this.firstName = "";
+           this.lastName = "";
+           this.email = "";
+           this.password = "";
         })
             .catch(error => {
                console.error(error);
@@ -63,6 +69,42 @@ createApp({
         this.loadData();
       })
       .catch(error => console.error(error))
+    },
+    confirmLoan(){
+      Swal.fire({
+        title: 'Are you sure to create a new Loan?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes!'
+      }).then((result) => {
+        if(result.isConfirmed){
+        this.createLoan();
+        } else {
+          Swal.fire(
+            'Request failed!',
+            'Please try again',
+            'error')
+        }
+      })    
+    },
+    createLoan(){
+      axios
+      .post('/api/loans/create', this.newLoan)
+      .then(response => {
+        Swal.fire(
+          'Loan payment succeeded!',
+          'You can see your updated balance.',
+          'success'
+        ).then(() => {
+          this.loadData();
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      })
     }
 
   }

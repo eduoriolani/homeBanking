@@ -11,6 +11,7 @@ public class LoanDTO {
     private String name;
     private List<Integer> payments;
     private Double maxAmount;
+    private Integer taxPercentage;
     private Set<ClientLoanDTO> clientLoans;
 
     public LoanDTO(Loan loan) {
@@ -18,6 +19,7 @@ public class LoanDTO {
         name = loan.getName();
         payments = loan.getPayments();
         maxAmount = loan.getMaxAmount();
+        taxPercentage = loan.getTaxPercentage();
         clientLoans = loan.getClients().stream().map(ClientLoanDTO :: new).collect(Collectors.toSet());
     }
 
@@ -36,6 +38,8 @@ public class LoanDTO {
     public Double getMaxAmount() {
         return maxAmount;
     }
+
+    public Integer getTaxPercentage() {return taxPercentage;}
 
     public Set<ClientLoanDTO> getClientLoans() {
         return clientLoans;
