@@ -26,7 +26,6 @@ public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
 
     private DaoAuthenticationProvider authenticationProvider;
 
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
