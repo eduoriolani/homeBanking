@@ -69,6 +69,7 @@ public class PdfService {
         }
         document.add(table);
 
+        //No entiendo por que me da tantos errores la ruta
         String imagePath = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgeEhNCLJ-iS6MYWDOV9OubMJn7QuPMYsD4cZv1I0na0aFZx0jO9qe841V2wb27a5Nx5oxH_E70Srzg3AkCfAWPZq5Kz1asszSdbv3NREjHdWjOlkqJeJJ8QmzhoIywCc19_x1xI_M-VowcJ8yv6odqD4K-woUPLj_Lr64pc1wPxMIgN0bvRALvizIpOJjp/s1600/mindHub-icon.png";
         Image image = Image.getInstance(imagePath);
         image.setAlignment(Element.ALIGN_CENTER);
