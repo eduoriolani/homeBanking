@@ -69,11 +69,12 @@ public class PdfService {
         }
         document.add(table);
 
-        String imagePath = "/Users/lemarch/Desktop/MindHub/Java/HomeBanking/src/main/resources/static/web/images/mindHub-icon.png";
-        Image image = Image.getInstance(imagePath);
-        image.setAlignment(Element.ALIGN_CENTER);
-
-        document.add(image);
+        //No entiendo por que me da tantos errores la ruta
+//        String imagePath = "/static/web/images/mindhub-icon.png";
+//        Image image = Image.getInstance(imagePath);
+//        image.setAlignment(Element.ALIGN_CENTER);
+//
+//        document.add(image);
         document.close();
 
         return outputStream;
