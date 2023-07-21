@@ -32,3 +32,10 @@ bootRun {
 	sourceResources sourceSets.main
 
 }
+sourceSets {
+	main {
+		resources {
+			srcDirs = ['src/main/resources']
+		}
+	}
+}
