@@ -44,7 +44,7 @@ public class PdfService {
         document.add(new Paragraph("Account type: " + account.getType(), fontInfo));
         document.add(new Paragraph("Actual Balance: $" + account.getBalance(), fontInfo));
 
-        PdfPTable table = new PdfPTable(3);
+        PdfPTable table = new PdfPTable(4);
         table.setWidthPercentage(100);
         table.setSpacingBefore(10f);
         table.setSpacingAfter(10f);
@@ -75,11 +75,11 @@ public class PdfService {
         document.add(table);
 
         //No entiendo por que me da tantos errores la ruta
-        String imagePath = "/static/web/images/mindHub-icon.png";
-        Image image = Image.getInstance(imagePath);
-        image.setAlignment(Element.ALIGN_CENTER);
+//        String imagePath = "/static/web/images/mindHub-icon.png";
+//        Image image = Image.getInstance(imagePath);
+//        image.setAlignment(Element.ALIGN_CENTER);
 
-        document.add(image);
+//      document.add(image);
         document.close();
 
         return outputStream;
