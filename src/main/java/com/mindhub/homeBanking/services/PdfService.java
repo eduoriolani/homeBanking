@@ -69,7 +69,7 @@ public class PdfService {
         }
         document.add(table);
 
-        String imagePath = "/Users/lemarch/Desktop/MindHub/Java/HomeBanking/src/main/resources/static/web/images/mindHub-icon.png";
+        String imagePath = "/homeBanking/src/main/resources/static/web/images/mindHub-icon.png";
         Image image = Image.getInstance(imagePath);
         image.setAlignment(Element.ALIGN_CENTER);
 
