@@ -26,7 +26,7 @@ createApp({
                 .then((response) => {
                     console.log(response);
                     this.client = response.data;
-                    this.cards = this.client.cards
+                    this.cards = this.client.cards.filter(card => card.active == true);
                     console.log(this.cards);
                     this.debitCards = this.cards.filter( card => card.type == "DEBIT");
                     console.log(this.debitCards);
@@ -74,16 +74,45 @@ createApp({
                 this.currentDate < new Date(cardThruDate)
             );
         },
+        confirmDelete(id){
+            Swal.fire({
+              title: `Are you sure you want to delete this card?`,
+              text: "You won't be able to revert this!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes!'
+            })
+            .then((result) => {
+              if(result.isConfirmed){
+              this.deleteCard(id);
+              } else {
+                Swal.fire(
+                  'Card delete failed!',
+                  'Please try again',
+                  'error')
+              }
+            }) 
+          },
         deleteCard(id){
             axios
             .patch("/api/clients/current/cards",`id=${id}`)
             .then(response => {
                 console.log(response.data);
-                
-                this.loadData();
-            })
-            .catch(error => {
-                console.log(error.response.data);
+                Swal.fire(
+                    'Card deleted!',
+                    'Your card has been deleted successfully!',
+                    'success'
+                  );
+                  this.loadData();
+                })
+                .catch(error => {
+                  Swal.fire(
+                    'Card delete failed!',
+                    'Please try again',
+                    'error'
+                  );
             })
         },
         logOut(){
