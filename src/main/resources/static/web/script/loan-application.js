@@ -6,6 +6,7 @@ createApp({
     return {
       client: {},
       logged: true,
+      activeAccounts: [],
       loans: [],
       selectedLoan: "",
       loan: {
@@ -27,6 +28,7 @@ createApp({
         .get("/api/clients/current")
         .then((response) => {
           this.client = response.data;
+          this.activeAccounts = this.client.accounts.filter(acc => acc.active == true);
           console.log(this.client);
           this.logged = true;
 

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link href="https://fonts.googleapis.com/css?family=Lato|Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<link rel="stylesheet" href="./style.css">
+	<title>Formulario de Tarjeta de Crédito Dinámico</title>
+</head>
+<body>
+	<div id="app">
+
+<div class="container">
+    <form @submit.prevent>
+      <div class="row">
+        <h4>Account</h4>
+        <div class="input-group input-group-icon">
+          <input type="text" v-model="details.accountNumber" placeholder="Account Number"/>
+          <div class="input-icon"><i class="fa fa-money ps-3"></i></div>
+        </div>
+      </div>
+      <div class="row">
+        <h4>Payment Details</h4>
+        <div class="input-group">
+          <input id="payment-method-card" type="radio" name="payment-method" value="card" checked="true"/>
+          <label for="payment-method-card"><span><i class="fa fa-cc-visa"></i>Credit Card</span></label>
+          <input id="payment-method-paypal" type="radio" name="payment-method" value="paypal"/>
+          <label for="payment-method-paypal"> <span><i class="fa fa-cc-mastercard"></i>Debit Card</span></label>
+        </div>
+        <div class="input-group input-group-icon">
+          <input type="text" v-model="details.cardNumber" placeholder="Card Number"/>
+          <div class="input-icon"><i class="fa fa-credit-card ps-3"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input type="text" v-model="details.amount" placeholder="Amount"/>
+          <div class="input-icon"><i class="fa fa-dollar ps-3"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input type="text" v-model="details.description" placeholder="Description"/>
+          <div class="input-icon"><i class="fa fa-align-justify ps-3"></i></div>
+        </div>
+        <div class="col-half">
+          <div class="input-group input-group-icon">
+            <input type="text" v-model="details.cvv" placeholder="Card CVC"/>
+            <div class="input-icon "><i class="fa fa-user"></i></div>
+        </div>
+    </div>
+</div>
+<button @click="confirmPayment" class="btn mt-3 text-white w-100">Pay</button>
+      
+</div>
+    </form>
+  </div>
+
+	<script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="./index.js"></script>
+</body>
+</html>

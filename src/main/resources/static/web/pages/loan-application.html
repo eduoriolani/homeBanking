@@ -102,7 +102,7 @@
                             <div class="w-100 d-flex flex-column">
                                 <label for="destinationAccount">Destination Account
                                     <select v-model="loan.destinationAccount" name="account" id="account">
-                                        <option v-for="account of client.accounts">{{account.number}}</option>
+                                        <option v-for="account of activeAccounts">{{account.number}}</option>
                                     </select>
                                 </label>
 

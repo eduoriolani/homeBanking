@@ -48,8 +48,8 @@ public class HomeBankingApplication {
 			accountRepository.save(account2);
 			accountRepository.save(account3);
 
-			Transaction transaction1 = new Transaction(TransactionType.DEBIT, -400.00, account1.getBalance() ,"Shopping", LocalDateTime.now());
-			Transaction transaction2 = new Transaction(TransactionType.CREDIT, 5400.00, account1.getBalance(),"Loading", LocalDateTime.now());
+			Transaction transaction1 = new Transaction(TransactionType.DEBIT, -400.00, account1.getBalance() ,"Shopping", LocalDateTime.now().minusDays(6));
+			Transaction transaction2 = new Transaction(TransactionType.CREDIT, 5400.00, account1.getBalance(),"Loading", LocalDateTime.now().minusDays(3));
 			Transaction transaction3 = new Transaction(TransactionType.DEBIT, -3400.00, account3.getBalance(), "Tax Fee", LocalDateTime.now());
 			Transaction transaction4 = new Transaction(TransactionType.CREDIT, 3250.00, account2.getBalance(), "Loading", LocalDateTime.now());
 			account1.addTransactions(transaction1);

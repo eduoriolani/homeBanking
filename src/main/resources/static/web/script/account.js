@@ -8,8 +8,11 @@ createApp({
             id: "",
             client: {},
             transactions: [],
+            filteredTransactions: [],
             param: "",
             format: [],
+            fromDate: "",
+            toDate: "",
         }
     },
     created(){
@@ -87,7 +90,17 @@ createApp({
         document.getElementById("myModal").style.display = "none";
         }
     },
-
+    computed: {
+        filterByDate(){
+            if(this.fromDate != "" && this.toDate != ""){
+                 this.filteredTransactions = this.transactions.filter(transaction => transaction.date.substring(2,10)  <= this.dateEnd.substring(2) &&
+                                                                      transaction.date.substring(2,10) >= this.dateStart.substring(2))
+            }
+            if(this.fromDate == "" && this.toDate == ""){
+                this.filteredTransactions = this.transactions
+            }
+        }
+    }
 
 
 

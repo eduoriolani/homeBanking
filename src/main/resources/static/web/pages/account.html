@@ -73,6 +73,20 @@
                                         <h5 class="card-text pb-2">Balance: {{account.balance}}</h5>
                                         <p class="card-text pb-2">Date of creation: {{account.date}}</p>
                                     </div>
+                                    <div class="col-12">
+                                        <h4 class="text-center">Filter by date your transactions!</h4>
+                                        <div class="d-flex justify-content-center gap-5 col-12">
+                                          <label for="startDate">From:
+                                          <input type="date" id="startDate" name="startDate"
+                                                value="2023-01-01" v-model="fromDate"
+                                                min="2000-01-01" max="2030-12-31"></label>
+                                             {{filterByDate}} 
+                                          <label for="endDate">To:
+                                          <input type="date" id="endDate" name="endDate"
+                                                value="2023-01-01" v-model="toDate"
+                                                min="2000-01-01" max="2030-12-31"></label>
+                                        </div>
+                                      </div>
                                         <table>
                                             <thead>
                                                 <th>Transaction Type</th>
@@ -83,7 +97,7 @@
                                                 <th>Updated Balance</th>
                                             </thead>
                                             <tbody>
-                                                <tr v-else v-for="transaction of transactions">
+                                                <tr v-else v-for="transaction of filteredTransactions">
                                                     <td v-if="transaction.type == 'CREDIT'" :class="['text-success']">{{transaction.type}}</td>
                                                     <td v-else :class="['text-danger']">{{transaction.type}}</td>
                                                     <td v-if="transaction.type == 'CREDIT'" :class="['text-success']">{{transaction.amount}}</td>
