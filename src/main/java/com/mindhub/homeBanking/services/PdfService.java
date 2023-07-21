@@ -62,10 +62,15 @@ public class PdfService {
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(cell);
 
+        cell = new PdfPCell(new Phrase("Updated Balance"));
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(cell);
+
         for (Transaction transaction : sortedTransactions) {
             table.addCell(transaction.getDate().format(DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss")));
             table.addCell(transaction.getDescription());
             table.addCell((" $" +transaction.getAmount()));
+            table.addCell(" $" + transaction.getBalance());
         }
         document.add(table);
 
