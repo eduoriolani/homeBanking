@@ -80,8 +80,8 @@
                                 <p class="card-text pb-2">Date of creation: {{account.date}}</p>
                             </div>
                             <div class="d-flex justify-content-around">
-                                <a :href="'./account.html?id='+account.id" v-if="account.active == true"  class="text-decoration-none btn btn-primary" >Show account Info</a>
-                                <button @click="deleteAccount(account.id)" class="btn btn-danger align-self-end">Delete Account</button>
+                                <a :href="'./account.html?id='+account.id" class="text-decoration-none btn btn-primary" >Show account Info</a>
+                                <button @click="confirmDelete(account.id)" class="btn btn-danger align-self-end">Delete Account</button>
                             </div>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                 <h4 class="ps-2 pt-2 mt-5">Quick Access</h4>
                 <div class="col-12 d-flex mt-2" data-aos="fade-up" id="searchDiv">
                     <div class="col-xs-4 col-sm-2 d-flex flex-column flex-wrap justify-content-center">
-                        <div class="w-75 align-self-center justify-content-start searchers">
+                        <div class="h-75 w-75 align-self-center justify-content-start searchers">
                             <a href="./transfer.html" class="text-decoration-none text-black">
                             <img src="../images/transfer.png" alt="">
                             <h6 class="text-center pt-1">Transfer</h6>
@@ -100,13 +100,13 @@
                         </div>
                     </div>
                     <div class="col-xs-4 col-sm-2 d-flex flex-column flex-wrap justify-content-center">
-                        <div class=" w-75 align-self-center justify-content-start searchers">
+                        <div class="h-75 w-75 align-self-center justify-content-start searchers">
                             <img src="../images/impuestos.png" alt="">
                             <h6 class="text-center pt-1">Pay Taxes</h6>
                         </div>
                     </div>
                     <div class="col-xs-4 col-sm-2 d-flex flex-column flex-wrap justify-content-center">
-                        <div class=" w-75 align-self-center justify-content-start searchers">
+                        <div class="h-75 w-75 align-self-center justify-content-start searchers">
                             <a href="./loan-application.html" class="text-decoration-none text-black">
                                 <img src="../images/loans.png" alt="">
                                 <h6 class="text-center pt-1">Loans</h6>
@@ -114,7 +114,7 @@
                         </div>
                     </div>
                     <div class="col-xs-4 col-sm-2 d-flex flex-column flex-wrap justify-content-center">
-                        <div class=" w-75 align-self-center justify-content-start searchers">
+                        <div class="h-75 w-75 align-self-center justify-content-start searchers">
                             <a href="./cards.html" class="text-decoration-none text-black">
                                 <img src="../images/tarjetas-de-credito.png" alt="">
                                 <h6 class="text-center pt-1">Cards</h6>
@@ -122,13 +122,13 @@
                         </div>
                     </div>
                     <div class="col-xs-4 col-sm-2 d-flex flex-column flex-wrap justify-content-center">
-                        <div class=" w-75 align-self-center justify-content-start searchers">
+                        <div class="h-75 w-75 align-self-center justify-content-start searchers">
                             <img src="../images/seguro-de-salud.png" alt="">
                             <h6 class="text-center pt-1">Medical issues</h6>
                         </div>
                     </div>
                     <div class="col-xs-4 col-sm-2 d-flex flex-column flex-wrap justify-content-center">
-                        <div class=" w-75 align-self-center justify-content-start searchers">
+                        <div class="h-75 w-75 align-self-center justify-content-start searchers">
                             <img src="../images/llamada.png" alt="">
                             <h6 class="text-center pt-1">Contact</h6>
                         </div>
@@ -147,11 +147,11 @@
 
                 <div class="d-flex request justify-content-between col-12 mt-5">
                     <h4 class="ps-2">Your loans</h4>
-                    <a class="btn align-self-center btn-primary w-25" href="/web/pages/loan-application.html">Request a new loan</a>
+                    <a class="btn align-self-center btn-primary w-25" href="./loan-application.html">Request a new loan</a>
                 </div>
                 
                 <div class="w-100 col-12  flex-wrap d-flex pb-5 gap-3 mt-4">
-                    <h4 v-if="clientLoans == 0">No loans requested</h4>
+                    <h4 v-if="clientLoans.length == 0">No loans requested</h4>
                     <div data-aos="zoom-out" v-for="loan of clientLoans" class="card d-flex justify-content-center col-xs-10">
                         <div class="card-body col-xs-10 d-flex flex-column align-items-center gap-3" >
                             <div id="loanDiv" class="d-flex w-100 justify-content-between">
@@ -170,14 +170,14 @@
                                     
                                     <tr>
                                         <td class="p-2">{{loan.name}}</td>
-                                        <td class="p-2">{{format.format(loan.amount)}}</td>
-                                        <td class="p-2">{{loan.payments}} dues</td>
+                                        <td class="p-2">{{format.format(loan.totalAmount)}}</td>
+                                        <td class="p-2">{{loan.selectedPayment}} dues</td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div class="w-100 d-flex flex-column text-center">
-                                <h5>{{loan.payments}} dues of ${{((loan.amount + (loan.amount * loan.taxPercentage / 100)) / loan.payments).toFixed(2)}} </h5>
-                                <p>Total amount: {{format.format(loan.amount + (loan.amount * loan.taxPercentage / 100))}} <br> ({{loan.taxPercentage}}% of tax fee added to the amount)</p>
+                                <h5>{{loan.payments}} dues of ${{((loan.totalAmount + (loan.totalAmount * loan.taxPercentage / 100)) / loan.selectedPayment).toFixed(2)}} left! </h5>
+                                <p>Total amount to pay: {{format.format(loan.amount + (loan.amount * loan.taxPercentage / 100))}} <br> ({{loan.taxPercentage}}% of tax fee added to the amount)</p>
                             </div>
                         </div>
                             <a href="./loan-pay.html" class="align-self-end btn btn-primary">Pay a due</a>
@@ -211,5 +211,8 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../script/accounts.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 </html>

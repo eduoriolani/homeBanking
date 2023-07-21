@@ -1,5 +1,6 @@
 package com.mindhub.homeBanking.controllers;
 
+import com.lowagie.text.DocumentException;
 import com.mindhub.homeBanking.DTO.TransferDTO;
 import com.mindhub.homeBanking.enums.TransactionType;
 import com.mindhub.homeBanking.models.Account;
@@ -8,14 +9,19 @@ import com.mindhub.homeBanking.models.Transaction;
 import com.mindhub.homeBanking.services.AccountService;
 import com.mindhub.homeBanking.services.ClientService;
 import com.mindhub.homeBanking.services.TransactionService;
+import com.mindhub.homeBanking.services.PdfService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayOutputStream;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -28,6 +34,15 @@ public class TransactionController {
     private ClientService clientService;
     @Autowired
     private TransactionService transactionService;
+    @Autowired
+    private PdfService pdfUtils;
+
+    @GetMapping("/accounts/{id}/transactions")
+    public List<Transaction> getTransactionsByDateRange(@PathVariable Long id, LocalDateTime startDate, LocalDateTime endDate) {
+        Account account = accountService.findById(id);
+        return transactionService.getTransactionsByAccountAndDateRange(account, startDate, endDate);
+    }
+
 
     @Transactional
     @PostMapping("/clients/current/transactions")
@@ -62,7 +77,7 @@ public class TransactionController {
             return new ResponseEntity<>("You can't transfer to the same account", HttpStatus.FORBIDDEN);
         }
 
-        if (!accounts.stream().anyMatch(account -> account.getNumber() == sourceAccount.getNumber())){
+        if (accounts.stream().noneMatch(account -> account.getNumber().equals(sourceAccount.getNumber()))){
             return new ResponseEntity<>("The source account doesn't belong to the client", HttpStatus.FORBIDDEN);
         }
         if (sourceAccount.getBalance() < transferDTO.getAmount()){

@@ -64,9 +64,6 @@
                 
             </section>
            <section class="d-flex flex-column col-12 card-section">
-                    <h3 class="text-center mt-4">
-                        <!-- Hello <span class="text-danger">{{clients[0].firstName}}</span>, here is your account information! -->
-                    </h3>
                 <div id="divCards" class="d-flex flex-row flex-wrap mt-4 justify-content-around">
 
                             <div class="card col-xs-10">
@@ -103,6 +100,7 @@
                                         
                                         <a href="./transfer.html" class="btn btn-primary pb-2">Make a transfer</a>
                                         <a href="./loan-application.html" class="btn btn-primary pb-2">Request a loan</a>
+                                        <button @click="downloadPDF(account.id)" class="btn btn-primary">Download Account Balance</button>
                                 </div>
                             </div>
 

@@ -15,7 +15,6 @@ createApp({
   created() {
     this.loadData();
     this.getLoans();
-    AOS.init();
   },
   methods: {
     loadData() {
@@ -105,15 +104,45 @@ createApp({
         );
       });
     },
+    confirmDelete(id){
+      Swal.fire({
+        title: `Are you sure you want to delete the account?`,
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes!'
+      })
+      .then((result) => {
+        if(result.isConfirmed){
+        this.deleteAccount(id);
+        } else {
+          Swal.fire(
+            'Account delete failed!',
+            'Please try again',
+            'error')
+        }
+      }) 
+    },
     deleteAccount(id){
       axios
       .patch('/api/clients/current/accounts', `id=${id}`)
       .then(response => {
         console.log(response.data);
+        Swal.fire(
+          'Account deleted!',
+          'Your account has been deleted successfully!',
+          'success'
+        );
         this.loadData();
       })
       .catch(error => {
-        console.log(error.response.data);
+        Swal.fire(
+          'Account delete failed!',
+          'Please try again',
+          'error'
+        );
       })
     },
     logOut(){

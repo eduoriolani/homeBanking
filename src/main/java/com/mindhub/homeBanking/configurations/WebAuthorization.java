@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,25 +18,38 @@ import javax.servlet.http.HttpSession;
 
 @Configuration
 @EnableWebSecurity
-class WebAuthorization{
+public class WebAuthorization{
     @Autowired
     private WebAuthentication webAuthentication;
     @Autowired
     private UserDetailsService userDetailsService;
 
+//    @Bean
+//    public CorsFilter corsFilter() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.addAllowedOrigin("http://127.0.0.1:5500");
+//        configuration.addAllowedHeader("*");
+//        configuration.addAllowedMethod("*");
+//        configuration.setAllowCredentials(true);
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//
+//        return new CorsFilter(source);
+//    }
 
-    @Bean
+@Bean
     protected SecurityFilterChain filterchain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/web/index.html","/api/login","/web/pages/login.html", "/web/style/**", "/web/script/**", "/web/images/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/clients", "/api/clients/cardPayment").permitAll()
                 .antMatchers( "/web/manager.html","/api/clients", "/api/accounts" ,"/rest/**","/h2-console/**").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/loans/create").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.POST, "/api/clients/current/cards", "/api/loans", "/api/loans/payment", "/api/clients/current/transactions").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST, "/api/clients/current/cards", "/api/loans","/api/accounts/pdf" ,"/api/loans/payment", "/api/clients/current/transactions").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.PATCH, "/api/clients/current/cards/**").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.POST, "/api/clients/current/accounts").hasAuthority("CLIENT")
-                .antMatchers(HttpMethod.PATCH, "/api/clients/current/accounts").hasAuthority("CLIENT")
-                .antMatchers("/web/pages/**","/api/loans", "/api/clients/current").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.PATCH, "/api/clients/current/accounts" ).hasAuthority("CLIENT")
+                .antMatchers("/web/pages/**","/api/loans", "/api/clients/current" ).hasAuthority("CLIENT")
                 .anyRequest().denyAll();
         http.formLogin()
                 .usernameParameter("email")
@@ -47,6 +59,9 @@ class WebAuthorization{
 
         // turn off checking for CSRF tokens
         http.csrf().disable();
+
+        http.cors();
+//        http.addFilterBefore(corsFilter(), ChannelProcessingFilter.class);
 
         http.authenticationProvider(webAuthentication.authenticationProvider(userDetailsService));
 
@@ -77,6 +92,7 @@ class WebAuthorization{
         // if logout is successful, just send a success response
         http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
 
+
         return http.build();
     }
 
@@ -85,8 +101,8 @@ class WebAuthorization{
         if (session != null) {
             session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
         }
-
     }
+
 }
 
 

@@ -7,10 +7,12 @@ createApp({
       client: {},
       logged: true,
       loans: [],
+      activeAccounts: [],
       selectedLoan: "",
       loan: {
         loan: "",
         payment: "",
+        selectedPayment: "",
         amount: "",
         account: "",
         taxPercentage: ""
@@ -19,7 +21,7 @@ createApp({
   },
   created() {
     this.loadData();
-    this.getLoans();
+    // this.getLoans();
   },
   methods: {
     loadData() {
@@ -28,6 +30,8 @@ createApp({
         .then((response) => {
           this.client = response.data;
           console.log(this.client);
+          this.activeAccounts = this.client.accounts.filter(account => account.active == true);
+          this.loans = this.client.loans;
           this.logged = true;
 
           this.format = new Intl.NumberFormat('en-US', {
@@ -40,18 +44,6 @@ createApp({
           this.logged = false;
         });
         
-    },
-    getLoans(){
-        axios
-        .get("/api/loans")
-        .then(response => {
-            console.log(response.data);
-            this.loans = response.data;
-
-        })
-        .catch(error => {
-            console.log(error.response.data);
-        })
     },
     loanPayment(){
       this.loan.name = this.selectedLoan.name;
@@ -112,9 +104,9 @@ createApp({
   },
   computed: {
     calculatePaymentAmount() {
-        const amount = parseInt(this.selectedLoan.amount);
+        const amount = parseInt(this.selectedLoan.totalAmount);
         const taxPercentage = parseInt(this.selectedLoan.taxPercentage);
-        const payments = parseInt(this.selectedLoan.payments);
+        const payments = parseInt(this.selectedLoan.selectedPayment);
         const paymentAmountperDue = amount / payments;
         const paymentAmount = paymentAmountperDue * this.loan.payment;
 

@@ -177,7 +177,7 @@ ul {
     background-color: #064385d0;
   }
   #searchDiv{
-    min-height: 10rem !important;
+    height: 10rem !important;
   }
   .searchers{
     background-color: #b8e5f4;
@@ -330,7 +330,7 @@ footer{
         flex-grow: 1;
     }
     .card-section{
-        width: 320px;
+        width: 80%;
         display: flex;
     }
 
@@ -349,6 +349,9 @@ footer{
     }
     table, th, td{
       font-size: smaller;
+    }
+    #searchDiv{
+      width: 100% !important;
     }
     .publicity{
       flex-direction: column;

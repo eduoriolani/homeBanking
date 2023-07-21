@@ -69,7 +69,7 @@ public class LoanController {
         if(destinationAccount == null){
             return new ResponseEntity<>("Destination account doesn't exist", HttpStatus.FORBIDDEN);
         } else {
-            ClientLoan clientLoan = new ClientLoan(loanApplicationDTO.getPayment(),loan.getTaxPercentage(), loanApplicationDTO.getAmount());
+            ClientLoan clientLoan = new ClientLoan(loanApplicationDTO.getPayment(), loanApplicationDTO.getPayment(), loan.getTaxPercentage(), loanApplicationDTO.getAmount(), loanApplicationDTO.getAmount());
             Transaction loanTransaction = new Transaction(TransactionType.CREDIT, loanApplicationDTO.getAmount(), destinationAccount.getBalance() + loanApplicationDTO.getAmount() , loanApplicationDTO.getDestinationAccount() + " " + "loan approved", LocalDateTime.now());
             client.addClientLoan(clientLoan);
             loan.addClientLoan(clientLoan);

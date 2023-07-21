@@ -75,7 +75,7 @@
                                         <option v-for="loan of client.loans" :value="loan">{{loan.name}}</option>
                                     </select>
                                     <p v-if="selectedLoan === ''">Please select the loan you want to pay</p>
-                                    <p v-else>Max amount:{{format.format(selectedLoan.amount)}}</p>
+                                    <p v-else>Max amount:{{format.format(selectedLoan.totalAmount)}}</p>
                                 </label>
                             </div>
                             <hr>
@@ -98,7 +98,7 @@
                             <div class="w-100 d-flex flex-column">
                                 <label for="account">Set the account to pay
                                     <select v-model="loan.account" name="account" id="account">
-                                        <option v-for="account of client.accounts" :value="account.number">{{account.number}}, balance: {{format.format(account.balance)}}</option>
+                                        <option v-for="account of activeAccounts" :value="account.number">{{account.number}}, balance: {{format.format(account.balance)}}</option>
                                     </select>
                                 </label>
 

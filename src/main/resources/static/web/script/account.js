@@ -5,6 +5,7 @@ createApp({
     data(){
         return {
             account: {},
+            id: "",
             client: {},
             transactions: [],
             param: "",
@@ -18,7 +19,7 @@ createApp({
     methods: {
         loadData(){
             axios
-            .get(`http://localhost:8080/api/clients/current`)
+            .get(`/api/clients/current`)
             .then((response) => {
                 this.client = response.data
                 this.account = this.client.accounts
@@ -45,6 +46,31 @@ createApp({
                 })
                 .catch((error) => {
                     console.error(error);
+            });
+        },
+        downloadPDF(id) {
+            axios
+            .post('/api/accounts/pdf', null, {
+                responseType: 'arraybuffer',
+                params: { id: id }
+            })
+            .then(response => {
+              const blob = new Blob([response.data], { type: 'application/pdf' });
+              const url = URL.createObjectURL(blob);
+      
+              // Crea un enlace temporal y haz clic en él para descargar el PDF
+              const link = document.createElement('a');
+              link.href = url;
+              link.setAttribute('download', 'account-balance.pdf');
+              document.body.appendChild(link);
+              link.click();
+      
+              // Liberar el objeto URL creado
+              URL.revokeObjectURL(url);
+            })
+            .catch(error => {
+              // Manejar errores en caso de ser necesario
+              console.error('Error trying to download the PDF:', error);
             });
         },
 

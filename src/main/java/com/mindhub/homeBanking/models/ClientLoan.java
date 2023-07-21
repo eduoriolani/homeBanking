@@ -21,15 +21,19 @@ public class ClientLoan {
     private Client client;
 
     private Integer payments;
+    private Integer selectedPayment;
     private Integer taxPercentage;
     private Double amount;
+    private Double totalAmount;
 
     public ClientLoan(){}
 
-    public ClientLoan(Integer payments,Integer taxPercentage, Double amount) {
+    public ClientLoan(Integer payments, Integer selectedPayment,Integer taxPercentage, Double amount, Double totalAmount) {
         this.payments = payments;
+        this.selectedPayment = selectedPayment;
         this.taxPercentage = taxPercentage;
         this.amount = amount;
+        this.totalAmount = totalAmount;
 
     }
 
@@ -57,9 +61,11 @@ public class ClientLoan {
         return payments;
     }
 
-    public void setPayments(Integer payments) {
-        this.payments = payments;
-    }
+    public void setPayments(Integer payments) {this.payments = payments;}
+
+    public Integer getSelectedPayment() {return selectedPayment;}
+
+    public void setSelectedPayment(Integer selectedPayment) {this.selectedPayment = selectedPayment;}
 
     public Integer getTaxPercentage() {return taxPercentage;}
 
@@ -72,4 +78,8 @@ public class ClientLoan {
     public void setAmount(Double amount) {
         this.amount = amount;
     }
+
+    public Double getTotalAmount() {return totalAmount;}
+
+    public void setTotalAmount(Double totalAmount) {this.totalAmount = totalAmount;}
 }

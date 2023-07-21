@@ -28,8 +28,7 @@ public class AccountController {
     public Set<AccountDTO> getAccountsDTO(){return accountService.getAccountsDTO();}
 
     @GetMapping("/accounts/{id}")
-    public AccountDTO getAccountDTO(@PathVariable Long id)
-    {return accountService.getAccountDTO(id);}
+    public AccountDTO getAccountDTO(@PathVariable Long id) {return accountService.getAccountDTO(id);}
 
 
     @PostMapping("/clients/current/accounts")
