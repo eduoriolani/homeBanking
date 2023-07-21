@@ -423,4 +423,7 @@ ul {
     display: flex;
     flex-direction: column;
   }
+  .publicity{
+    object-fit: cover;
+  }
 }

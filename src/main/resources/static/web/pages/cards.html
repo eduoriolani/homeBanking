@@ -61,7 +61,7 @@
                 
             </section>
            <section class="d-flex flex-column align-items-center col-12 card-section">
-            <div class="col-10">
+            <div class="col-xs-12 col-sm-10">
              <div class="pb-2 align-self-start">
                <h3 class=" mt-5 pt-5 pb-3">Hello <span class="text-danger">{{client.firstName}}</span>, these are all your cards!</h3>
                <a class="btn btn-primary" v-if="cards.length < 6" href="./create-cards.html">Request a new card</a>
@@ -72,7 +72,7 @@
                     <h4 class="ps-5 pb-3 pt-4 mt-5" v-if="debitCards.length > 0">Your debit cards</h4>
                     <h4 class="ps-5 pb-3 pt-4 mt-5" v-else>You dont have debit cards yet!</h4>
                     <div class=" d-flex flex-column align-items-center p-2 pb-5" >
-                    <div v-for="card of debitCards"  class="d-flex flex-column align-items-center flex-wrap col-xs-10 col-10 p-2">
+                    <div v-for="card of debitCards"  class="d-flex flex-column align-items-center flex-wrap col-xs-12 col-sm-10 p-2">
                     <div v-if="card.active == true" class="d-flex flex-column">
                             <div v-if="card.type == 'DEBIT'" class="card d-flex pb-3">
                               <div class="flip">

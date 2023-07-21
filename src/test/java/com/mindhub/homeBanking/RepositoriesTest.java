@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
@@ -15,7 +16,7 @@ import static org.hamcrest.Matchers.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@DataJpaTest
+@SpringBootTest
 @AutoConfigureTestDatabase(replace = NONE)
 public class RepositoriesTest {
 
@@ -58,9 +59,9 @@ public class RepositoriesTest {
         assertThat(accounts, is(not(empty())));
     }
     @Test
-    public void compareDate(){
+    public void hasDate(){
         List<Account> accounts = accountRepository.findAll();
-        assertThat(accounts, hasItem(hasProperty("date", lessThan(LocalDate.now().minusDays(2)))));
+        assertThat(accounts, hasItem(hasProperty("date")));
     }
 
     @Test

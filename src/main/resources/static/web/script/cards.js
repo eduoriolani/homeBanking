@@ -22,7 +22,7 @@ createApp({
     methods: {
         loadData(){
                 axios
-                .get("http://localhost:8080/api/clients/current")
+                .get("/api/clients/current")
                 .then((response) => {
                     console.log(response);
                     this.client = response.data;

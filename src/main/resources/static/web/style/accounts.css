@@ -342,7 +342,7 @@ footer{
         padding: 0;
         margin: 0;
         margin-bottom: 2rem;
-        width: 300px !important;
+        width: 100% !important;
     }  
     .card-title{
         font-size: x-large;
