@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="../style/bootstrap.css">
+    <link rel="stylesheet" href="../style/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style/accounts.css">
+    <link rel="shortcut icon" href="../images/mindHub-icon.png" type="image/x-icon">
+    <title>Mindhub Brothers | Accounts</title>
+</head>
+<body>
+    <div class="layout" id="app">
+        <header>
+            <div class="header d-flex align-items-center">
+                <nav class="navbar navbar-light remove-bg">
+                    <div class="container-fluid  d-flex justify-content-center">
+                      <button class="navbar-toggler bg-white" @click="mostrarMenu()" type="button" id="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        <span class="p-2">Menu</span>
+                      </button>
+                    </div>
+                  </nav>
+                <img class="logoMind" src="../../web/images/mindHub-icon.png" alt="mindHub-Brothers">
+                <div class="d-flex flex-column">
+                    <h5 class="align-self-center pt-1">Confidence & Grow</h5>
+                    <a href="../index.html" @click="logOut()" class="text-decoration-none  text-white"><div class="d-flex align-items-center logOut  w-100 justify-content-between btn">
+                        <img class="userIcon" src="../images/logOut1.png" alt="user">
+                        <p class="mt-1 ps-1 pt-2">Log out</p>
+                </div></a>
+                </div>
+            </div>
+        </header>
+        <main class="d-flex flex-column col-12 align-items-center">
+            <section class="d-flex flex-column flex-start" id="navbar">
+                
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                      <span class="close" @click="cerrarModal()">&times;</span>
+                        <h3 class="text-center mt-2">HomeBanking</h3>
+                        <div class="d-flex flex-column">
+                            <ul class="pagesList">
+                                <li class="p-1 mt-2 text-decoration-none"><a href="../index.html">Home | Client</a></li>
+                                <hr>
+                                <li class="p-1 text-decoration-none"><a href="../pages/cards.html">Cards</a></li>
+                                <hr>
+                                <li class="p-1 text-decoration-none"><a href="../pages/transfer.html">Transfer Options</a></li>
+                                <hr>
+                                <li class="p-1 text-decoration-none"><a href="../pages/loan-application.html">Loans</a> </li>
+                                <hr>
+                                <li class="p-1 text-decoration-none"><a href="../pages/contact.html">More Information</a></li>
+                                <hr>
+                            </ul>
+                            <img class="align-self-center logoMind" src="../images/mindHub-icon.png" alt="mindhub">
+                        </div>
+                    </div>
+                </div>
+                
+            </section>
+           <section class="d-flex flex-column col-10 card-section">
+                <div class="d-flex justify-content-between col-12  ps-2 pt-2 mt-5">
+                    <h3 class="align-self-start">
+                        Hello <span class="text-danger">{{client.firstName}}</span>, here are your accounts information!
+                    </h3>
+                    <button class="btn btn-primary w-25" v-if="activeAccounts.length < 3" @click="selectType">Create Account</button>
+
+                </div>
+                <div id="divCards" class="d-flex flex-row flex-wrap mt-4 gap-3 justify-content-start">
+                    <div v-for="account of accounts">
+                    <div class="card col-xs-10" v-if="account.active == true" data-aos="zoom-in"  >
+                        <div class="card-body col-xs-10 d-flex flex-column justify-content-around gap-3" >
+                            <div>
+                                <h5 class="card-title pb-2">Account Number: {{account.number}}</h5>
+                                <h5 class="card-text pb-2">Account type: {{account.type}}</h5>
+                                <h5 class="card-text pb-2">Balance: {{account.balance}}</h5>
+                                <p class="card-text pb-2">Date of creation: {{account.date}}</p>
+                            </div>
+                            <div class="d-flex justify-content-around">
+                                <a :href="'./account.html?id='+account.id" class="text-decoration-none btn btn-primary" >Show account Info</a>
+                                <button @click="confirmDelete(account.id)" class="btn btn-danger align-self-end">Delete Account</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                <h4 class="ps-2 pt-2 mt-5">Quick Access</h4>
+                <div class="col-12 d-flex mt-2" data-aos="fade-up" id="searchDiv">
+                    <div class="col-xs-4 col-sm-2 d-flex flex-column flex-wrap justify-content-center">
+                        <div class="h-75 w-75 align-self-center justify-content-start searchers">
+                            <a href="./transfer.html" class="text-decoration-none text-black">
+                            <img src="../images/transfer.png" alt="">
+                            <h6 class="text-center pt-1">Transfer</h6>
+                        </a>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-2 d-flex flex-column flex-wrap justify-content-center">
+                        <div class="h-75 w-75 align-self-center justify-content-start searchers">
+                            <img src="../images/impuestos.png" alt="">
+                            <h6 class="text-center pt-1">Pay Taxes</h6>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-2 d-flex flex-column flex-wrap justify-content-center">
+                        <div class="h-75 w-75 align-self-center justify-content-start searchers">
+                            <a href="./loan-application.html" class="text-decoration-none text-black">
+                                <img src="../images/loans.png" alt="">
+                                <h6 class="text-center pt-1">Loans</h6>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-2 d-flex flex-column flex-wrap justify-content-center">
+                        <div class="h-75 w-75 align-self-center justify-content-start searchers">
+                            <a href="./cards.html" class="text-decoration-none text-black">
+                                <img src="../images/tarjetas-de-credito.png" alt="">
+                                <h6 class="text-center pt-1">Cards</h6>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-2 d-flex flex-column flex-wrap justify-content-center">
+                        <div class="h-75 w-75 align-self-center justify-content-start searchers">
+                            <img src="../images/seguro-de-salud.png" alt="">
+                            <h6 class="text-center pt-1">Medical issues</h6>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-2 d-flex flex-column flex-wrap justify-content-center">
+                        <div class="h-75 w-75 align-self-center justify-content-start searchers">
+                            <img src="../images/llamada.png" alt="">
+                            <h6 class="text-center pt-1">Contact</h6>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-12 mt-5 d-flex justify-content-between publicity">
+                    <img id="creditImg" src="../images/creditCard.png" alt="">
+                    <div class="d-flex flex-column justify-content-center p-2 ms-3">
+                        <h3>Advantages of Having a Credit Card</h3>
+                        <p>Convenience and Security:
+                            Credit cards provide a convenient way to make purchases without carrying large amounts of cash. They are widely accepted at various merchants, both online and offline, allowing you to shop and pay with ease. Additionally, credit cards come with built-in security features such as fraud protection, purchase dispute resolution, and zero-liability policies, which safeguard your funds and provide peace of mind.</p>
+                    </div>
+                </div>
+
+                <div class="d-flex request justify-content-between col-12 mt-5">
+                    <h4 class="ps-2">Your loans</h4>
+                    <a class="btn align-self-center btn-primary w-25" href="./loan-application.html">Request a new loan</a>
+                </div>
+                
+                <div class="w-100 col-12  flex-wrap d-flex pb-5 gap-3 mt-4">
+                    <h4 v-if="clientLoans.length == 0">No loans requested</h4>
+                    <div data-aos="zoom-out" v-for="loan of clientLoans" class="card d-flex justify-content-center col-xs-10">
+                        <div class="card-body col-xs-10 d-flex flex-column align-items-center gap-3" >
+                            <div id="loanDiv" class="d-flex w-100 justify-content-between">
+                                <h5 class="text-center card-title">Loan requested</h5>
+                                <img src="../images/loans.png" alt="">
+                            </div>
+                            <h3 v-if="loan.payments == 0">You have paid all the loan</h3>
+                            <div v-else>
+                            <table >
+                                <thead>
+                                    <th class="p-2">Loan</th>
+                                    <th class="p-2">Amount</th>
+                                    <th class="p-2">Payments</th>
+                                </thead>
+                                <tbody >
+                                    
+                                    <tr>
+                                        <td class="p-2">{{loan.name}}</td>
+                                        <td class="p-2">{{format.format(loan.totalAmount)}}</td>
+                                        <td class="p-2">{{loan.selectedPayment}} dues</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="w-100 d-flex flex-column text-center">
+                                <h5>{{loan.payments}} dues of ${{((loan.totalAmount + (loan.totalAmount * loan.taxPercentage / 100)) / loan.selectedPayment).toFixed(2)}} left! </h5>
+                                <p>Total amount to pay: {{format.format(loan.amount + (loan.amount * loan.taxPercentage / 100))}} <br> ({{loan.taxPercentage}}% of tax fee added to the amount)</p>
+                            </div>
+                        </div>
+                            <a href="./loan-pay.html" class="align-self-end btn btn-primary">Pay a due</a>
+                        </div>
+                    </div>
+                </div>
+              
+           </section>
+           <div id="socialMedia" class="ms-3">
+            <a class="smedia facebook" href="#">Uno</a>
+            <a class="smedia twitter" href="#">Dos</a>
+            <a class="smedia instagram" href="https://www.instagram.com/lemarch___/">Tres</a>
+            <a class="smedia youtube" href="#">Cuatro</a>
+            <a class="smedia vimeo" href="#">Cinco</a>
+            <a class="smedia email" href="#">Seis</a>
+        </div>
+
+        </main>
+        <footer class="d-flex justify-content-around p-1">  
+            <svg class="logo pt-2" width="40" height="40" viewbox="0 0 17.5 16.2">
+                <path d="M3.2 0l5.4 5.6L14.3 0l3.2 3v9L13 16.2V7.8l-4.4 4.1L4.5 8v8.2L0 12V3l3.2-3z" fill="white"></path>
+              </svg>
+            <h5 class="align-self-center">Developed by Edu</h5>
+        
+        </footer>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../script/accounts.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style/manager.css">
+    <title>Client Manager</title>
+</head>
+<body>
+<div class="layout d-flex" id="app">
+    <div id="clientInfo" class="">
+<h3>Client Manager</h3>
+    <form class="" @submit.prevent>
+        <div class="mb-3">
+            <label for="firstName" class="form-label">First Name:</label>
+            <input type="text" class="form-control" v-model="firstName" id="firstName" placeholder="Name">
+        </div>
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name:</label>
+            <input type="text" class="form-control" v-model="lastName" id="lastName" placeholder="Surname">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input class="form-control" type="email" name="email" v-model="email" id="email" placeholder="example@example.com">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" class="form-control" v-model="password" id="password">
+        </div>
+        <button type="submit" @click="addClient" class="btn btn-success">Add Client</button>
+    </form>
+    <div class="table-div mt-4">
+        <h3>Client List</h3>
+    <table class="table width-50">
+        <thead class="width-50">
+        <tr>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Delete Client</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="client of clients">
+            <td>{{client.firstName}}</td>
+            <td>{{client.lastName}}</td>
+            <td>{{client.email}}</td>
+            <td class="d-flex justify-content-center"><button @click="deleteClient(client.id)" class="btn btn-danger">Delete</button></td>
+        </tr>
+
+        </tbody>
+    </table>
+    </div>
+    </div>
+    <div id="rest" class="d-flex align-items-center ps-2 flex-column">
+        <h3>Create new Loan</h3>
+        <form class="" @submit.prevent>
+            <div class="mb-3">
+                <label for="name" class="form-label">Loan name:</label>
+                <input type="text" class="form-control w-75" v-model="newLoan.name" id="name" placeholder="Name">
+            </div>
+            <div class="mb-3">
+                <label for="maxAmount" class="form-label">Loan max amount</label>
+                <input type="text" class="form-control w-75" v-model="newLoan.maxAmount" id="maxAmount">
+            </div>
+            <div class="mb-3 d-flex gap-2">
+                <label for="payments" class="form-label">Payments options:</label>
+                <div class="d-flex flex-column">
+                    <label for="payment-6">6 dues</label>
+                    <input type="checkbox" name="payments" v-model="newLoan.payments" id="payment-6" value="6">
+                </div>
+                <div class="d-flex flex-column">
+                    <label for="payment-12">12 dues</label>
+                    <input type="checkbox" name="payments" v-model="newLoan.payments" id="payment-12" value="12">
+                </div>
+                <div class="d-flex flex-column">
+                    <label for="payment-24">24 dues</label>
+                    <input type="checkbox" name="payments" v-model="newLoan.payments" id="payment-24" value="24">
+                </div>
+                <div class="d-flex flex-column">
+                    <label for="payment-36">36 dues</label>
+                    <input type="checkbox" name="payments" v-model="newLoan.payments" id="payment-36" value="36">
+                </div>
+                <div class="d-flex flex-column">
+                    <label for="payment-48">48 dues</label>
+                    <input type="checkbox" name="payments" v-model="newLoan.payments" id="payment-48" value="48">
+                </div>
+                <div class="d-flex flex-column">
+                    <label for="payment-60">60 dues</label>
+                    <input type="checkbox" name="payments" v-model="newLoan.payments" id="payment-60" value="60">
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="taxPercentage" class="form-label">Loan tax percentage</label>
+                <input type="text" class="form-control w-25" v-model="newLoan.taxPercentage" id="taxPercentage">
+            </div>
+            <button type="submit" @click="confirmLoan" class="btn btn-success">Create Loan</button>
+        </form>
+    </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="./script/manager.js"></script>
+</body>
+</html>
